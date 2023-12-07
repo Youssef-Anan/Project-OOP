@@ -24,9 +24,9 @@ public class Client extends User {
 
     }
 
-    public Client(String firstName, String lastName, String username, String password, SavingsAccount[] arrAccount, int telephoneNumber) {
+    public Client(String firstName, String lastName, String username, String password, int telephoneNumber) {
         super(firstName, lastName, username, password);
-        ArrAccount = arrAccount;
+
         TelephoneNumber = telephoneNumber;
     }
 
