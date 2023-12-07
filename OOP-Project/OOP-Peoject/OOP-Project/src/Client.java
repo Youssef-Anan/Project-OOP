@@ -5,16 +5,28 @@ import java.util.ArrayList;
 public class Client extends User {
     SavingsAccount[] ArrAccount=new SavingsAccount[2];
     private   int TelephoneNumber;
-
+    private    String TypeOfAccount;
+    private   String StateOfAccount;
 
     Scanner scanner=new Scanner(System.in);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Client(String firstName, String lastName, String username, String password, int telephoneNumber) {
-        super(firstName, lastName, username, password);
 
+    public Client(int ID, String FirstName, String LastName, String Username, String Password, SavingsAccount[] arrAccount, int telephoneNumber, String typeOfAccount, String stateOfAccount, Scanner scanner) {
+        super(ID, FirstName, LastName, Username, Password);
+        ArrAccount = arrAccount;
+        TelephoneNumber = telephoneNumber;
+        TypeOfAccount = typeOfAccount;
+        StateOfAccount = stateOfAccount;
+        this.scanner = scanner;
+
+    }
+
+    public Client(String firstName, String lastName, String username, String password, SavingsAccount[] arrAccount, int telephoneNumber) {
+        super(firstName, lastName, username, password);
+        ArrAccount = arrAccount;
         TelephoneNumber = telephoneNumber;
     }
 
@@ -27,6 +39,8 @@ public class Client extends User {
         System.out.println("The client last name: "+getLastName());
         System.out.println("The client last user name: "+getUsername());
         System.out.println("The client phone number: "+TelephoneNumber);
+        System.out.println("The account state (Active or closed): "+StateOfAccount);
+        System.out.println("The account last type: "+TypeOfAccount);
 
 
     }
@@ -101,6 +115,23 @@ if (sourceAcc.balance>=1){}
     public void setTelephoneNumber(int telephoneNumber) {
         TelephoneNumber = telephoneNumber;
     }
+
+    public String getStateOfAccount() {
+        return StateOfAccount;
+    }
+
+    public void setStateOfAccount(String stateOfAccount) {
+        StateOfAccount = stateOfAccount;
+    }
+
+    public String getTypeOfAccount() {
+        return TypeOfAccount;
+    }
+
+    public void setTypeOfAccount(String typeOfAccount) {
+        TypeOfAccount = typeOfAccount;
+    }
+
 
 
 }
