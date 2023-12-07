@@ -17,6 +17,14 @@ public class User {
             this.Username=Username;
             this.Password=Password;
         }
+    public  User(int ID,String FirstName,String LastName,String Username, String Password){
+
+        this.FirstName=FirstName;
+        this.LastName=LastName;
+        this.Username=Username;
+        this.Password=Password;
+        this.ID=ID;
+    }
 
 
 
