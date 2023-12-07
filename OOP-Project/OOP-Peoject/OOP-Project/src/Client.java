@@ -21,6 +21,13 @@ public class Client extends User {
         TypeOfAccount = typeOfAccount;
         StateOfAccount = stateOfAccount;
         this.scanner = scanner;
+
+    }
+
+    public Client(String firstName, String lastName, String username, String password, SavingsAccount[] arrAccount, int telephoneNumber) {
+        super(firstName, lastName, username, password);
+        ArrAccount = arrAccount;
+        TelephoneNumber = telephoneNumber;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,8 +77,8 @@ public class Client extends User {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void TransferMoney(Client Recipient, double amount,Account sourceAcc,Account destinationAcc) {
-
+    public void TransferMoney( double amount,Account sourceAcc,Account destinationAcc) {
+if (sourceAcc.balance>=1){}
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
