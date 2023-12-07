@@ -1,7 +1,5 @@
-public class User {
-    package oop;
 
-    public class User {
+public class User {
         private int ID;
         private String FirstName;
         private String LastName;
@@ -61,4 +59,3 @@ public class User {
         }
     }
 
-}
