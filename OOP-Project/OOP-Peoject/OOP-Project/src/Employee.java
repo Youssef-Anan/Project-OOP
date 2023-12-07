@@ -1,4 +1,6 @@
 
+import java.lang.IllegalArgumentException;
+
 public class Employee extends User {
     private String Address;
     private String Postion;
@@ -19,6 +21,10 @@ public class Employee extends User {
     public void EditPersonalinformation(String Address,String Postion){
         this.Address=Address;
         this.Postion=Postion;
+    }
+    public Client CreateClients(String firstName, String lastName, int accountNumber, int phoneNumber, String stateOfAccount, String typeOfAccount, double balance){
+      Client client=new Client(firstName,lastName,accountNumber,phoneNumber,stateOfAccount,typeOfAccount,balance);
+      return client;
     }
 
 
