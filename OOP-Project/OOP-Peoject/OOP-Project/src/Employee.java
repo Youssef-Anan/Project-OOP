@@ -22,10 +22,24 @@ public class Employee extends User {
         this.Address=Address;
         this.Postion=Postion;
     }
-    public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ){
-      Client client=new Client(firstName,lastName,username,password,phoneNumber);
+    public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ) {
+        Client client = new Client(firstName, lastName, username, password, phoneNumber);
 
-      return client;
+        return client;
+    }
+    public void searchclientbyId(int id)
+    {
+        Client client = new Client();
+        if(id == getID()){
+            client.DisplayClientDetails();
+        }
+    }
+    public void DeleteClient(Client c ){
+        Client customer=new Client();
+
+        if(c!=null){
+            c=customer;
+        }
     }
 
 
