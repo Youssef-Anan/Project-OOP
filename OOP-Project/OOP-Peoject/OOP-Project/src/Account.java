@@ -2,11 +2,12 @@ import java.io.Serializable;
 
 public abstract class Account implements Serializable {
     private static final long serialVersionUID = 1L;
+    private int AccountNumber;
 
     private static final String ACCOUNT_FILE_PATH = "accounts.txt";
 
     private String accountType;
-    private double balance;
+    protected double balance;
 
     public Account(String accountType, double balance) {
         this.accountType = accountType;
@@ -78,5 +79,13 @@ public abstract class Account implements Serializable {
     @Override
     public int hashCode() {
         return accountType.hashCode();
+    }
+
+    public int getAccountNumber() {
+        return AccountNumber;
+    }
+
+    public void setAccountNumber(int accountNumber) {
+        AccountNumber = accountNumber;
     }
 }

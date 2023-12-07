@@ -3,10 +3,10 @@ import  java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
-    Account[] ArrAccount=new Account[2];
+    SavingsAccount[] ArrAccount=new SavingsAccount[2];
     private   int TelephoneNumber;
-    private   String StateOfAccount;
     private    String TypeOfAccount;
+    private   String StateOfAccount;
 
     Scanner scanner=new Scanner(System.in);
     //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14,7 +14,14 @@ public class Client extends User {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
+    public Client(int ID, String FirstName, String LastName, String Username, String Password, SavingsAccount[] arrAccount, int telephoneNumber, String typeOfAccount, String stateOfAccount, Scanner scanner) {
+        super(ID, FirstName, LastName, Username, Password);
+        ArrAccount = arrAccount;
+        TelephoneNumber = telephoneNumber;
+        TypeOfAccount = typeOfAccount;
+        StateOfAccount = stateOfAccount;
+        this.scanner = scanner;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,7 +70,7 @@ public class Client extends User {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void TransferMoney(Client Recipient, double amount) {
+    public void TransferMoney(Client Recipient, double amount,Account sourceAcc,Account destinationAcc) {
 
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
