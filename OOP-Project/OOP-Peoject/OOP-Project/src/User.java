@@ -18,7 +18,14 @@ public class User {
             this.Password=Password;
         }
 
-        public int getID() {
+    public User(String firstName, String lastName, String username, String password) {
+        FirstName = firstName;
+        LastName = lastName;
+        Username = username;
+        Password = password;
+    }
+
+    public int getID() {
             return ID;
         }
 
