@@ -8,9 +8,9 @@ public class Employee extends User {
     private int yearOfGraduation;
     private  float TotalGrade;
 
-    public  Employee(int ID, String FirstName, String LastName,String Username, String Password, String Address, String Postion,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
+    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Postion,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
     {
-        super(ID, FirstName, LastName, Username, Password);
+        super( FirstName, LastName, Username, Password);
         this.Address = Address;
         this.Postion = Postion;
         this.GraduatedCollege = GraduatedCollege;
@@ -22,8 +22,9 @@ public class Employee extends User {
         this.Address=Address;
         this.Postion=Postion;
     }
-    public Client CreateClients(String firstName, String lastName, int accountNumber, int phoneNumber, String stateOfAccount, String typeOfAccount, double balance){
-      Client client=new Client(firstName,lastName,accountNumber,phoneNumber,stateOfAccount,typeOfAccount,balance);
+    public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ){
+      Client client=new Client(firstName,lastName,username,password,phoneNumber);
+
       return client;
     }
 

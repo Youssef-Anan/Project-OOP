@@ -10,20 +10,15 @@ public class User {
         }
 
 
-        public  User(int ID,String FirstName,String LastName,String Username, String Password){
-            this.ID=ID;
+        public  User(String FirstName,String LastName,String Username, String Password){
+
             this.FirstName=FirstName;
             this.LastName=LastName;
             this.Username=Username;
             this.Password=Password;
         }
 
-    public User(String firstName, String lastName, String username, String password) {
-        FirstName = firstName;
-        LastName = lastName;
-        Username = username;
-        Password = password;
-    }
+
 
     public int getID() {
             return ID;
