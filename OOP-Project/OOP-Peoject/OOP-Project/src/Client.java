@@ -1,42 +1,55 @@
 
+import  java.util.Scanner;
 import java.util.ArrayList;
+
 public class Client extends User {
-    private   int AccountNumber;
+    Account[] ArrAccount=new Account[2];
     private   int TelephoneNumber;
     private   String StateOfAccount;
     private    String TypeOfAccount;
-    private    double balance;
-    private ArrayList TransactionHistory;
-    public Client(int ID, String FirstName, String LastName, String Username, String Password, int accountNumber, int telephoneNumber, String stateOfAccount, String typeOfAccount, double balance, ArrayList transactionHistory) {
-        super(ID, FirstName, LastName, Username, Password);
-        AccountNumber = accountNumber;
-        TelephoneNumber = telephoneNumber;
-        StateOfAccount = stateOfAccount;
-        TypeOfAccount = typeOfAccount;
-        this.balance = balance;
-        TransactionHistory = transactionHistory;
-    }
 
-    public Client(int AccountNumber, int TelephoneNumber, String StateOfAccount, String TypeOfAccount, double balance) {
-        this.AccountNumber = AccountNumber;
-        this.TelephoneNumber = TelephoneNumber;
-        this.StateOfAccount = StateOfAccount;
-        this.TypeOfAccount = TypeOfAccount;
-        this.balance = balance;
-    }
-    public void DisplayAccountDetails(){
-        System.out.println("The account id: "+getID());
-        System.out.println("The account first name: "+getFirstName());
-        System.out.println("The account last name: "+getLastName());
-        System.out.println("The account last user name: "+getUsername());
-        System.out.println("The account number: "+AccountNumber);
-        System.out.println("The account phone number: "+TelephoneNumber);
+    Scanner scanner=new Scanner(System.in);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisplayClientDetails(){
+        System.out.println("The client id: "+getID());
+        System.out.println("The client first name: "+getFirstName());
+        System.out.println("The client last name: "+getLastName());
+        System.out.println("The client last user name: "+getUsername());
+        System.out.println("The client phone number: "+TelephoneNumber);
         System.out.println("The account state (Active or closed): "+StateOfAccount);
         System.out.println("The account last type: "+TypeOfAccount);
-        System.out.println("Balance: $" + balance);
 
 
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void DisplayAccountDetails()
+    {
+        System.out.println("Enter 1 to see account 1 Enter 2 to see account 2");
+        int x=scanner.nextInt();
+        if (x==1)
+        {
+            System.out.println("The account id"+ArrAccount[0].getAccountNumber()+" The balance: "+ArrAccount[0].getBalance());
+        }
+        else if (x==2)
+        {
+            System.out.println("The account id"+ArrAccount[1].getAccountNumber()+" The balance: "+ArrAccount[1].getBalance());
+
+        }
+
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void EditPersonalInformation(String NewFirstName, String NewLastName,String NewUserName ,int NewPhoneNumber)
     {
         this.setFirstName(NewFirstName);
@@ -46,21 +59,32 @@ public class Client extends User {
         System.out.println("Personal information updated for " + getID());
 
     }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void TransferMoney(Client Recipient, double amount) {
 
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
     public void ShowTransactionHistory()
     {
         System.out.println("Transaction History for " + getFirstName() + " " + getLastName() + " (ID: " + getID() + "):");
-        System.out.println(TransactionHistory);
+        // System.out.println(TransactionHistory);
     }
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
     public void TakeDeposit(double Amount) {
         try {
 
-            balance += Amount;
-            System.out.println("Deposited $" + Amount + ". New balance: $" + balance);
-            TransactionHistory.add("Deposit: +$" + Amount);
+            ArrAccount[0].balance += Amount;
+            System.out.println("Deposited $" + Amount + ". New balance: $" + ArrAccount[0].getBalance());
+
 
         } catch (Exception EX) {
 
@@ -69,13 +93,6 @@ public class Client extends User {
         }
     }
 
-    public int getAccountNumber() {
-        return AccountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        AccountNumber = accountNumber;
-    }
 
     public int getTelephoneNumber() {
         return TelephoneNumber;
@@ -101,20 +118,6 @@ public class Client extends User {
         TypeOfAccount = typeOfAccount;
     }
 
-    public double getBalance() {
-        return balance;
-    }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
 
-    public ArrayList getTransactionHistory() {
-        return TransactionHistory;
-    }
-
-    public void setTransactionHistory(ArrayList transactionHistory) {
-        TransactionHistory = transactionHistory;
-    }
 }
-
