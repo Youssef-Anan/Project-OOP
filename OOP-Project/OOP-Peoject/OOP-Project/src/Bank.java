@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+import java.io.*;
 public class Bank {
     Scanner input =new Scanner(System.in);
     private Employee listOfEmployees[]= new Employee[1000];
@@ -13,6 +13,8 @@ public class Bank {
     void saveClients(Client users[]){
         for (int i = 0; i < 1000; i++) {
             String saveInput=users[i].getFirstName()+"#"+users[i].getLastName()+"#";
+            //write function
+            FileHandler.writeData(saveInput);
         }
     }
     void Authenticate(){
