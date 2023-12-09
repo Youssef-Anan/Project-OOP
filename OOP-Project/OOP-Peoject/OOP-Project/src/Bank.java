@@ -70,4 +70,38 @@ public class Bank {
         }
 
     }
+    void ClientOptions(Client user){
+        System.out.println("1-Display Account Details");
+        System.out.println("2-Edit Personal Information");
+        System.out.println("3-Transfer Money");
+        System.out.println("4-Show Transaction History");
+        System.out.println("5-Deposit");
+        System.out.println("6-Withdraw");
+        System.out.println("Choose From 1 to 6:");
+        int choice = input.nextInt();
+        switch (choice){
+            case 1:
+                user.DisplayClientDetails();
+                break;
+            case 2:
+                System.out.println("Enter the new First Name:");
+                String firstname= input.nextLine();
+                System.out.println("Enter the new Last Name:");
+                String lastname= input.nextLine();
+                System.out.println("Enter the new Telephone Number:");
+                int telephone= input.nextInt();
+                user.EditPersonalInformation(firstname,lastname,telephone);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            default:
+                break;
+        }
+    }
 }
