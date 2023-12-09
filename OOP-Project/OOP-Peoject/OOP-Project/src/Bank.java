@@ -35,11 +35,38 @@ public class Bank {
                         break;
                     }
                 }
+                if (userFound){
+                    System.out.println("Login successful!");
+                }
+                else {
+                    System.out.println("User not found!");
+                }
                 break;
             case "Employee":
-                System.out.println("Employee");
-            case "Admin":
-                System.out.println("Admin");
+                for (int i = 0; i < numOfEmloyees; i++) {
+                    if (listOfEmployees[i].getUsername().equals(username)&&listOfEmployees[i].getPassword().equals(password)){
+                        userFound=true;
+                        break;
+                    }
+                }
+                if (userFound){
+                    System.out.println("Login successful!");
+                }
+                else {
+                    System.out.println("User not found!");
+                }
+                break;
+            /*case "Admin":
+                    if (admin.getUsername().equals(username)&&listOfClients[i].getPassword().equals(password)){
+                        userFound=true;
+                }
+                if (userFound){
+                    System.out.println("Login successful!");
+                }
+                else {
+                    System.out.println("User not found!");
+                }
+                break;*/
         }
 
     }
