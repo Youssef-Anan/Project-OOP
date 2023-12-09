@@ -3,7 +3,7 @@ import java.io.Serializable;
 public abstract class Account implements Serializable {
     private static final long serialVersionUID = 1L;
     private int AccountNumber;
-
+    protected double interestRate;
     private static final String ACCOUNT_FILE_PATH = "accounts.txt";
 
     private String accountType;

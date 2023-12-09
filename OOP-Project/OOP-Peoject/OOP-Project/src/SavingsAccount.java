@@ -6,7 +6,6 @@ public class SavingsAccount extends Account implements Serializable {
     private static final String ACCOUNT_TYPE = "Savings";
     private static final double DEFAULT_INTEREST_RATE = 0.05;
 
-    private double interestRate;
 
     public SavingsAccount() {
 
