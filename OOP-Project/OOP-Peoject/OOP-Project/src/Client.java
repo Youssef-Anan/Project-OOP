@@ -3,7 +3,7 @@ import  java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
-    SavingsAccount[] ArrAccount=new SavingsAccount[2];
+    ArrayList<SavingsAccount> SavingAccount=new ArrayList<SavingsAccount>();
     private   int TelephoneNumber;
 
 
@@ -22,30 +22,22 @@ public class Client extends User {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisplayClientDetails(){
-        System.out.println("The client id: "+getID());
-        System.out.println("The client first name: "+getFirstName());
-        System.out.println("The client last name: "+getLastName());
-        System.out.println("The client last user name: "+getUsername());
-        System.out.println("The client phone number: "+TelephoneNumber);
+    public void DisplayClientDetails(Client c){
+        System.out.println("The client id: "+c.getID());
+        System.out.println("The client first name: "+c.getFirstName());
+        System.out.println("The client last name: "+c.getLastName());
+        System.out.println("The client last user name: "+c.getUsername());
+        System.out.println("The client phone number: "+c.TelephoneNumber);
 
 
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisplayAccountDetails()
+    public void DisplayAccountDetails( int Account_ID)
     {
-        System.out.println("Enter 1 to see account 1 Enter 2 to see account 2");
-        int x=scanner.nextInt();
-        if (x==1)
-        {
-            System.out.println("The account id"+ArrAccount[0].getAccountNumber()+" The balance: "+ArrAccount[0].getBalance());
-        }
-        else if (x==2)
-        {
-            System.out.println("The account id"+ArrAccount[1].getAccountNumber()+" The balance: "+ArrAccount[1].getBalance());
-
-        }
+       for (int i=0;i<SavingAccount.size();i++){
+//SavingAccount.add();
+       }
 
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +58,7 @@ public class Client extends User {
 
     public void TransferMoney( double amount,Account sourceAcc,Account destinationAcc) {
 if (sourceAcc.balance>=1){}
+
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,8 +76,8 @@ if (sourceAcc.balance>=1){}
     public void TakeDeposit(double Amount) {
         try {
 
-            ArrAccount[0].balance += Amount;
-            System.out.println("Deposited $" + Amount + ". New balance: $" + ArrAccount[0].getBalance());
+          //  ArrAccount[0].balance += Amount;
+          //  System.out.println("Deposited $" + Amount + ". New balance: $" + ArrAccount[0].getBalance());
 
 
         } catch (Exception EX) {
