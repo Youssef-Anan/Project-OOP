@@ -3,7 +3,9 @@ import  java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
-    ArrayList<SavingsAccount> SavingAccount=new ArrayList<SavingsAccount>();
+ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
+   SavingsAccount CurrentAccount=new SavingsAccount();
+
     ArrayList TransactionHistory=new ArrayList();
     private   int TelephoneNumber;
 
@@ -32,14 +34,15 @@ public class Client extends User {
 
 
     }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisplayAccountDetails( int Account_ID)
+    public void DisplayAccounts( )
     {
-       for (int i=0;i<SavingAccount.size();i++){
-//SavingAccount.add();
-       }
-
+  for (int i=0;i<savingAccount.size();i++)
+  {
+      System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+  }
     }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,10 +61,10 @@ public class Client extends User {
 
     public void TransferMoney( double amount,Account sourceAcc,Account destinationAcc) {
         if (sourceAcc.balance>= amount) {
-            //sourceAcc.withdraw(amount);
             destinationAcc.setBalance(destinationAcc.balance+amount);
             sourceAcc.setBalance(sourceAcc.balance-amount);
             System.out.println("Transfer successful.");
+            TransactionHistory.add("trancfer money form account number :"+sourceAcc.getAccountNumber()+" to :"+destinationAcc+" the amount is :"+amount);
         } else {
             System.out.println("Insufficient funds for transfer.");
         }
@@ -72,7 +75,7 @@ public class Client extends User {
     public void ShowTransactionHistory()
     {
         System.out.println("Transaction History for " + getFirstName() + " " + getLastName() + " (ID: " + getID() + "):");
-        // System.out.println(TransactionHistory);
+        System.out.println(TransactionHistory);
     }
 
 
@@ -81,11 +84,12 @@ public class Client extends User {
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     public void TakeDeposit(double Amount,Account a) {
         try {
+if (a.balance>=Amount) {
+    a.balance += Amount;
+    System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
 
-          a.balance += Amount;
-            System.out.println("Deposited $" + Amount + ". New balance: $" + a.balance);
-
-
+    TransactionHistory.add("deposit -$" + Amount);
+}
         } catch (Exception EX) {
 
             System.out.println("Invalid deposit amount. Amount must be greater than zero.");
@@ -94,7 +98,13 @@ public class Client extends User {
     }
     public void Withdraw(double amount,Account sourceAcc)
     {
+if (sourceAcc.balance>=amount)
+{
+    sourceAcc.setBalance(sourceAcc.getBalance()-amount);
+    System.out.println("Withdraw -$" + amount + ". New balance: $"+ sourceAcc.balance );
 
+    TransactionHistory.add("withdraw -$"+amount);
+}
     }
 
 
