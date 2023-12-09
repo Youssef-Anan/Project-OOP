@@ -6,7 +6,6 @@ public class Client extends User {
     ArrayList<SavingsAccount> savingAccount = new ArrayList<>();
     CurrentAccount currentAccount = new CurrentAccount();
 
-    ArrayList TransactionHistory = new ArrayList();
     private int TelephoneNumber;
 
 

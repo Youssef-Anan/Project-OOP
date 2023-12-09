@@ -32,7 +32,7 @@ public abstract class Account implements Serializable {
 
     public static Account[] readAccountsFromFile() {
         try {
-            return FileHandler.readAccountsFromFile();
+            return FileHandler.readData();
         } catch (Exception e) {
             System.err.println("Error reading accounts from file: " + e.getMessage());
         }
@@ -62,7 +62,7 @@ public abstract class Account implements Serializable {
             updatedAccounts[accounts.length] = this;
 
             // Write updated accounts to file
-            FileHandler.writeAccountsToFile(updatedAccounts);
+            FileHandler.writeAToFile(updatedAccounts);
             System.out.println("Account data has been written to file.");
         } catch (Exception e) {
             System.err.println("Error writing account to file: " + e.getMessage());
