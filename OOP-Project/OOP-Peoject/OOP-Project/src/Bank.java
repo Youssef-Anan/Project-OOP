@@ -10,6 +10,11 @@ public class Bank {
     private static int numOfTransactions=0;
     public Bank(){}
 
+    void saveClients(Client users[]){
+        for (int i = 0; i < 1000; i++) {
+            String saveInput=users[i].getFirstName()+"#"+users[i].getLastName()+"#";
+        }
+    }
     void Authenticate(){
         String userType;
         boolean userFound=false;
