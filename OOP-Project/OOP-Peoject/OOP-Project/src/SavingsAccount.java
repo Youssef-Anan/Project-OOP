@@ -4,7 +4,7 @@ public class SavingsAccount extends Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private static final String ACCOUNT_TYPE = "Savings";
-    private static final double DEFAULT_INTEREST_RATE = 0.05;
+    private static final double DEFAULT_INTEREST_RATE = 0.12;
 
 
     public SavingsAccount() {
@@ -16,13 +16,6 @@ public class SavingsAccount extends Account implements Serializable {
         this.interestRate = interestRate;
     }
 
-    public double getInterestRate() {
-        return interestRate;
-    }
-
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
-    }
 
     @Override
     public void evaluateInterest() {

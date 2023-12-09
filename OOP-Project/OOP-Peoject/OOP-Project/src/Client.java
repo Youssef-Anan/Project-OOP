@@ -1,20 +1,23 @@
 
-import  java.util.Scanner;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
-ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
-   CurrentAccount CurrentAccount=new CurrentAccount();
+    ArrayList<SavingsAccount> savingAccount = new ArrayList<>();
+    CurrentAccount currentAccount = new CurrentAccount();
 
-    ArrayList TransactionHistory=new ArrayList();
-    private   int TelephoneNumber;
+    ArrayList TransactionHistory = new ArrayList();
+    private int TelephoneNumber;
 
 
-    Scanner scanner=new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Client() {}
+    public Client() {
+    }
+
     public Client(String firstName, String lastName, String username, String password, int telephoneNumber) {
         super(firstName, lastName, username, password);
 
@@ -25,34 +28,32 @@ ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisplayClientDetails(){
-        System.out.println("The client id: "+getID());
-        System.out.println("The client first name: "+getFirstName());
-        System.out.println("The client last name: "+getLastName());
-        System.out.println("The client last user name: "+getUsername());
-        System.out.println("The client phone number: "+TelephoneNumber);
+    public void DisplayClientDetails() {
+        System.out.println("The client id: " + getID());
+        System.out.println("The client first name: " + getFirstName());
+        System.out.println("The client last name: " + getLastName());
+        System.out.println("The client last user name: " + getUsername());
+        System.out.println("The client phone number: " + TelephoneNumber);
 
 
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisplayAccounts( )
-    {
-  for (int i=0;i<savingAccount.size();i++)
-  {
-      System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
-  }
+    public void DisplayAccounts() {
+        for (int i = 0; i < savingAccount.size(); i++) {
+            System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+        }
 
     }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void EditPersonalInformation(String NewFirstName, String NewLastName,int NewPhoneNumber)
-    {
+    public void EditPersonalInformation(String NewFirstName, String NewLastName, int NewPhoneNumber) {
         setFirstName(NewFirstName);
         setLastName(NewLastName);
-        TelephoneNumber=NewPhoneNumber;
+        TelephoneNumber = NewPhoneNumber;
         System.out.println("Personal information updated for " + getID());
 
     }
@@ -60,21 +61,21 @@ ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void TransferMoney( double amount,Account sourceAcc,Account destinationAcc) {
-        if (sourceAcc.balance>= amount) {
-            destinationAcc.setBalance(destinationAcc.balance+amount);
-            sourceAcc.setBalance(sourceAcc.balance-amount);
+    public void TransferMoney(double amount, Account sourceAcc, Account destinationAcc) {
+        if (sourceAcc.balance >= amount) {
+            destinationAcc.setBalance(destinationAcc.balance + amount);
+            sourceAcc.setBalance(sourceAcc.balance - amount);
             System.out.println("Transfer successful.");
-            TransactionHistory.add("trancfer money form account number :"+sourceAcc.getAccountNumber()+" to :"+destinationAcc+" the amount is :"+amount);
+            TransactionHistory.add("trancfer money form account number :" + sourceAcc.getAccountNumber() + " to :" + destinationAcc + " the amount is :" + amount);
         } else {
             System.out.println("Insufficient funds for transfer.");
         }
     }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void ShowTransactionHistory()
-    {
+    public void ShowTransactionHistory() {
         System.out.println("Transaction History for " + getFirstName() + " " + getLastName() + " (ID: " + getID() + "):");
         System.out.println(TransactionHistory);
     }
@@ -83,29 +84,28 @@ ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void TakeDeposit(double Amount,Account a) {
+    public void TakeDeposit(double Amount, Account a) {
         try {
-if (a.balance>=Amount) {
-    a.balance += Amount;
-    System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
+            if (a.balance >= Amount) {
+                a.balance += Amount;
+                System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
 
-    TransactionHistory.add("deposit -$" + Amount);
-}
+                TransactionHistory.add("deposit -$" + Amount);
+            }
         } catch (Exception EX) {
 
             System.out.println("Invalid deposit amount. Amount must be greater than zero.");
 
         }
     }
-    public void Withdraw(double amount,Account sourceAcc)
-    {
-if (sourceAcc.balance>=amount)
-{
-    sourceAcc.setBalance(sourceAcc.getBalance()-amount);
-    System.out.println("Withdraw -$" + amount + ". New balance: $"+ sourceAcc.balance );
 
-    TransactionHistory.add("withdraw -$"+amount);
-}
+    public void Withdraw(double amount, Account sourceAcc) {
+        if (sourceAcc.balance >= amount) {
+            sourceAcc.setBalance(sourceAcc.getBalance() - amount);
+            System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.balance);
+
+            TransactionHistory.add("withdraw -$" + amount);
+        }
     }
 
 
