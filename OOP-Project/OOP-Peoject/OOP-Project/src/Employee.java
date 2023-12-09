@@ -6,11 +6,10 @@ public class Employee extends User {
     private String Postion;
     private String GraduatedCollege;
     private int yearOfGraduation;
-    private  float TotalGrade;
+    private float TotalGrade;
 
-    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Postion,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
-    {
-        super( FirstName, LastName, Username, Password);
+    public Employee(String FirstName, String LastName, String Username, String Password, String Address, String Postion, String GraduatedCollege, int yearOfGraduation, float TotalGrade) {
+        super(FirstName, LastName, Username, Password);
         this.Address = Address;
         this.Postion = Postion;
         this.GraduatedCollege = GraduatedCollege;
@@ -18,31 +17,32 @@ public class Employee extends User {
         this.TotalGrade = TotalGrade;
 
     }
-    public void EditPersonalinformation(String Address,String Postion){
-        this.Address=Address;
-        this.Postion=Postion;
+
+    public void EditPersonalinformation(String Address, String Postion) {
+        this.Address = Address;
+        this.Postion = Postion;
     }
-    public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ) {
+
+    public Client CreateClients(String firstName, String lastName, int phoneNumber, String username, String password) {
         Client client = new Client(firstName, lastName, username, password, phoneNumber);
 
         return client;
     }
-    public void searchclientbyId(int id)
-    {
+
+    public void searchclientbyId(int id) {
         Client client = new Client();
-        if(id == getID()){
+        if (id == getID()) {
             client.DisplayClientDetails();
         }
     }
-    public void DeleteClient(Client c ){
-        Client customer=new Client();
 
-        if(c!=null){
-            c=customer;
+    public void DeleteClient(Client c) {
+        Client customer = new Client();
+
+        if (c != null) {
+            c = customer;
         }
     }
-
-
 
 
     public String getAddress() {

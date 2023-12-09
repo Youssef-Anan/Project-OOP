@@ -1,25 +1,26 @@
 import java.util.Scanner;
 
 public class Bank {
-    Scanner input =new Scanner(System.in);
-    private Employee listOfEmployees[]= new Employee[1000];
-    private Client listOfClients[]=new Client[1000];
-    private Transaction listOfTransactions[]=new Transaction[1000];
-    private static int numOfEmloyees=0;
-    private static int numOfClients=0;
-    private static int numOfTransactions=0;
-    public Bank(){}
+    Scanner input = new Scanner(System.in);
+    private Employee listOfEmployees[] = new Employee[1000];
+    private Client listOfClients[] = new Client[1000];
+    private Transaction listOfTransactions[] = new Transaction[1000];
+    private static int numOfEmloyees = 0;
+    private static int numOfClients = 0;
+    private static int numOfTransactions = 0;
 
-    void Authenticate(){
+    public Bank() {
+    }
+
+    void Authenticate() {
         String userType;
-        boolean userFound=false;
-        while(true) {
+        boolean userFound = false;
+        while (true) {
             System.out.println("Choose who are you (Client-Employee-Admin)");
             userType = input.nextLine();
-            if(userType.equals("Client")||userType.equals("Employee")||userType.equals("Admin")){
+            if (userType.equals("Client") || userType.equals("Employee") || userType.equals("Admin")) {
                 break;
-            }
-            else{
+            } else {
                 System.out.println("Wrong input! Please try again.");
             }
         }
@@ -27,32 +28,30 @@ public class Bank {
         String username = input.nextLine();
         System.out.println("Enter Password:");
         String password = input.nextLine();
-        switch (userType){
+        switch (userType) {
             case "Client":
                 for (int i = 0; i < numOfClients; i++) {
-                    if (listOfClients[i].getUsername().equals(username)&&listOfClients[i].getPassword().equals(password)){
-                        userFound=true;
+                    if (listOfClients[i].getUsername().equals(username) && listOfClients[i].getPassword().equals(password)) {
+                        userFound = true;
                         break;
                     }
                 }
-                if (userFound){
+                if (userFound) {
                     System.out.println("Login successful!");
-                }
-                else {
+                } else {
                     System.out.println("User not found!");
                 }
                 break;
             case "Employee":
                 for (int i = 0; i < numOfEmloyees; i++) {
-                    if (listOfEmployees[i].getUsername().equals(username)&&listOfEmployees[i].getPassword().equals(password)){
-                        userFound=true;
+                    if (listOfEmployees[i].getUsername().equals(username) && listOfEmployees[i].getPassword().equals(password)) {
+                        userFound = true;
                         break;
                     }
                 }
-                if (userFound){
+                if (userFound) {
                     System.out.println("Login successful!");
-                }
-                else {
+                } else {
                     System.out.println("User not found!");
                 }
                 break;
@@ -70,7 +69,8 @@ public class Bank {
         }
 
     }
-    void ClientOptions(Client user){
+
+    void ClientOptions(Client user) {
         System.out.println("1-Display Account Details");
         System.out.println("2-Edit Personal Information");
         System.out.println("3-Transfer Money");
@@ -79,18 +79,18 @@ public class Bank {
         System.out.println("6-Withdraw");
         System.out.println("Choose From 1 to 6:");
         int choice = input.nextInt();
-        switch (choice){
+        switch (choice) {
             case 1:
                 user.DisplayClientDetails();
                 break;
             case 2:
                 System.out.println("Enter the new First Name:");
-                String firstname= input.nextLine();
+                String firstname = input.nextLine();
                 System.out.println("Enter the new Last Name:");
-                String lastname= input.nextLine();
+                String lastname = input.nextLine();
                 System.out.println("Enter the new Telephone Number:");
-                int telephone= input.nextInt();
-                user.EditPersonalInformation(firstname,lastname,telephone);
+                int telephone = input.nextInt();
+                user.EditPersonalInformation(firstname, lastname, telephone);
                 break;
             case 3:
                 break;
