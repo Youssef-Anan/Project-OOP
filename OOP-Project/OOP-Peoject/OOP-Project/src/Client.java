@@ -43,11 +43,10 @@ public class Client extends User {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void EditPersonalInformation(String NewFirstName, String NewLastName,String NewUserName ,int NewPhoneNumber)
+    public void EditPersonalInformation(String NewFirstName, String NewLastName,int NewPhoneNumber)
     {
         setFirstName(NewFirstName);
         setLastName(NewLastName);
-        setUsername(NewUserName);
         TelephoneNumber=NewPhoneNumber;
         System.out.println("Personal information updated for " + getID());
 
@@ -78,11 +77,11 @@ public class Client extends User {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void TakeDeposit(double Amount) {
+    public void TakeDeposit(double Amount,Account a) {
         try {
 
-          //  ArrAccount[0].balance += Amount;
-          //  System.out.println("Deposited $" + Amount + ". New balance: $" + ArrAccount[0].getBalance());
+          a.balance += Amount;
+            System.out.println("Deposited $" + Amount + ". New balance: $" + a.balance);
 
 
         } catch (Exception EX) {
