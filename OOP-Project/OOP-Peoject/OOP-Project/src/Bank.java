@@ -100,6 +100,11 @@ public class Bank {
                 user.EditPersonalInformation(firstname,lastname,telephone);
                 break;
             case 3:
+                System.out.println("Choose which account you want to transfer money from");
+                user.DisplayAccounts();
+
+                System.out.println("Choose which account you want to transfer money to");
+                user.DisplayAccounts();
                 break;
             case 4:
                 break;
