@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Client extends User {
     ArrayList<SavingsAccount> SavingAccount=new ArrayList<SavingsAccount>();
+    ArrayList TransactionHistory=new ArrayList();
     private   int TelephoneNumber;
 
 
@@ -56,9 +57,10 @@ public class Client extends User {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void TransferMoney( double amount,Account sourceAcc,Account destinationAcc) {
-        if (sourceAcc.getBalance() >= amount) {
+        if (sourceAcc.balance>= amount) {
             //sourceAcc.withdraw(amount);
-            //destinationAcc.deposit(amount);
+            destinationAcc.setBalance(destinationAcc.balance+amount);
+            sourceAcc.setBalance(sourceAcc.balance-amount);
             System.out.println("Transfer successful.");
         } else {
             System.out.println("Insufficient funds for transfer.");
