@@ -1,15 +1,17 @@
 
 import java.lang.IllegalArgumentException;
+import java.util.ArrayList;
 
 public class Employee extends User {
     private String Address;
     private String Postion;
     private String GraduatedCollege;
     private int yearOfGraduation;
-    private float TotalGrade;
+    private  float TotalGrade;
 
-    public Employee(String FirstName, String LastName, String Username, String Password, String Address, String Postion, String GraduatedCollege, int yearOfGraduation, float TotalGrade) {
-        super(FirstName, LastName, Username, Password);
+    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Postion,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
+    {
+        super( FirstName, LastName, Username, Password);
         this.Address = Address;
         this.Postion = Postion;
         this.GraduatedCollege = GraduatedCollege;
@@ -18,32 +20,52 @@ public class Employee extends User {
 
     }
 
-    public void EditPersonalinformation(String Address, String Postion) {
-        this.Address = Address;
-        this.Postion = Postion;
-    }
 
-    public Client CreateClients(String firstName, String lastName, int phoneNumber, String username, String password) {
+    public void EditPersonalinformation(String Address,String Postion){
+        setAddress(Address);
+        setPostion(Postion);
+    }
+    public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ) {
         Client client = new Client(firstName, lastName, username, password, phoneNumber);
 
         return client;
     }
+    public void searchclientbyId(int id, ArrayList<Client> c)
+    {
+        for (int i = 0; i < c.size(); i++) {
 
-    public void searchclientbyId(int id) {
-        Client client = new Client();
-        if (id == getID()) {
-            client.DisplayClientDetails();
+        if(id == c.get(i).getID())
+        {
+            c.get(i).DisplayClientDetails();
+        }
         }
     }
+    public void EditClientAccount(int id,ArrayList<Client> c){
+        for (int i = 0; i <c.size(); i++) {
+            if (id == c.get(i).getID()) {
+                c.get(i).EditPersonalInformation(c.get(i).getFirstName(), c.get(i).getLastName(), c.get(i).getTelephoneNumber());
 
-    public void DeleteClient(Client c) {
-        Client customer = new Client();
-
-        if (c != null) {
-            c = customer;
+            }
         }
+
+    }
+    public void DeleteClient(int id,ArrayList<Client> c )
+    {
+        for(int i=0;i<c.size();i++){
+            if(id==c.get(i).getID()){
+               c.remove(c.get(i));
+            }
+
+        }
+
     }
 
+    public void DisplayEmployeeDetails(){
+        System.out.println("The Employee id: "+getID());
+        System.out.println("The Employee first name: "+getFirstName());
+        System.out.println("The Employee last name: "+getLastName());
+        System.out.println("The Employee last user name: "+getUsername());
+    }
 
     public String getAddress() {
         return Address;
@@ -84,5 +106,6 @@ public class Employee extends User {
     public void setTotalGrade(float totalGrade) {
         TotalGrade = totalGrade;
     }
+
 
 }
