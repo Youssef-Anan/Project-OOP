@@ -2,16 +2,21 @@ import java.io.Serializable;
 
 public abstract class Account implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int AccountNumber;
+    protected int AccountNumber;
     protected double interestRate;
     private static final String ACCOUNT_FILE_PATH = "accounts.txt";
 
+
+
     private String accountType;
-    protected double balance;
+    protected double balance=0;
 
     public Account(String accountType, double balance) {
         this.accountType = accountType;
         this.balance = balance;
+    }
+    public Account(int accountNumber) {
+        AccountNumber=accountNumber;
     }
 
     public String getAccountType() {

@@ -8,7 +8,7 @@ public class SavingsAccount extends Account implements Serializable {
 
 
     public SavingsAccount() {
-
+super(1);
     }
 
     public SavingsAccount(double balance, double interestRate) {
