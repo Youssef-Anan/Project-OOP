@@ -39,6 +39,9 @@ public abstract class Account implements Serializable {
         return null;
     }
 
+    public Account() {
+    }
+
     public void writeAccountToFile() {
         try {
             Account[] accounts = readAccountsFromFile();

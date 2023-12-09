@@ -8,6 +8,10 @@ public class SavingsAccount extends Account implements Serializable {
 
     private double interestRate;
 
+    public SavingsAccount() {
+
+    }
+
     public SavingsAccount(double balance, double interestRate) {
         super(ACCOUNT_TYPE, balance);
         this.interestRate = interestRate;
