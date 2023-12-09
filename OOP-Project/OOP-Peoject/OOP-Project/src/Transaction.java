@@ -5,7 +5,16 @@ public class Transaction {
 
     private Client Client;
     private Employee Employee;
-    String Date;
+     private String Date;
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
     private float Amount;
     private Account SrcAcc, DstAcc;
 
@@ -20,7 +29,7 @@ public class Transaction {
     }
 
     public static void addTransaction(Account source, Account destination, ArrayList<Transaction> transactions) {
-        Transaction trans = new trans("Date",Am )
+        Transaction trans = new Transaction(Date, "Client","Employee","Amount","");
     }
 
     public void GetTransactionDetail(String Date, float Amount, String SrcAcc, String DstAcc, String Client) {

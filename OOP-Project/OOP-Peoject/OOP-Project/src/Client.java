@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Client extends User {
     ArrayList<SavingsAccount> savingAccount = new ArrayList<>();
-    CurrentAccount currentAccount = new CurrentAccount();
+    CurrentAccount currentAccount ;
 
     private int TelephoneNumber;
 
@@ -76,7 +76,7 @@ public class Client extends User {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     public void ShowTransactionHistory() {
         System.out.println("Transaction History for " + getFirstName() + " " + getLastName() + " (ID: " + getID() + "):");
-        System.out.println(TransactionHistory);
+
     }
 
 
@@ -89,7 +89,7 @@ public class Client extends User {
                 a.balance += Amount;
                 System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
 
-                TransactionHistory.add("deposit -$" + Amount);
+
             }
         } catch (Exception EX) {
 
@@ -103,7 +103,7 @@ public class Client extends User {
             sourceAcc.setBalance(sourceAcc.getBalance() - amount);
             System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.balance);
 
-            TransactionHistory.add("withdraw -$" + amount);
+
         }
     }
 
