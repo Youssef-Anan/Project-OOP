@@ -22,12 +22,12 @@ public class Client extends User {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void DisplayClientDetails(Client c){
-        System.out.println("The client id: "+c.getID());
-        System.out.println("The client first name: "+c.getFirstName());
-        System.out.println("The client last name: "+c.getLastName());
-        System.out.println("The client last user name: "+c.getUsername());
-        System.out.println("The client phone number: "+c.TelephoneNumber);
+    public void DisplayClientDetails(){
+        System.out.println("The client id: "+getID());
+        System.out.println("The client first name: "+getFirstName());
+        System.out.println("The client last name: "+getLastName());
+        System.out.println("The client last user name: "+getUsername());
+        System.out.println("The client phone number: "+TelephoneNumber);
 
 
     }
@@ -45,10 +45,10 @@ public class Client extends User {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void EditPersonalInformation(String NewFirstName, String NewLastName,String NewUserName ,int NewPhoneNumber)
     {
-        this.setFirstName(NewFirstName);
-        this.setLastName(NewLastName);
-        this.setUsername(NewUserName);
-        this.TelephoneNumber=NewPhoneNumber;
+        setFirstName(NewFirstName);
+        setLastName(NewLastName);
+        setUsername(NewUserName);
+        TelephoneNumber=NewPhoneNumber;
         System.out.println("Personal information updated for " + getID());
 
     }
@@ -57,8 +57,13 @@ public class Client extends User {
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void TransferMoney( double amount,Account sourceAcc,Account destinationAcc) {
-if (sourceAcc.balance>=1){}
-
+        if (sourceAcc.getBalance() >= amount) {
+            //sourceAcc.withdraw(amount);
+            //destinationAcc.deposit(amount);
+            System.out.println("Transfer successful.");
+        } else {
+            System.out.println("Insufficient funds for transfer.");
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,6 +90,10 @@ if (sourceAcc.balance>=1){}
             System.out.println("Invalid deposit amount. Amount must be greater than zero.");
 
         }
+    }
+    public void Withdraw(double amount,Account sourceAcc)
+    {
+
     }
 
 
