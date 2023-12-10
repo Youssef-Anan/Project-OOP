@@ -23,8 +23,23 @@ public class Client extends User {
 
         TelephoneNumber = telephoneNumber;
     }
-
-
+public CurrentAccount createcurrent()
+{
+    currentAccount=new CurrentAccount();
+    return currentAccount;
+}
+public void createsavings()
+{
+    for (int i=0;i<savingAccount.size();i++)
+    {
+createsaving(i+1);
+    }
+}
+public SavingsAccount createsaving(int i)
+{
+    savingAccount.add(new SavingsAccount(i));
+    return savingAccount.get(0);
+}
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,8 +56,15 @@ public class Client extends User {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void DisplayAccounts() {
+        String s=currentAccount.toString();
+
         for (int i = 0; i < savingAccount.size(); i++) {
             System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+        }
+        if (s!=null)
+        {
+            System.out.println("current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
+
         }
 
     }
