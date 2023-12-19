@@ -3,9 +3,9 @@ public class CurrentAccount extends Account {
     private static final String ACCOUNT_TYPE = "Current";
 
 
-    public CurrentAccount(double balance, double interestRate){
-        super(ACCOUNT_TYPE,balance);
-        this.interestRate=interestRate;
+
+    public CurrentAccount(){
+        super(1);
     }
 
     public void evaluateInterest() {

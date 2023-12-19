@@ -7,8 +7,8 @@ public class SavingsAccount extends Account implements Serializable {
     private static final double DEFAULT_INTEREST_RATE = 0.12;
 
 
-    public SavingsAccount() {
-
+    public SavingsAccount(int id) {
+super(id);
     }
 
     public SavingsAccount(double balance, double interestRate) {

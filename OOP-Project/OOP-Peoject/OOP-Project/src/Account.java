@@ -2,16 +2,21 @@ import java.io.Serializable;
 
 public abstract class Account implements Serializable {
     private static final long serialVersionUID = 1L;
-    private int AccountNumber;
+    protected int AccountNumber;
     protected double interestRate;
     private static final String ACCOUNT_FILE_PATH = "accounts.txt";
 
+
+
     private String accountType;
-    protected double balance;
+    protected double balance=0;
 
     public Account(String accountType, double balance) {
         this.accountType = accountType;
         this.balance = balance;
+    }
+    public Account(int accountNumber) {
+        AccountNumber=accountNumber;
     }
 
     public String getAccountType() {
@@ -32,7 +37,7 @@ public abstract class Account implements Serializable {
 
     public static Account[] readAccountsFromFile() {
         try {
-            return FileHandler.readAccountsFromFile();
+            return FileHandler.readData();
         } catch (Exception e) {
             System.err.println("Error reading accounts from file: " + e.getMessage());
         }
@@ -62,7 +67,7 @@ public abstract class Account implements Serializable {
             updatedAccounts[accounts.length] = this;
 
             // Write updated accounts to file
-            FileHandler.writeAccountsToFile(updatedAccounts);
+            FileHandler.writeAToFile(updatedAccounts);
             System.out.println("Account data has been written to file.");
         } catch (Exception e) {
             System.err.println("Error writing account to file: " + e.getMessage());
