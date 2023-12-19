@@ -4,26 +4,30 @@ import java.util.ArrayList;
 
 public class Employee extends User {
     private String Address;
-    private String Postion;
+    private String Position;
     private String GraduatedCollege;
     private int yearOfGraduation;
     private  float TotalGrade;
 
-    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Postion,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
+    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
     {
         super( FirstName, LastName, Username, Password);
         this.Address = Address;
-        this.Postion = Postion;
+        this.Position = Position;
         this.GraduatedCollege = GraduatedCollege;
         this.yearOfGraduation = yearOfGraduation;
         this.TotalGrade = TotalGrade;
 
     }
+    public Employee(String username,String password){
+        setUsername(username);
+        setPassword(password);
+    }
 
 
-    public void EditPersonalinformation(String Address,String Postion){
+    public void EditPersonalinformation(String Address,String Position){
         setAddress(Address);
-        setPostion(Postion);
+        setPosition(Position);
     }
     public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ) {
         Client client = new Client(firstName, lastName, username, password, phoneNumber);
@@ -75,12 +79,12 @@ public class Employee extends User {
         Address = address;
     }
 
-    public String getPostion() {
-        return Postion;
+    public String getPosition() {
+        return Position;
     }
 
-    public void setPostion(String postion) {
-        Postion = postion;
+    public void setPosition(String position) {
+        Position = position;
     }
 
     public String getGraduatedCollege() {

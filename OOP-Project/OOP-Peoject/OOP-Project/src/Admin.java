@@ -24,4 +24,19 @@ public class Admin extends User {
             c.get(i).DisplayClientDetails();
         }
     }
+    public Employee AuthorizeNewEmp(String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, float TotalGrade) {
+        Employee employee= new Employee(FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade );
+        return employee;
+    }
+
+    public void DeleteEmployee(int id,ArrayList<Employee> e)
+    {
+        for(int i=0;i<e.size();i++){
+            if(id==e.get(i).getID()){
+                e.remove(e.get(i));
+            }
+
+        }
+
+    }
 }
