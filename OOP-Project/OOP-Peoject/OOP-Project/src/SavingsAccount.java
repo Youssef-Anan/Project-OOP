@@ -10,6 +10,9 @@ public class SavingsAccount extends Account implements Serializable {
     public SavingsAccount(int id) {
 super(id);
     }
+    public SavingsAccount() {
+
+    }
 
     public SavingsAccount(double balance, double interestRate) {
         super(ACCOUNT_TYPE, balance);

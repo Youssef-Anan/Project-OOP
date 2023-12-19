@@ -23,11 +23,26 @@ public class Client extends User {
 
         TelephoneNumber = telephoneNumber;
     }
+
 public CurrentAccount createcurrent()
 {
     currentAccount=new CurrentAccount();
     return currentAccount;
 }
+    public Client(Client other) {
+        super(other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
+        this.TelephoneNumber = other.TelephoneNumber;
+        this.currentAccount = new CurrentAccount();
+
+        // Deep copy of the savingAccount ArrayList
+        this.savingAccount = new ArrayList<>();
+        for (SavingsAccount acc : other.savingAccount) {
+            this.savingAccount.add(new SavingsAccount());
+        }
+
+        // Deep copy of the TransactionHistory ArrayList
+        this.TransactionHistory = new ArrayList<>(other.TransactionHistory);
+    }
 public void createsavings()
 {
 SavingsAccount savings=new SavingsAccount(getID());
