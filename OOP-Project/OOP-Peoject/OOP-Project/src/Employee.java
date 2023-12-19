@@ -5,15 +5,16 @@ import java.util.Scanner;
 
 public class Employee extends User {
     Scanner input=new Scanner(System.in);
+    private  static int empcount=10000;
     private String Address;
     private String Position;
     private String GraduatedCollege;
     private int yearOfGraduation;
     private  String TotalGrade;
 
-    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, String TotalGrade)
+    public  Employee( int id,String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, String TotalGrade)
     {
-        super( FirstName, LastName, Username, Password);
+        super( id,FirstName, LastName, Username, Password);
         this.Address = Address;
         this.Position = Position;
         this.GraduatedCollege = GraduatedCollege;
@@ -27,7 +28,7 @@ public class Employee extends User {
     }
 
     public Employee(Employee e) {
-        super(e.getFirstName(),e.getLastName(),e.getUsername(),e.getPassword());
+        super(e.getID(),e.getFirstName(),e.getLastName(),e.getUsername(),e.getPassword());
       this.Address=e.Address;
       this.Position=e.Position;
       this.GraduatedCollege=e.GraduatedCollege;
@@ -55,7 +56,7 @@ public class Employee extends User {
         String password = input.next();
         System.out.println("Enter PhoneNumber:");
         String phoneNumber=input.next();
-        Client client = new Client(firstName, lastName, username, password, phoneNumber);
+        Client client = new Client(10000+c.size(),firstName, lastName, username, password, phoneNumber);
         c.add(client);
     }
     public void searchclientbyId( ArrayList<Client> c)

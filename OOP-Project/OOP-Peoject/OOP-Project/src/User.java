@@ -11,7 +11,8 @@ public abstract class User {
         super();
     }
 
-    public User( String FirstName, String LastName, String Username, String Password) {
+    public User( int id,String FirstName, String LastName, String Username, String Password) {
+        this.ID=id;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Username = Username;

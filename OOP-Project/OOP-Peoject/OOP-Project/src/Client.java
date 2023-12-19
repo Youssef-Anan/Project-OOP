@@ -18,8 +18,8 @@ public class Client extends User {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String username, String password, String telephoneNumber) {
-        super(firstName, lastName, username, password);
+    public Client(int id,String firstName, String lastName, String username, String password, String telephoneNumber) {
+        super(id,firstName, lastName, username, password);
     super.userType="Client";
         TelephoneNumber = telephoneNumber;
     }
@@ -30,7 +30,7 @@ public CurrentAccount createcurrent()
     return currentAccount;
 }
     public Client(Client other) {
-        super(other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
+        super(other.getID(),other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
         this.TelephoneNumber = other.TelephoneNumber;
         this.currentAccount = new CurrentAccount();
 

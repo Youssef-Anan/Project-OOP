@@ -64,12 +64,12 @@ public class Admin extends User {
         }
 
     }
-    public void Display_All_Transaction(Date date, ArrayList<Transaction> t)
+    /*public void Display_All_Transaction(Date date, ArrayList<Transaction> t)
     {
         for (int i = 0; i < t.size(); i++)
         {
             if (date.equals(t.get(i).date))
              t.get(i).displaytransaction();
         }
-    }
+    }*/
 }
