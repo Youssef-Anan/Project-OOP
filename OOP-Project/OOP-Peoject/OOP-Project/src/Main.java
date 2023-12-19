@@ -5,8 +5,8 @@ public class Main {
         Admin convAdmin=null;
         Employee convEmployee=null;
         Bank testbank = new Bank();
-        Employee test=new Employee("First Name","Last Name","emp","emp","abc","pos","asu",202,"4");
-        testbank.Employees.add(test);
+        //Employee test=new Employee(1,"First Name","Last Name","emp","emp","abc","pos","asu",202,"4");
+        //testbank.Employees.add(test);
         while(true){
         User user=testbank.Authenticate();
 

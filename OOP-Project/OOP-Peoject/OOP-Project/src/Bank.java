@@ -114,6 +114,25 @@ public class Bank {
             case 6:
                 break;
             case 7:
+                String c=null;
+                while(true) {
+                    System.out.println("What type of Account do you wish to create?[Current-Saving]");
+                    c=input.next();
+                    if(c.equals("Current")||c.equals("Saving")){
+                        break;
+                    }
+                    else{
+                        System.out.println("Wrong input! Please try again.");
+                    }
+                }
+                switch (c){
+                    case "Saving":
+                        user.createsavings();
+                        break;
+                    case "Current":
+                        user.createcurrent();
+                        break;
+                }
                 break;
             case 8:
                 break loop;
@@ -171,7 +190,7 @@ public class Bank {
             int choice = input.nextInt();
             switch (choice) {
                 case 1:
-
+                    user.CreateEmployee(Employees);
                     break;
                 case 2:
 

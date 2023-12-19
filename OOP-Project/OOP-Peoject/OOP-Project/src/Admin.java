@@ -3,6 +3,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Admin extends User {
+
     Scanner input=new Scanner(System.in);
     @Override
     public void setUsername(String username) {
@@ -50,7 +51,7 @@ public class Admin extends User {
         int yearOfGraduation = input.nextInt();
         System.out.println("Enter Total Grade:");
         String TotalGrade = input.next();
-        Employee emp= new Employee(FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade);
+        Employee emp= new Employee(20000+e.size(),FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade);
         e.add(emp);
     }
 
