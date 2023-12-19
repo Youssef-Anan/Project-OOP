@@ -9,9 +9,9 @@ public class Employee extends User {
     private String Position;
     private String GraduatedCollege;
     private int yearOfGraduation;
-    private  float TotalGrade;
+    private  String TotalGrade;
 
-    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, float TotalGrade)
+    public  Employee( String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, String TotalGrade)
     {
         super( FirstName, LastName, Username, Password);
         this.Address = Address;
@@ -27,10 +27,7 @@ public class Employee extends User {
     }
 
     public Employee(Employee e) {
-      this.setFirstName(e.getFirstName());
-      this.setLastName(e.getLastName());
-      this.setUsername(e.getUsername());
-      this.setPassword(e.getPassword());
+        super(e.getFirstName(),e.getLastName(),e.getUsername(),e.getPassword());
       this.Address=e.Address;
       this.Position=e.Position;
       this.GraduatedCollege=e.GraduatedCollege;
@@ -47,13 +44,24 @@ public class Employee extends User {
         this.Position=Position;
 
     }
-    public Client CreateClients(String firstName, String lastName, String username,String password, int phoneNumber) {
+    public void CreateClients(ArrayList<Client>c) {
+        System.out.println("Enter  Firstname:");
+        String firstName = input.next();
+        System.out.println("Enter Lastname:");
+        String lastName = input.next();
+        System.out.println("Enter Username:");
+        String username = input.next();
+        System.out.println("Enter password:");
+        String password = input.next();
+        System.out.println("Enter PhoneNumber:");
+        String phoneNumber=input.next();
         Client client = new Client(firstName, lastName, username, password, phoneNumber);
-
-        return client;
+        c.add(client);
     }
-    public void searchclientbyId(int id, ArrayList<Client> c)
+    public void searchclientbyId( ArrayList<Client> c)
     {
+        System.out.println("Enter the desired ID to search for a client : ");
+        int id=input.nextInt();
         for (int i = 0; i < c.size(); i++) {
 
         if(id == c.get(i).getID())
@@ -61,8 +69,11 @@ public class Employee extends User {
             c.get(i).DisplayClientDetails();
         }
         }
+
     }
-    public void EditClientAccount(int id,ArrayList<Client> c){
+    public void EditClientAccount(ArrayList<Client> c){
+        System.out.println("Enter the desired ID to edit the client  : ");
+        int id=input.nextInt();
         for (int i = 0; i <c.size(); i++) {
             if (id == c.get(i).getID()) {
                 c.get(i).EditPersonalInformation(c.get(i).getFirstName(), c.get(i).getLastName(), c.get(i).getTelephoneNumber());
@@ -71,8 +82,10 @@ public class Employee extends User {
         }
 
     }
-    public void DeleteClient(int id,ArrayList<Client> c )
+    public void DeleteClient(ArrayList<Client> c )
     {
+        System.out.println("Enter the desired ID to delete the client: ");
+        int id=input.nextInt();
         for(int i=0;i<c.size();i++){
             if(id==c.get(i).getID()){
                c.remove(c.get(i));
@@ -121,11 +134,11 @@ public class Employee extends User {
         this.yearOfGraduation = yearOfGraduation;
     }
 
-    public float getTotalGrade() {
+    public String getTotalGrade() {
         return TotalGrade;
     }
 
-    public void setTotalGrade(float totalGrade) {
+    public void setTotalGrade(String totalGrade) {
         TotalGrade = totalGrade;
     }
 
