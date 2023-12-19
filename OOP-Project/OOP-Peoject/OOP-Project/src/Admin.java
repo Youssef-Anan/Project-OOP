@@ -39,4 +39,11 @@ public class Admin extends User {
         }
 
     }
+    public void Display_All_Transaction(ArrayList<Transaction> t)
+    {
+        for (int i = 0; i < t.size(); i++)
+        {
+            t.get(i).displaytransaction();
+        }
+    }
 }
