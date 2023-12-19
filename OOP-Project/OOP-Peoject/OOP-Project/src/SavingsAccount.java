@@ -1,6 +1,6 @@
-import java.io.Serializable;
+import java.time.LocalDate;
 
-public class SavingsAccount extends Account implements Serializable {
+public class SavingsAccount extends Account  {
     private static final long serialVersionUID = 1L;
 
     private static final String ACCOUNT_TYPE = "Savings";
@@ -11,25 +11,28 @@ public class SavingsAccount extends Account implements Serializable {
 super(id);
     }
 
-    public SavingsAccount(double balance, double interestRate) {
+    public SavingsAccount(double balance, double interestRate)
+    {
         super(ACCOUNT_TYPE, balance);
         this.interestRate = interestRate;
     }
 
 
     @Override
-    public void evaluateInterest() {
+    public void evaluateInterest()
+    {
         double interest = getBalance() * interestRate;
         setBalance(getBalance() + interest);
         System.out.println("Interest evaluated. New balance: " + getBalance());
     }
 
     @Override
-    public void applyFees() {
+    public void applyFees()
+    {
         // Savings accounts do not have fees
     }
 
-    public static SavingsAccount createSavingsAccount(double initialBalance, double interestRate) {
+    public  SavingsAccount createSavingsAccount(double initialBalance, double interestRate) {
         SavingsAccount savingsAccount = new SavingsAccount(initialBalance, interestRate);
         savingsAccount.writeAccountToFile();
         return savingsAccount;
