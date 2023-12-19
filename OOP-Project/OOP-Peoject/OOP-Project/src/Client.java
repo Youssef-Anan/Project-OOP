@@ -4,35 +4,46 @@ import java.util.ArrayList;
 
 public class Client extends User {
     ArrayList<SavingsAccount> savingAccount = new ArrayList<>();
-    CurrentAccount currentAccount = new CurrentAccount();
+    CurrentAccount currentAccount ;
 
     ArrayList TransactionHistory = new ArrayList();
     private String TelephoneNumber;
 
-
+public static int clientC=1001;
     Scanner input = new Scanner(System.in);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     public Client() {
+        clientC=1001;
+        clientC++;
     }
 
     public Client(int id,String firstName, String lastName, String username, String password, String telephoneNumber) {
         super(id,firstName, lastName, username, password);
     super.userType="Client";
         TelephoneNumber = telephoneNumber;
+        clientC=1001;
+        clientC++;
     }
 
-public CurrentAccount createcurrent()
+public void createcurrent()
 {
-    currentAccount=new CurrentAccount();
-    return currentAccount;
+    if(currentAccount==null) {
+        currentAccount = new CurrentAccount(getID());
+
+    }
+
+else
+    {
+        System.out.println("the account number is already taken");
+    }
 }
     public Client(Client other) {
         super(other.getID(),other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
         this.TelephoneNumber = other.TelephoneNumber;
-        this.currentAccount = new CurrentAccount();
+        this.currentAccount = new CurrentAccount(getID());
 
         // Deep copy of the savingAccount ArrayList
         this.savingAccount = new ArrayList<>();
@@ -42,6 +53,8 @@ public CurrentAccount createcurrent()
 
         // Deep copy of the TransactionHistory ArrayList
         this.TransactionHistory = new ArrayList<>(other.TransactionHistory);
+        clientC=1001;
+        clientC++;
     }
 public void createsavings()
 {

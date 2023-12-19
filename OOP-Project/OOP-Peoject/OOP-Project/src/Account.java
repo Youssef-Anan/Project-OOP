@@ -22,9 +22,9 @@ public abstract class Account{
         this.accountType = accountType;
         this.balance = balance;
     }
-    public Account(int Client_id ) {
+    public Account(int Client_id,String s ) {
         this.Client_Id=Client_id;
-        this.AccountNumber = generateUniqueAccountNumber();
+        this.AccountNumber = generateUniqueAccountNumber(s);
     }
 
     public String getAccountType() {
@@ -42,11 +42,11 @@ public abstract class Account{
     public abstract void evaluateInterest();
 
     public abstract void applyFees();
-    private static synchronized long generateUniqueAccountNumber() {
+    static synchronized long generateUniqueAccountNumber(String x) {
         long newAccountNumber;
         do {
             long randomNumber = Math.abs(random.nextLong() % 900000000000L) + 100000000000L;
-            newAccountNumber = Long.parseLong("5484" + Long.toString(randomNumber));
+            newAccountNumber = Long.parseLong(x + Long.toString(randomNumber));
         } while (generatedAccountNumbers.contains(newAccountNumber));
         generatedAccountNumbers.add(newAccountNumber);
         return newAccountNumber;
@@ -89,21 +89,6 @@ public abstract class Account{
         } catch (Exception e) {
             System.err.println("Error writing account to file: " + e.getMessage());
         }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-
-        Account account = (Account) obj;
-
-        return accountType.equals(account.accountType);
-    }
-
-    @Override
-    public int hashCode() {
-        return accountType.hashCode();
     }
 
     public long getAccountNumber() {

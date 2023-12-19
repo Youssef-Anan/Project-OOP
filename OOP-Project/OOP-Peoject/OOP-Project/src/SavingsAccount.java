@@ -9,7 +9,7 @@ public class SavingsAccount extends Account  {
 
     public SavingsAccount(int id)
     {
-    super(id);
+    super(id,"5484");
     this.interestRate = DEFAULT_INTEREST_RATE;
         this.local_Date = LocalDate.now();
     }
@@ -21,6 +21,7 @@ public class SavingsAccount extends Account  {
     {
         super(ACCOUNT_TYPE, balance);
         this.interestRate = interestRate;
+        this.AccountNumber = generateUniqueAccountNumber("5484");
     }
 
 
