@@ -20,7 +20,7 @@ public class Client extends User {
 
     public Client(String firstName, String lastName, String username, String password, String telephoneNumber) {
         super(firstName, lastName, username, password);
-
+    super.userType="Client";
         TelephoneNumber = telephoneNumber;
     }
 

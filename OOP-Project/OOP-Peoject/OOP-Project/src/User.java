@@ -1,6 +1,6 @@
 
 public abstract class User {
-    public static int  usercount =100;
+    String userType;
     private int ID;
     private String FirstName;
     private String LastName;
@@ -12,14 +12,13 @@ public abstract class User {
     }
 
     public User( String FirstName, String LastName, String Username, String Password) {
-        ID=usercount;
-        usercount++;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Username = Username;
         this.Password = Password;
 
     }
+
 
     public int getID() {
         return ID;
@@ -59,6 +58,9 @@ public abstract class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+    public String getUserType() {
+        return userType;
     }
 }
 
