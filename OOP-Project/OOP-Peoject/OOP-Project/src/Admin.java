@@ -51,7 +51,7 @@ public class Admin extends User {
         int yearOfGraduation = input.nextInt();
         System.out.println("Enter Total Grade:");
         String TotalGrade = input.next();
-        Employee emp= new Employee(20000+e.size(),FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade);
+        Employee emp= new Employee(20001+e.size(),FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade);
         e.add(emp);
     }
 
