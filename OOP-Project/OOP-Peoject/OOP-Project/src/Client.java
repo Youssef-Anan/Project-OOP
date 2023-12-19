@@ -10,7 +10,7 @@ public class Client extends User {
     private int TelephoneNumber;
 
 
-    Scanner scanner = new Scanner(System.in);
+    Scanner input = new Scanner(System.in);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,16 +30,10 @@ public CurrentAccount createcurrent()
 }
 public void createsavings()
 {
-    for (int i=0;i<savingAccount.size();i++)
-    {
-createsaving(i+1);
-    }
+SavingsAccount savings=new SavingsAccount(getID());
+savingAccount.add(savings);
 }
-public SavingsAccount createsaving(int i)
-{
-    savingAccount.add(new SavingsAccount(i));
-    return savingAccount.get(0);
-}
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -73,9 +67,12 @@ public SavingsAccount createsaving(int i)
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void EditPersonalInformation(String NewFirstName, String NewLastName, int NewPhoneNumber) {
-        setFirstName(NewFirstName);
-        setLastName(NewLastName);
-        TelephoneNumber = NewPhoneNumber;
+        System.out.println("Enter the new First Name:");
+        String firstname= input.nextLine();
+        System.out.println("Enter the new Last Name:");
+        String lastname= input.nextLine();
+        System.out.println("Enter the new Telephone Number:");
+        int telephone= input.nextInt();
         System.out.println("Personal information updated for " + getID());
 
     }
