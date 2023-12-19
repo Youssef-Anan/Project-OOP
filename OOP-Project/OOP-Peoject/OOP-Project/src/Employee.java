@@ -1,8 +1,10 @@
 
 import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Employee extends User {
+    Scanner input=new Scanner(System.in);
     private String Address;
     private String Position;
     private String GraduatedCollege;
@@ -24,12 +26,28 @@ public class Employee extends User {
         setPassword(password);
     }
 
-
-    public void EditPersonalinformation(String Address,String Position){
-        setAddress(Address);
-        setPosition(Position);
+    public Employee(Employee e) {
+      this.setFirstName(e.getFirstName());
+      this.setLastName(e.getLastName());
+      this.setUsername(e.getUsername());
+      this.setPassword(e.getPassword());
+      this.Address=e.Address;
+      this.Position=e.Position;
+      this.GraduatedCollege=e.GraduatedCollege;
+      this.yearOfGraduation=e.yearOfGraduation;
+      this.TotalGrade=e.TotalGrade;
     }
-    public Client CreateClients(String firstName, String lastName,  int phoneNumber,String username,String password ) {
+
+    public void EditPersonalinformation(){
+        System.out.println("Enter the new address");
+        String Address = input.next();
+       this.Address=Address;
+        System.out.println("Enter the new Position");
+        String Position = input.next();
+        this.Position=Position;
+
+    }
+    public Client CreateClients(String firstName, String lastName, String username,String password, int phoneNumber) {
         Client client = new Client(firstName, lastName, username, password, phoneNumber);
 
         return client;
