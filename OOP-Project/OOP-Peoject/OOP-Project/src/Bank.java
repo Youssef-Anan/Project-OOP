@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 public class Bank {
     Scanner input =new Scanner(System.in);
-    private Employee listOfEmployees[]= new Employee[1000];
-    private Client listOfClients[]=new Client[1000];
-    private Transaction listOfTransactions[]=new Transaction[1000];
+    private ArrayList<Employee> Employees= new ArrayList<>();
+    private ArrayList<Client> Clients= new ArrayList<>();
+    private ArrayList<Transaction> Transactions = new ArrayList<>();
     private static int numOfEmloyees=0;
     private static int numOfClients=0;
     private static int numOfTransactions=0;
@@ -17,9 +18,10 @@ public class Bank {
             FileHandler.writeData(saveInput);
         }
     }
-    void Authenticate(){
+    User Authenticate(){
         String userType;
         boolean userFound=false;
+        User user;
         while(true) {
             System.out.println("Choose who are you (Client-Employee-Admin)");
             userType = input.nextLine();
@@ -37,8 +39,9 @@ public class Bank {
         switch (userType){
             case "Client":
                 for (int i = 0; i < numOfClients; i++) {
-                    if (listOfClients[i].getUsername().equals(username)&&listOfClients[i].getPassword().equals(password)){
+                    if (Clients.get(i).getUsername().equals(username)&&Clients.get(i).getPassword().equals(password)){
                         userFound=true;
+                user = new Employee(Employees.get(i));
                         break;
                     }
                 }
@@ -51,8 +54,9 @@ public class Bank {
                 break;
             case "Employee":
                 for (int i = 0; i < numOfEmloyees; i++) {
-                    if (listOfEmployees[i].getUsername().equals(username)&&listOfEmployees[i].getPassword().equals(password)){
+                    if (Employees.get(i).getUsername().equals(username)&&Employees.get(i).getPassword().equals(password)){
                         userFound=true;
+                        user = new Employee(Employees.get(i));
                         break;
                     }
                 }
@@ -62,6 +66,7 @@ public class Bank {
                 else {
                     System.out.println("User not found!");
                 }
+
                 break;
             /*case "Admin":
                     if (admin.getUsername().equals(username)&&listOfClients[i].getPassword().equals(password)){
@@ -75,7 +80,7 @@ public class Bank {
                 }
                 break;*/
         }
-
+    return user;
     }
     void ClientOptions(Client user){
         System.out.println("1-Display Account Details");
@@ -84,6 +89,7 @@ public class Bank {
         System.out.println("4-Show Transaction History");
         System.out.println("5-Deposit");
         System.out.println("6-Withdraw");
+        System.out.println("7-Create Account");
         System.out.println("Choose From 1 to 6:");
         int choice = input.nextInt();
         switch (choice){
@@ -92,11 +98,11 @@ public class Bank {
                 break;
             case 2:
                 System.out.println("Enter the new First Name:");
-                String firstname= input.nextLine();
+                String firstname= input.next();
                 System.out.println("Enter the new Last Name:");
-                String lastname= input.nextLine();
+                String lastname= input.next();
                 System.out.println("Enter the new Telephone Number:");
-                int telephone= input.nextInt();
+                String telephone= input.next();
                 user.EditPersonalInformation(firstname,lastname,telephone);
                 break;
             case 3:
@@ -111,6 +117,47 @@ public class Bank {
             case 5:
                 break;
             case 6:
+                break;
+            default:
+                break;
+        }
+    }
+    void EmployeeOptions(Employee user){
+        System.out.println("1-Create CLient");
+        System.out.println("2-Edit Personal Information");
+        System.out.println("3-Search for Client");
+        System.out.println("4-Edit Client Account");
+        System.out.println("5-Display Client Details");
+        System.out.println("Choose From 1 to 5:");
+        int choice = input.nextInt();
+        switch (choice){
+            case 1:
+                System.out.println("Enter the First Name:");
+                String firstname= input.next();
+                System.out.println("Enter the Last Name:");
+                String lastname= input.next();
+                System.out.println("Enter the Telephone Number:");
+                String telephone= input.next();
+                System.out.println("Enter the username:");
+                String username= input.next();
+                System.out.println("Enter the password:");
+                String password= input.next();
+                Clients.add(user.CreateClients(firstname,lastname,telephone,username,password));
+                break;
+            case 2:
+                System.out.println("Enter the Address:");
+                String address= input.next();
+                System.out.println("Enter the Position:");
+                String position= input.next();
+                user.EditPersonalinformation(address,position);
+                break;
+            case 3:
+                user.searchclientbyId(101,Clients);
+                break;
+            case 4:
+                break;
+            case 5:
+
                 break;
             default:
                 break;

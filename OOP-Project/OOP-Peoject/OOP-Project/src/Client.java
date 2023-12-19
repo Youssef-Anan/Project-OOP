@@ -7,7 +7,7 @@ public class Client extends User {
     CurrentAccount currentAccount = new CurrentAccount();
 
     ArrayList TransactionHistory = new ArrayList();
-    private int TelephoneNumber;
+    private String TelephoneNumber;
 
 
     Scanner input = new Scanner(System.in);
@@ -18,7 +18,7 @@ public class Client extends User {
     public Client() {
     }
 
-    public Client(String firstName, String lastName, String username, String password, int telephoneNumber) {
+    public Client(String firstName, String lastName, String username, String password, String telephoneNumber) {
         super(firstName, lastName, username, password);
 
         TelephoneNumber = telephoneNumber;
@@ -81,7 +81,7 @@ savingAccount.add(savings);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void EditPersonalInformation(String NewFirstName, String NewLastName, int NewPhoneNumber) {
+    public void EditPersonalInformation(String NewFirstName, String NewLastName, String NewPhoneNumber) {
         System.out.println("Enter the new First Name:");
         String firstname= input.nextLine();
         System.out.println("Enter the new Last Name:");
@@ -143,11 +143,11 @@ savingAccount.add(savings);
     }
 
 
-    public int getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return TelephoneNumber;
     }
 
-    public void setTelephoneNumber(int telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         TelephoneNumber = telephoneNumber;
     }
 
