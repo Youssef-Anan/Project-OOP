@@ -18,63 +18,67 @@ public class Bank {
             FileHandler.writeData(saveInput);
         }
     }
-    User Authenticate(){
-        System.out.println("testauth");
+    User Authenticate() {
         String userType;
-        boolean userFound=false;
-        User user=null;
-        while(true) {
+        boolean userFound = false;
+        User user = null;
+        while (true) {
             System.out.println("Choose who are you (Client-Employee-Admin)");
             userType = input.nextLine();
-            if(userType.equals("Client")||userType.equals("Employee")||userType.equals("Admin")){
+            if (userType.equals("Client") || userType.equals("Employee") || userType.equals("Admin")) {
                 break;
-            }
-            else{
+            } else {
                 System.out.println("Wrong input! Please try again.");
             }
         }
+        loop :while (true) {
         System.out.println("Enter Username:");
         String username = input.nextLine();
         System.out.println("Enter Password:");
         String password = input.nextLine();
-        if(userType.equals("Client")){
+            if (userType.equals("Client")) {
                 for (int i = 0; i < Clients.size(); i++) {
-                    if (Clients.get(i).getUsername().equals(username)&&Clients.get(i).getPassword().equals(password)){
-                        userFound=true;
+                    if (Clients.get(i).getUsername().equals(username) && Clients.get(i).getPassword().equals(password)) {
+                        userFound = true;
                         user = new Client(Clients.get(i));
-                        user.userType="Client";
+                        user.userType = "Client";
                         System.out.println("Login successful!");
-                        return user;
+                        break loop;
+
                     }
                 }
-                System.out.println("User not found!");}
-        else if(userType.equals("Employee")){
+                System.out.println("Wrong Credintials!");
+                continue loop;
+            } else if (userType.equals("Employee")) {
                 for (int i = 0; i < Employees.size(); i++) {
-                    if (Employees.get(i).getUsername().equals(username)&&Employees.get(i).getPassword().equals(password)){
-                        userFound=true;
+                    if (Employees.get(i).getUsername().equals(username) && Employees.get(i).getPassword().equals(password)) {
+                        userFound = true;
                         user = new Employee(Employees.get(i));
-                        user.userType="Employee";
+                        user.userType = "Employee";
                         System.out.println("Login successful!");
-                        return user;
+                        break loop;
 
                     }
                 }
-                System.out.println("User not found!");
+                System.out.println("Wrong Credintials!");
+                continue loop;
+            } else if (userType.equals("Admin")) {
+                if (username.equals("admin") && password.equals("admin")) {
+                    userFound = true;
+                    user = new Admin();
+                    user.userType = "Admin";
+                    System.out.println("Login successful!");
+                    break loop;
                 }
-
-
-                else if (userType.equals("Admin")) {
-                    if (username.equals("admin")&&password.equals("admin")){
-                        userFound=true;
-                        user = new Admin();
-                        user.userType="Admin";
-                        System.out.println("Login successful!");
-                        return user;
+                else{
+                    System.out.println("Wrong Credintials!");
+                    continue loop;
                 }
-        }
-    return user;
-        }
+            }
 
+        }
+            return user;
+    }
     void ClientOptions(Client user){
        loop: while(true){
         System.out.println("1-Display Account Details");
