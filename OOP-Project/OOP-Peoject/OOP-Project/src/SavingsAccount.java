@@ -7,8 +7,11 @@ public class SavingsAccount extends Account  {
     private static final double DEFAULT_INTEREST_RATE = 0.12;
 
 
-    public SavingsAccount(int id) {
-super(id);
+    public SavingsAccount(int id)
+    {
+    super(id);
+    this.interestRate = DEFAULT_INTEREST_RATE;
+        this.local_Date = LocalDate.now();
     }
     public SavingsAccount() {
 
@@ -22,11 +25,16 @@ super(id);
 
 
     @Override
-    public void evaluateInterest()
-    {
-        double interest = getBalance() * interestRate;
-        setBalance(getBalance() + interest);
-        System.out.println("Interest evaluated. New balance: " + getBalance());
+    public void evaluateInterest() {
+        LocalDate currentDate = LocalDate.now();
+        if (local_Date.plusYears(1).isBefore(currentDate) || local_Date.equals(currentDate)) {
+            double interest = getBalance() * interestRate;
+            setBalance(getBalance() + interest);
+            local_Date = currentDate;
+            System.out.println("Interest evaluated. New balance: " + getBalance());
+        } else {
+            System.out.println("Interest evaluation is not due yet.");
+        }
     }
 
     @Override

@@ -1,12 +1,13 @@
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
+import java.time.LocalDate;
 
 
-public abstract class Account implements Serializable {
+public abstract class Account{
     private static final long serialVersionUID = 1L;
     protected long AccountNumber;
+    protected   LocalDate local_Date;
     protected double interestRate;
     private static final String ACCOUNT_FILE_PATH = "accounts.txt";
 
@@ -21,8 +22,8 @@ public abstract class Account implements Serializable {
         this.accountType = accountType;
         this.balance = balance;
     }
-    public Account(int Clieint_id ) {
-        this.Client_Id=Clieint_id;
+    public Account(int Client_id ) {
+        this.Client_Id=Client_id;
         this.AccountNumber = generateUniqueAccountNumber();
     }
 
@@ -44,7 +45,8 @@ public abstract class Account implements Serializable {
     private static synchronized long generateUniqueAccountNumber() {
         long newAccountNumber;
         do {
-            newAccountNumber = Math.abs(random.nextLong() % 9000000000000000L) + 1000000000000000L;
+            long randomNumber = Math.abs(random.nextLong() % 900000000000L) + 100000000000L;
+            newAccountNumber = Long.parseLong("5484" + Long.toString(randomNumber));
         } while (generatedAccountNumbers.contains(newAccountNumber));
         generatedAccountNumbers.add(newAccountNumber);
         return newAccountNumber;
@@ -112,5 +114,11 @@ public abstract class Account implements Serializable {
         AccountNumber = accountNumber;
     }
 
+    public LocalDate getLocal_Date() {
+        return local_Date;
+    }
 
+    public void setLocal_Date(LocalDate local_Date) {
+        this.local_Date = local_Date;
+    }
 }
