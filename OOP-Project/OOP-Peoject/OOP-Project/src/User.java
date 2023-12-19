@@ -1,5 +1,6 @@
 
 public abstract class User {
+    public static int  usercount =100;
     private int ID;
     private String FirstName;
     private String LastName;
@@ -10,24 +11,15 @@ public abstract class User {
         super();
     }
 
-
-    public User(String FirstName, String LastName, String Username, String Password) {
-
+    public User( String FirstName, String LastName, String Username, String Password) {
+        ID=usercount;
+        usercount++;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Username = Username;
         this.Password = Password;
+
     }
-
-    public User(int ID, String FirstName, String LastName, String Username, String Password) {
-
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Username = Username;
-        this.Password = Password;
-        this.ID = ID;
-    }
-
 
     public int getID() {
         return ID;
