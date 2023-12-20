@@ -1,30 +1,36 @@
 import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
-        Client convClient=null;
-        Admin convAdmin=null;
-        Employee convEmployee=null;
+        Client convClient=null;     Admin convAdmin=null;       Employee convEmployee=null;
         Bank testbank = new Bank();
-        //Employee test=new Employee(1,"First Name","Last Name","emp","emp","abc","pos","asu",202,"4");
-        //testbank.Employees.add(test);
+        //Program
         while(true){
-        User user=testbank.Authenticate();
 
+//--------------------------------------Authentication--------------------------------------------------//
+//Authenticating User
+        User user=testbank.Authenticate();
+//Giving User Client Authorities
         if(user.getUserType().equals("Client")){
             convClient= (Client) user;
         }
+//Giving User Employee Authorities
         else if (user.getUserType().equals("Employee")) {
             convEmployee= (Employee) user;
         }
+//Giving User Admin Authorities
         else {
             convAdmin = (Admin) user;
         }
+//--------------------------------------Showing User Options--------------------------------------------//
+//Client Options
             if(user.getUserType().equals("Client")){
                 testbank.ClientOptions(convClient);
             }
+//Employee Options
             else if (user.getUserType().equals("Employee")) {
                 testbank.EmployeeOptions(convEmployee);
             }
+//Admin Options
             else {
                 testbank.AdminOptions(convAdmin);
             }

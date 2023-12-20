@@ -55,8 +55,11 @@ public class Admin extends User {
         e.add(emp);
     }
 
-    public void DeleteEmployee(int id,ArrayList<Employee> e)
+    public void DeleteEmployee(ArrayList<Employee> e)
     {
+        Display_All_Employees(e);
+        System.out.println("Choose the Employee by ID");
+        int id = input.nextInt();
         for(int i=0;i<e.size();i++){
             if(id==e.get(i).getID()){
                 e.remove(e.get(i));

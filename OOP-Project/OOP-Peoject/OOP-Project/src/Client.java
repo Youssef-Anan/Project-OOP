@@ -71,6 +71,7 @@ savingAccount.add(savings);
         System.out.println("The client last name: " + getLastName());
         System.out.println("The client last user name: " + getUsername());
         System.out.println("The client phone number: " + TelephoneNumber);
+        DisplayAccounts();
 
 
     }
@@ -94,13 +95,16 @@ savingAccount.add(savings);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void EditPersonalInformation(String NewFirstName, String NewLastName, String NewPhoneNumber) {
+    public void EditPersonalInformation() {
         System.out.println("Enter the new First Name:");
         String firstname= input.nextLine();
         System.out.println("Enter the new Last Name:");
         String lastname= input.nextLine();
         System.out.println("Enter the new Telephone Number:");
-        int telephone= input.nextInt();
+        String telephone= input.next();
+        setFirstName(firstname);
+        setLastName(lastname);
+        setTelephoneNumber(telephone);
         System.out.println("Personal information updated for " + getID());
 
     }

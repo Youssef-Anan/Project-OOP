@@ -10,7 +10,6 @@ public class Bank {
     private static int numOfClients=0;
     private static int numOfTransactions=0;
     public Bank(){}
-
     void saveClients(Client users[]){
         for (int i = 0; i < 1000; i++) {
             String saveInput=users[i].getFirstName()+"#"+users[i].getLastName()+"#";
@@ -102,7 +101,7 @@ public class Bank {
                 String lastname= input.next();
                 System.out.println("Enter the new Telephone Number:");
                 String telephone= input.next();
-                user.EditPersonalInformation(firstname,lastname,telephone);
+                user.EditPersonalInformation();
                 break;
             case 3:
                 System.out.println("Choose which account you want to transfer money from");
@@ -141,6 +140,7 @@ public class Bank {
             case 8:
                 break loop;
             default:
+                System.out.println("Wrong input!");
                 break;
         }
         }
@@ -160,23 +160,21 @@ public class Bank {
                     user.CreateClients(Clients);
                     break;
                 case 2:
-                    System.out.println("Enter the Address:");
-                    String address = input.next();
-                    System.out.println("Enter the Position:");
-                    String position = input.next();
-                    //user.EditPersonalinformation(address,position);
+                    user.EditPersonalinformation();
                     break;
                 case 3:
                     user.searchclientbyId(Clients);
                     break;
                 case 4:
+                    user.EditClientAccount(Clients);
                     break;
                 case 5:
-
+                    user.searchclientbyId(Clients);
                     break;
                 case 6:
                     break loop;
                 default:
+                    System.out.println("Wrong input!");
                     break;
             }
         }
@@ -197,7 +195,7 @@ public class Bank {
                     user.CreateEmployee(Employees);
                     break;
                 case 2:
-
+                    user.DeleteEmployee(Employees);
                     break;
                 case 3:
 
@@ -213,6 +211,7 @@ public class Bank {
                 case 7:
                     break loop;
                 default:
+                    System.out.println("Wrong input!");
                     break;
             }
         }
