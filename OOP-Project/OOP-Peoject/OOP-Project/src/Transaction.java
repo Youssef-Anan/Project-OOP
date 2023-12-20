@@ -3,42 +3,42 @@ import java.util.ArrayList;
 
 public class Transaction {
 
-
-    LocalDateTime date = LocalDateTime.now();
-    private Client client;
-    private Employee employee;
+    private final LocalDateTime date = LocalDateTime.now();
+    private int clientId;  // clientId is now assigned based on the Client class
+    private int employeeId;
     private float amount;
     private Account srcAcc;
     private Account dstAcc;
 
-    public Transaction(LocalDateTime date, Client client, Employee employee, float amount, Account srcAcc, Account dstAcc) {
-        this.date = date;
-        this.client = client;
-        this.employee = employee;
+    public Transaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc) {
+        this.clientId = client.getID();
+        this.employeeId= employee.getID();
         this.amount = amount;
         this.srcAcc = srcAcc;
+        this.dstAcc = dstAcc;
     }
 
-    public static void createTransaction(LocalDateTime date, Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
-        Transaction trans = new Transaction(date, client, employee, amount, srcAcc, dstAcc);
+    public static void createTransaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
+        Transaction trans = new Transaction( client, employee, amount, srcAcc, dstAcc);
         transactions.add(trans);
     }
-
-    public Client getClient() {
-        return client;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public int getClientId() {
+        return clientId;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public void setEmployeeIdId(int employeeId) {
+        this.employeeId=employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public int getEmployeeIdId() {
+        return employeeId;
     }
+
+
 
     public float getAmount() {
         return amount;
@@ -64,11 +64,13 @@ public class Transaction {
         this.dstAcc = dstAcc;
     }
 
-    public void displaytransaction(){
-        System.out.println("The transaction was in : " + date+ "to the client "+getClient()+ "of amount :"+getAmount()+" \nThe employee : "+getEmployee() );
-        System.out.println("The transaction was sent from : "+getSrcAcc()+"to : "+getDstAcc());
-
-}
-
-
+    public void displayTransaction() {
+        System.out.println("Transaction Details:");
+        System.out.println("Date: " + date);
+        System.out.println("Client ID: " + clientId);  // Display clientId
+        System.out.println("Amount: " + amount);
+        System.out.println("Employee: " + employeeId);
+        System.out.println("Source Account: " + (srcAcc.getAccountNumber()));
+        System.out.println("Destination Account: " + (dstAcc.getAccountNumber()));
+    }
 }
