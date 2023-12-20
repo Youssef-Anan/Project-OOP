@@ -46,7 +46,7 @@ public class Bank {
 
                     }
                 }
-                System.out.println("Wrong Credintials!");
+                System.out.println("Wrong Credentials!");
                 continue loop;
             } else if (userType.equals("Employee")) {
                 for (int i = 0; i < Employees.size(); i++) {
@@ -59,7 +59,7 @@ public class Bank {
 
                     }
                 }
-                System.out.println("Wrong Credintials!");
+                System.out.println("Wrong Credentials!");
                 continue loop;
             } else if (userType.equals("Admin")) {
                 if (username.equals("admin") && password.equals("admin")) {
@@ -70,7 +70,7 @@ public class Bank {
                     break loop;
                 }
                 else{
-                    System.out.println("Wrong Credintials!");
+                    System.out.println("Wrong Credentials!");
                     continue loop;
                 }
             }
@@ -147,7 +147,7 @@ public class Bank {
     }
     void EmployeeOptions(Employee user){
         loop :while(true) {
-            System.out.println("1-Create CLient");
+            System.out.println("1-Create Client");
             System.out.println("2-Edit Personal Information");
             System.out.println("3-Search for Client");
             System.out.println("4-Edit Client Account");

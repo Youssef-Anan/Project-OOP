@@ -77,7 +77,7 @@ public class Employee extends User {
         int id=input.nextInt();
         for (int i = 0; i <c.size(); i++) {
             if (id == c.get(i).getID()) {
-                c.get(i).EditPersonalInformation(c.get(i).getFirstName(), c.get(i).getLastName(), c.get(i).getTelephoneNumber());
+                c.get(i).EditPersonalInformation();
 
             }
         }
