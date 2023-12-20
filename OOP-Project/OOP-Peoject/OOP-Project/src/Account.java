@@ -13,14 +13,13 @@ public abstract class Account{
 
     private int Client_Id;
 
-    private String accountType;
     protected double balance=0;
     protected String AccountType;
     private static final Set<Long> generatedAccountNumbers = new HashSet<>();
     private static final Random random = new Random();
 
     public Account(String accountType, double balance) {
-        this.accountType = accountType;
+        this.AccountType = accountType;
         this.balance = balance;
     }
     public Account(int Client_id,String s ,String AccountType) {
@@ -30,7 +29,7 @@ public abstract class Account{
     }
 
     public String getAccountType() {
-        return accountType;
+        return AccountType;
     }
 
     public double getBalance() {
@@ -130,6 +129,6 @@ public abstract class Account{
     }
 
     public void setAccountType(String accountType) {
-        this.accountType = accountType;
+        this.AccountType = accountType;
     }
 }
