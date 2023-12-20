@@ -3,12 +3,10 @@ import java.util.Scanner;
 import java.io.*;
 public class Bank {
     Scanner input =new Scanner(System.in);
-    public ArrayList<Employee> Employees= new ArrayList<>();
-    public ArrayList<Client> Clients= new ArrayList<>();
+    private ArrayList<Employee> Employees= new ArrayList<>();
+    private ArrayList<Client> Clients= new ArrayList<>();
     private ArrayList<Transaction> Transactions = new ArrayList<>();
-    private static int numOfEmloyees=0;
-    private static int numOfClients=0;
-    private static int numOfTransactions=0;
+
     public Bank(){}
     void saveClients(Client users[]){
         for (int i = 0; i < 1000; i++) {
@@ -17,7 +15,7 @@ public class Bank {
             FileHandler.writeData(saveInput);
         }
     }
-    User Authenticate() {
+    public User Authenticate() {
         String userType;
         boolean userFound = false;
         User user = null;
@@ -78,7 +76,7 @@ public class Bank {
         }
             return user;
     }
-    void ClientOptions(Client user){
+    public void ClientOptions(Client user){
        loop: while(true){
         System.out.println("1-Display Account Details");
         System.out.println("2-Edit Personal Information");
@@ -145,7 +143,7 @@ public class Bank {
         }
         }
     }
-    void EmployeeOptions(Employee user){
+    public void EmployeeOptions(Employee user){
         loop :while(true) {
             System.out.println("1-Create Client");
             System.out.println("2-Edit Personal Information");
@@ -179,7 +177,7 @@ public class Bank {
             }
         }
     }
-    void AdminOptions(Admin user){
+    public void AdminOptions(Admin user){
         loop :while(true) {
             System.out.println("1-Create Employee");
             System.out.println("2-Delete Employee");
