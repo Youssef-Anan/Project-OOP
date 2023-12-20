@@ -6,20 +6,20 @@ public class Transaction {
 
     private final LocalDateTime date = LocalDateTime.now();
    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm");
-    String formattedDateTime = date.format(formatter); //it formats the LocalDatetime
+    private final String formattedDateTime = date.format(formatter); //it formats the LocalDatetime
 
     private int clientId;  // clientId is now assigned based on the Client class
     private int employeeId;//employeeId is now assigned based on the Employee class
     private float amount;
-    private Account srcAcc; // the Account that sends the money
-    private Account dstAcc; // the Account that recieves the money
+    private long srcAccnum; // the Account that sends the money
+    private  long dstAccnum; // the Account that receives the money
 
     public Transaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc) {
         this.clientId = client.getID(); //It takes the client id from Client class
         this.employeeId= employee.getID();//It takes the employee id from Employee class
         this.amount = amount;
-        this.srcAcc = srcAcc;
-        this.dstAcc = dstAcc;
+        this.srcAccnum = srcAcc.getAccountNumber();
+        this.dstAccnum = dstAcc.getAccountNumber();
     }
 
     public static void createTransaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
@@ -28,8 +28,8 @@ public class Transaction {
     }
 
 
-    public LocalDateTime getDate() {
-        return date;
+    public String getFormattedDateTime() {
+        return formattedDateTime;
     }
 
     public void setClientId(int clientId) {
@@ -40,11 +40,11 @@ public class Transaction {
         return clientId;
     }
 
-    public void setEmployeeIdId(int employeeId) {
+    public void setEmployeeId(int employeeId) {
         this.employeeId=employeeId;
     }
 
-    public int getEmployeeIdId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
@@ -56,20 +56,20 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Account getSrcAcc() {
-        return srcAcc;
+    public long getSrcAccnum() {
+        return srcAccnum;
     }
 
-    public void setSrcAcc(Account srcAcc) {
-        this.srcAcc = srcAcc;
+    public void setSrcAccnum(long srcAccnum) {
+        this.srcAccnum = srcAccnum;
     }
 
-    public Account getDstAcc() {
-        return dstAcc;
+    public long getDstAccnum() {
+        return dstAccnum;
     }
 
-    public void setDstAcc(Account dstAcc) {
-        this.dstAcc = dstAcc;
+    public void setDstAccnum(long dstAccnum) {
+        this.dstAccnum = dstAccnum;
     }
 
     public void displayTransaction() {
@@ -78,7 +78,7 @@ public class Transaction {
         System.out.println("Client ID: " + clientId);  // Display clientId
         System.out.println("Amount: " + amount);
         System.out.println("Employee: " + employeeId);
-        System.out.println("Source Account: " + (srcAcc.getAccountNumber()));
-        System.out.println("Destination Account: " + (dstAcc.getAccountNumber()));
+        System.out.println("Source Account: " + srcAccnum);
+        System.out.println("Destination Account: " + dstAccnum);
     }
 }
