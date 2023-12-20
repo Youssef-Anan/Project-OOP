@@ -100,7 +100,7 @@ public class Employee extends User {
         System.out.println("The Employee id: "+getID());
         System.out.println("The Employee first name: "+getFirstName());
         System.out.println("The Employee last name: "+getLastName());
-        System.out.println("The Employee last user name: "+getUsername());
+        System.out.println("The Employee  username: "+getUsername());
     }
 
     public String getAddress() {

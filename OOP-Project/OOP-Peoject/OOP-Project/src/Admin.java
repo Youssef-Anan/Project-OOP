@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -28,10 +29,24 @@ public class Admin extends User {
             c.get(i).DisplayClientDetails();
         }
     }
-    /*public Employee AuthorizeNewEmp(String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, String TotalGrade) {
-        Employee employee= new Employee(FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade );
-        return employee;
-    }*/
+    public void AuthorizeNewEmp(ArrayList<Employee>e)
+    {
+        System.out.println("Enter username of the employee :");
+        String User=input.next();
+        System.out.println("Enter password of the employee :");
+        String Pass=input.next();
+        for(int i=0;i<e.size();i++)
+        {
+            if(User.equals(e.get(i).getUsername())&&Pass.equals(e.get(i).getPassword()))
+            {
+                System.out.println("This employee is authorized .");
+            }
+            else
+            {
+                System.out.println("Employee is not authorized");
+            }
+        }
+    }
     public void CreateEmployee(ArrayList<Employee>e) {
         System.out.println("Enter Firstname:");
         String FirstName = input.next();
@@ -68,12 +83,17 @@ public class Admin extends User {
         }
 
     }
-    /*public void Display_All_Transaction(Date date, ArrayList<Transaction> t)
+    public void displayAllTransactions(ArrayList<Transaction> t)
     {
-        for (int i = 0; i < t.size(); i++)
-        {
-            if (date.equals(t.get(i).date))
-             t.get(i).displaytransaction();
-        }
-    }*/
+        System.out.print("Enter the desired date to show all transactions (dd/MM/yyyy  HH:mm): ");
+         String date =input.next();
+
+             for (int i = 0; i < t.size(); i++) {
+                 if (date.equals(t.get(i).getFormattedDateTime())) {
+                     t.get(i).displayTransaction();
+                 }
+
+             }
+
+    }
 }

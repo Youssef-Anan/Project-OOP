@@ -1,43 +1,51 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Transaction {
 
+    private final LocalDateTime date = LocalDateTime.now();
+   private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm");
+    private final String formattedDateTime = date.format(formatter); //it formats the LocalDatetime
 
-    LocalDateTime date = LocalDateTime.now();
-    private Client client;
-    private Employee employee;
+    private int clientId;  // clientId is now assigned based on the Client class
+    private int employeeId;//employeeId is now assigned based on the Employee class
     private float amount;
-    private Account srcAcc;
-    private Account dstAcc;
+    private long srcAccnum; // the Account that sends the money
+    private  long dstAccnum; // the Account that receives the money
 
-    public Transaction(LocalDateTime date, Client client, Employee employee, float amount, Account srcAcc, Account dstAcc) {
-        this.date = date;
-        this.client = client;
-        this.employee = employee;
+    public Transaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc) {
+        this.clientId = client.getID(); //It takes the client id from Client class
+        this.employeeId= employee.getID();//It takes the employee id from Employee class
         this.amount = amount;
-        this.srcAcc = srcAcc;
+        this.srcAccnum = srcAcc.getAccountNumber();
+        this.dstAccnum = dstAcc.getAccountNumber();
     }
 
-    public static void createTransaction(LocalDateTime date, Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
-        Transaction trans = new Transaction(date, client, employee, amount, srcAcc, dstAcc);
+    public static void createTransaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
+        Transaction trans = new Transaction( client, employee, amount, srcAcc, dstAcc);
         transactions.add(trans);
     }
 
-    public Client getClient() {
-        return client;
+
+    public String getFormattedDateTime() {
+        return formattedDateTime;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId=employeeId;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
     }
 
     public float getAmount() {
@@ -48,27 +56,29 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Account getSrcAcc() {
-        return srcAcc;
+    public long getSrcAccnum() {
+        return srcAccnum;
     }
 
-    public void setSrcAcc(Account srcAcc) {
-        this.srcAcc = srcAcc;
+    public void setSrcAccnum(long srcAccnum) {
+        this.srcAccnum = srcAccnum;
     }
 
-    public Account getDstAcc() {
-        return dstAcc;
+    public long getDstAccnum() {
+        return dstAccnum;
     }
 
-    public void setDstAcc(Account dstAcc) {
-        this.dstAcc = dstAcc;
+    public void setDstAccnum(long dstAccnum) {
+        this.dstAccnum = dstAccnum;
     }
 
-    public void displaytransaction(){
-        System.out.println("The transaction was in : " + date+ "to the client "+getClient()+ "of amount :"+getAmount()+" \nThe employee : "+getEmployee() );
-        System.out.println("The transaction was sent from : "+getSrcAcc()+"to : "+getDstAcc());
-
-}
-
-
+    public void displayTransaction() {
+        System.out.println("Transaction Details:");
+        System.out.println("Date: " + formattedDateTime);
+        System.out.println("Client ID: " + clientId);  // Display clientId
+        System.out.println("Amount: " + amount);
+        System.out.println("Employee: " + employeeId);
+        System.out.println("Source Account: " + srcAccnum);
+        System.out.println("Destination Account: " + dstAccnum);
+    }
 }
