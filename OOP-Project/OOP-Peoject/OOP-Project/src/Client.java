@@ -173,5 +173,27 @@ savingAccount.add(savings);
         TelephoneNumber = telephoneNumber;
     }
 
+    public ArrayList<SavingsAccount> getSavingAccount() {
+        return savingAccount;
+    }
 
+    public void setSavingAccount(ArrayList<SavingsAccount> savingAccount) {
+        this.savingAccount = savingAccount;
+    }
+
+    public CurrentAccount getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public void setCurrentAccount(CurrentAccount currentAccount) {
+        this.currentAccount = currentAccount;
+    }
+
+    public Scanner getInput() {
+        return input;
+    }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
 }
