@@ -3,9 +3,9 @@ import java.time.LocalDate;
 public class SavingsAccount extends Account {
     private static final long serialVersionUID = 1L;
 
+    public SavingsAccount() {
 
-
-
+    }
     public SavingsAccount(int id)
     {
     // Call the constructor of the superclass (Account) with specific parameters
@@ -16,9 +16,6 @@ public class SavingsAccount extends Account {
     this.local_Date = LocalDate.now();
     }
 
-    public SavingsAccount() {
-
-    }
 
     @Override
     public void evaluateInterest() {
