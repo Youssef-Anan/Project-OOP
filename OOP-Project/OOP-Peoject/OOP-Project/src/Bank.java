@@ -4,16 +4,12 @@ import java.io.*;
 public class Bank {
     Scanner input =new Scanner(System.in);
     private ArrayList<Employee> Employees= new ArrayList<>();
-    private ArrayList<Client> Clients= new ArrayList<>();
+    public ArrayList<Client> Clients= new ArrayList<>();
     private ArrayList<Transaction> Transactions = new ArrayList<>();
 
     public Bank(){}
-    void saveClients(Client users[]){
-        for (int i = 0; i < 1000; i++) {
-            String saveInput=users[i].getFirstName()+"#"+users[i].getLastName()+"#";
-            //write function
-            FileHandler.writeData(saveInput);
-        }
+    public void getBankData(){
+
     }
     public User Authenticate() {
         String userType;
@@ -128,10 +124,10 @@ public class Bank {
                 }
                 switch (c){
                     case "Saving":
-                        user.createsavings();
+                        user.createSavings();
                         break;
                     case "Current":
-                        user.createcurrent();
+                        user.createCurrent();
                         break;
                 }
                 break;

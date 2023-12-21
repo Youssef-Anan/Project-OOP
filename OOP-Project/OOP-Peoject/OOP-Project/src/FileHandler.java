@@ -66,7 +66,7 @@ public class FileHandler {
     //--------------------Convert String to Object----------------------------------------------------------------------//
     public static void ConvertStringtoClient(String data, ArrayList<Client> c) {
         //String[] dataArray = inputData.split("\n");
-        String[] objects = data.split("\n");//Splitting Objects---------------
+        String[] objects = data.split("\n");//Splitting Objects--------------
         for (int i = 0; i < objects.length; i++) {
            Client dummy=new Client();
             String[] objPart = objects[i].split("&");//Splitting DataTypes------------
