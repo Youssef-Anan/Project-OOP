@@ -79,11 +79,10 @@ public class Admin extends User {
             if(id==e.get(i).getID()){
                 e.remove(e.get(i));
             }
-
         }
 
     }
-    public void displayAllTransactions(ArrayList<Transaction> t)
+    public void displayAllTransactionsbydate(ArrayList<Transaction> t)
     {
         System.out.print("Enter the desired date to show all transactions (dd/MM/yyyy  HH:mm): ");
          String date =input.next();
@@ -92,8 +91,29 @@ public class Admin extends User {
                  if (date.equals(t.get(i).getFormattedDateTime())) {
                      t.get(i).displayTransaction();
                  }
-
              }
 
+    }
+    public void displayAllTransactionsbyClientID(ArrayList<Transaction> t)
+    {
+        System.out.print("Enter the desired Client ID to show all transactions: ");
+        int clientId =input.nextInt();
+
+        for (int i = 0; i < t.size(); i++) {
+            if (clientId==t.get(i).getClientId()) {
+               t.get(i).displayTransaction();
+            }
+        }
+    }
+    public void displayAllTransactionsbyEmployeeID(ArrayList<Transaction> t)
+    {
+        System.out.print("Enter the desired Employee ID to show all transactions: ");
+        int EmpId =input.nextInt();
+
+        for (int i = 0; i < t.size(); i++) {
+            if (EmpId==t.get(i).getClientId()) {
+                t.get(i).displayTransaction();
+            }
+        }
     }
 }
