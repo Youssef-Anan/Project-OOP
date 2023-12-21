@@ -26,6 +26,28 @@ public abstract class Account{
         this.AccountNumber = generateUniqueAccountNumber(s);
         this.AccountType=AccountType;
     }
+    // Method to generate a unique account number that takes a definitely the first 4 numbers of account number and the rest is random
+    static synchronized long generateUniqueAccountNumber(String x) {
+        long newAccountNumber;
+        do {
+            long randomNumber = Math.abs(random.nextLong() % 900000000000L) + 100000000000L;
+            newAccountNumber = Long.parseLong(x + Long.toString(randomNumber));
+        } while (generatedAccountNumbers.contains(newAccountNumber));
+        generatedAccountNumbers.add(newAccountNumber);
+        return newAccountNumber;
+    }
+
+    public long getAccountNumber() {
+        return AccountNumber;
+    }
+
+    public LocalDate getLocal_Date() {
+        return local_Date;
+    }
+
+    public void setLocal_Date(LocalDate local_Date) {
+        this.local_Date = local_Date;
+    }
 
     public String getAccountType() {
         return AccountType;
@@ -65,20 +87,5 @@ public abstract class Account{
     public abstract void evaluateInterest();
 
     public abstract void applyFees();
-
-
-
-    // Method to generate a unique account number that takes a definitely the first 4 numbers of account number and the rest is random
-    static synchronized long generateUniqueAccountNumber(String x) {
-        long newAccountNumber;
-        do {
-            long randomNumber = Math.abs(random.nextLong() % 900000000000L) + 100000000000L;
-            newAccountNumber = Long.parseLong(x + Long.toString(randomNumber));
-        } while (generatedAccountNumbers.contains(newAccountNumber));
-        generatedAccountNumbers.add(newAccountNumber);
-        return newAccountNumber;
-    }
-
-
 
 }
