@@ -1,5 +1,6 @@
 import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
@@ -67,7 +68,7 @@ public class FileHandler {
         //String[] dataArray = inputData.split("\n");
         String[] objects = data.split("\n");//Splitting Objects---------------
         for (int i = 0; i < objects.length; i++) {
-            Client dummy = new Client();
+           Client dummy=new Client();
             String[] objPart = objects[i].split("&");//Splitting DataTypes------------
             //----------------------Client Data---------------------------
             String[] ClientData = objPart[0].split(",");//Splitting Client Data-------
@@ -83,6 +84,48 @@ public class FileHandler {
             c.add(dummy);
         }
     }
+// data += i + 1 + "- " + e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() + "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation() + "," + e.get(i).getTotalGrade() + "\n";
+
+    public static void ConvertStringtoEmployee(String data, ArrayList<Employee> e) {
+        //String[] dataArray = inputData.split("\n");
+        String[] objects = data.split("\n");//Splitting Objects---------------
+        for (int i = 0; i < objects.length; i++) {
+            Employee dummy=new Employee();
+            //----------------------Employee Data---------------------------
+            String[] Employeedata = objects[i].split(",");
+            dummy.userType=Employeedata[0];
+            dummy.setID(Integer.parseInt(Employeedata[1]));
+            dummy.setUsername(Employeedata[2]);
+            dummy.setFirstName(Employeedata[3]);
+            dummy.setLastName(Employeedata[4]);
+            dummy.setAddress(Employeedata[5]);
+            dummy.setPosition(Employeedata[6]);
+            dummy.setGraduatedCollege(Employeedata[7]);
+            dummy.setYearOfGraduation(Integer.parseInt(Employeedata[8]));
+            dummy.setTotalGrade(Employeedata[9]);
+
+            e.add(dummy);
+        }
+    }
+    public static void ConvertStringtoTransaction(String data,ArrayList<Transaction>transactions){
+        String[] objects = data.split("\n");//Splitting Objects---------------
+        for (int i = 0; i < objects.length; i++) {
+            Transaction dummy = new Transaction();
+
+            //----------------------Transactions data---------------------------//
+            String[] Transdata = objects[i].split(",");
+            dummy.setFormatterDateTime(Transdata[0]);
+            dummy.setClientId(Integer.parseInt(Transdata[1]));
+            dummy.setEmployeeId(Integer.parseInt(Transdata[2]));
+            dummy.setAmount(Float.parseFloat(Transdata[3]));
+            dummy.setSrcAccnum(Long.parseLong(Transdata[4]));
+            dummy.setDstAccnum(Long.parseLong(Transdata[5]));
+        transactions.add(dummy);
+        }
+
+    }
+
+
 
     // data +=s.get(i).AccountNumber + "," + s.get(i).local_Date + "," + s.get(i).DEFAULT_INTEREST_RATE + "," + s.get(i).getBalance();
 

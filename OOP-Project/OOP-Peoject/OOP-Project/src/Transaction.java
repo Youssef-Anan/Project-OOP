@@ -6,7 +6,7 @@ public class Transaction {
 
     private final LocalDateTime date = LocalDateTime.now();
    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm");
-    private final String formattedDateTime = date.format(formatter); //it formats the LocalDatetime
+    private String formattedDateTime = date.format(formatter); //it formats the LocalDatetime
 
     private int clientId;  // clientId is now assigned based on the Client class
     private int employeeId;//employeeId is now assigned based on the Employee class
@@ -22,6 +22,10 @@ public class Transaction {
         this.dstAccnum = dstAcc.getAccountNumber();
     }
 
+    public Transaction() {
+
+    }
+
     public static void createTransaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
         Transaction trans = new Transaction( client, employee, amount, srcAcc, dstAcc);
         transactions.add(trans);
@@ -30,6 +34,10 @@ public class Transaction {
 
     public String getFormattedDateTime() {
         return formattedDateTime;
+    }
+    public void setFormatterDateTime(String formattedDateTime){
+        this.formattedDateTime=formattedDateTime;
+
     }
 
     public void setClientId(int clientId) {
