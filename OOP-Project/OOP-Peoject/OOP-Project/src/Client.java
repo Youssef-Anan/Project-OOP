@@ -6,26 +6,23 @@ public class Client extends User {
     ArrayList<SavingsAccount> savingAccount = new ArrayList<>();
     CurrentAccount currentAccount ;
 
-    ArrayList TransactionHistory = new ArrayList();
     private String TelephoneNumber;
 
-public static int clientC=1001;
+
     Scanner input = new Scanner(System.in);
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     public Client() {
-        clientC=1001;
-        clientC++;
+
     }
 
     public Client(int id,String firstName, String lastName, String username, String password, String telephoneNumber) {
         super(id,firstName, lastName, username, password);
     super.userType="Client";
         TelephoneNumber = telephoneNumber;
-        clientC=1001;
-        clientC++;
+
     }
 
 public void createcurrent()
@@ -52,9 +49,7 @@ else
         }
 
         // Deep copy of the TransactionHistory ArrayList
-        this.TransactionHistory = new ArrayList<>(other.TransactionHistory);
-        clientC=1001;
-        clientC++;
+
     }
 public void createsavings()
 {
@@ -117,7 +112,6 @@ savingAccount.add(savings);
             destinationAcc.setBalance(destinationAcc.balance + amount);
             sourceAcc.setBalance(sourceAcc.balance - amount);
             System.out.println("Transfer successful.");
-            TransactionHistory.add("trancfer money form account number :" + sourceAcc.getAccountNumber() + " to :" + destinationAcc + " the amount is :" + amount);
         } else {
             System.out.println("Insufficient funds for transfer.");
         }
@@ -126,9 +120,22 @@ savingAccount.add(savings);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void ShowTransactionHistory() {
-        System.out.println("Transaction History for " + getFirstName() + " " + getLastName() + " (ID: " + getID() + "):");
-        System.out.println(TransactionHistory);
+    public void ShowTransactionHistory(ArrayList<Transaction> tran) {
+        for (int i=0;i<tran.size();i++)
+        {
+            if (tran!=null)
+            {
+                if (tran.get(i).getClientId() == getID()) {
+                    tran.get(i).displayTransaction();
+                }
+            }
+            else
+                System.out.println("the transaction history is empty");{
+
+            }
+
+        }
+
     }
 
 
@@ -141,7 +148,6 @@ savingAccount.add(savings);
                 a.balance += Amount;
                 System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
 
-                TransactionHistory.add("deposit -$" + Amount);
             }
         } catch (Exception EX) {
 
@@ -155,7 +161,6 @@ savingAccount.add(savings);
             sourceAcc.setBalance(sourceAcc.getBalance() - amount);
             System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.balance);
 
-            TransactionHistory.add("withdraw -$" + amount);
         }
     }
 
@@ -168,5 +173,27 @@ savingAccount.add(savings);
         TelephoneNumber = telephoneNumber;
     }
 
+    public ArrayList<SavingsAccount> getSavingAccount() {
+        return savingAccount;
+    }
 
+    public void setSavingAccount(ArrayList<SavingsAccount> savingAccount) {
+        this.savingAccount = savingAccount;
+    }
+
+    public CurrentAccount getCurrentAccount() {
+        return currentAccount;
+    }
+
+    public void setCurrentAccount(CurrentAccount currentAccount) {
+        this.currentAccount = currentAccount;
+    }
+
+    public Scanner getInput() {
+        return input;
+    }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
 }

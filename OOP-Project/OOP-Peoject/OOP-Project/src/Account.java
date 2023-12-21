@@ -8,27 +8,28 @@ public abstract class Account{
     private static final long serialVersionUID = 1L;
     protected long AccountNumber;
     protected   LocalDate local_Date;
-    protected double interestRate;
+    protected double DEFAULT_INTEREST_RATE = 0.12;
     private static final String ACCOUNT_FILE_PATH = "accounts.txt";
 
     private int Client_Id;
 
-    private String accountType;
     protected double balance=0;
+    protected String AccountType;
     private static final Set<Long> generatedAccountNumbers = new HashSet<>();
     private static final Random random = new Random();
 
     public Account(String accountType, double balance) {
-        this.accountType = accountType;
+        this.AccountType = accountType;
         this.balance = balance;
     }
-    public Account(int Client_id,String s ) {
+    public Account(int Client_id,String s ,String AccountType) {
         this.Client_Id=Client_id;
         this.AccountNumber = generateUniqueAccountNumber(s);
+        this.AccountType=AccountType;
     }
 
     public String getAccountType() {
-        return accountType;
+        return AccountType;
     }
 
     public double getBalance() {
@@ -105,5 +106,29 @@ public abstract class Account{
 
     public void setLocal_Date(LocalDate local_Date) {
         this.local_Date = local_Date;
+    }
+
+    public void setAccountNumber(long accountNumber) {
+        AccountNumber = accountNumber;
+    }
+
+    public double getDEFAULT_INTEREST_RATE() {
+        return DEFAULT_INTEREST_RATE;
+    }
+
+    public void setDEFAULT_INTEREST_RATE(double DEFAULT_INTEREST_RATE) {
+        this.DEFAULT_INTEREST_RATE = DEFAULT_INTEREST_RATE;
+    }
+
+    public int getClient_Id() {
+        return Client_Id;
+    }
+
+    public void setClient_Id(int client_Id) {
+        Client_Id = client_Id;
+    }
+
+    public void setAccountType(String accountType) {
+        this.AccountType = accountType;
     }
 }

@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Admin extends User {
 
     Scanner input=new Scanner(System.in);
+    //-------setting static username and password for the admin--------//
     @Override
     public void setUsername(String username) {
         super.setUsername("admin");
@@ -14,6 +15,8 @@ public class Admin extends User {
     public void setPassword(String password) {
         super.setPassword("admin");
     }
+    //----------------------------------privileges for the admin---------------------------------------//
+    //---------Function to display all employees--------------//
     public void Display_All_Employees(ArrayList <Employee> e)
     {
         for (int i = 0; i < e.size(); i++)
@@ -21,7 +24,7 @@ public class Admin extends User {
             e.get(i).DisplayEmployeeDetails();
         }
     }
-
+    //---------Function to display all clients--------------//
     public void Display_All_Clients(ArrayList <Client> c)
     {
         for (int i = 0; i < c.size(); i++)
@@ -29,6 +32,7 @@ public class Admin extends User {
             c.get(i).DisplayClientDetails();
         }
     }
+    //-----------Function to authorize new employees-----------//
     public void AuthorizeNewEmp(ArrayList<Employee>e)
     {
         System.out.println("Enter username of the employee :");
@@ -47,6 +51,7 @@ public class Admin extends User {
             }
         }
     }
+    //-------------Function for creating new employees-----------//
     public void CreateEmployee(ArrayList<Employee>e) {
         System.out.println("Enter Firstname:");
         String FirstName = input.next();
@@ -69,21 +74,20 @@ public class Admin extends User {
         Employee emp= new Employee(20001+e.size(),FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade);
         e.add(emp);
     }
-
+    //----------Function for deleting an employee------------//
     public void DeleteEmployee(ArrayList<Employee> e)
     {
         Display_All_Employees(e);
-        System.out.println("Choose the Employee by ID");
+        System.out.println("Choose the Employee by ID: ");
         int id = input.nextInt();
         for(int i=0;i<e.size();i++){
             if(id==e.get(i).getID()){
                 e.remove(e.get(i));
             }
-
         }
-
     }
-    public void displayAllTransactions(ArrayList<Transaction> t)
+    //--------Function for displaying transactions by date-------//
+    public void displayAllTransactionsbydate(ArrayList<Transaction> t)
     {
         System.out.print("Enter the desired date to show all transactions (dd/MM/yyyy  HH:mm): ");
          String date =input.next();
@@ -92,8 +96,31 @@ public class Admin extends User {
                  if (date.equals(t.get(i).getFormattedDateTime())) {
                      t.get(i).displayTransaction();
                  }
-
              }
 
+    }
+    //--------Function for displaying transactions by client's Id--------//
+    public void displayAllTransactionsbyClientID(ArrayList<Transaction> t)
+    {
+        System.out.print("Enter the desired Client ID to show all transactions: ");
+        int clientId =input.nextInt();
+
+        for (int i = 0; i < t.size(); i++) {
+            if (clientId==t.get(i).getClientId()) {
+               t.get(i).displayTransaction();
+            }
+        }
+    }
+    //--------Function for displaying transactions by employee's Id--------//
+    public void displayAllTransactionsbyEmployeeID(ArrayList<Transaction> t)
+    {
+        System.out.print("Enter the desired Employee ID to show all transactions: ");
+        int EmpId =input.nextInt();
+
+        for (int i = 0; i < t.size(); i++) {
+            if (EmpId==t.get(i).getClientId()) {
+                t.get(i).displayTransaction();
+            }
+        }
     }
 }

@@ -1,31 +1,21 @@
 public class CurrentAccount extends Account {
 
-    private static final String ACCOUNT_TYPE = "Current";
-
-
     public CurrentAccount(int id ){
-        super(id,"7385");
+        super(id,"7385","current account");
     }
-
-    public CurrentAccount(double balance, double interestRate)
-    {
-        super(ACCOUNT_TYPE, balance);
-        this.interestRate = interestRate;
-    }
-
 
     @Override
     public void evaluateInterest()
     {
         if (balance >= 3000) {
-            interestRate = 0;
+            DEFAULT_INTEREST_RATE = 0;
         } else {
-            interestRate=0.12;
+            DEFAULT_INTEREST_RATE=0.12;
         }
     }
     public void applyFees()
     {
-        double interest = getBalance() * interestRate;
+        double interest = getBalance() * DEFAULT_INTEREST_RATE;
         setBalance(getBalance() + interest);
         System.out.println("Interest evaluated. New balance: " + getBalance());
     }

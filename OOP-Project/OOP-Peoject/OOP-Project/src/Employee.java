@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Employee extends User {
     Scanner input=new Scanner(System.in);
-    private  static int empcount=10000;
     private String Address;
     private String Position;
     private String GraduatedCollege;
@@ -35,7 +34,8 @@ public class Employee extends User {
       this.yearOfGraduation=e.yearOfGraduation;
       this.TotalGrade=e.TotalGrade;
     }
-
+    //----------------------------------Privileges of Employee----------------------------------------------------//
+    //---------Function to edit his personal information (address,position)---------//
     public void EditPersonalinformation(){
         System.out.println("Enter the new address");
         String Address = input.next();
@@ -45,6 +45,7 @@ public class Employee extends User {
         this.Position=Position;
 
     }
+    //---------Function to create new clients ---------//
     public void CreateClients(ArrayList<Client>c) {
         System.out.println("Enter  Firstname:");
         String firstName = input.next();
@@ -56,9 +57,11 @@ public class Employee extends User {
         String password = input.next();
         System.out.println("Enter PhoneNumber:");
         String phoneNumber=input.next();
-        Client client = new Client(10000+c.size(),firstName, lastName, username, password, phoneNumber);
+        //-------Generating Id for clients-------//
+        Client client = new Client(10001+c.size(),firstName, lastName, username, password, phoneNumber);
         c.add(client);
     }
+    //------Function to search for a client by ID--------//
     public void searchclientbyId( ArrayList<Client> c)
     {
         System.out.println("Enter the desired ID to search for a client : ");
@@ -70,8 +73,8 @@ public class Employee extends User {
             c.get(i).DisplayClientDetails();
         }
         }
-
     }
+    //----Function to edit personal information of client by using client Id-----//
     public void EditClientAccount(ArrayList<Client> c){
         System.out.println("Enter the desired ID to edit the client  : ");
         int id=input.nextInt();
@@ -81,8 +84,8 @@ public class Employee extends User {
 
             }
         }
-
     }
+    //----Function to delete client by using client Id-----//
     public void DeleteClient(ArrayList<Client> c )
     {
         System.out.println("Enter the desired ID to delete the client: ");
@@ -95,7 +98,7 @@ public class Employee extends User {
         }
 
     }
-
+    //----Function to display employee's details-----//
     public void DisplayEmployeeDetails(){
         System.out.println("The Employee id: "+getID());
         System.out.println("The Employee first name: "+getFirstName());
