@@ -37,6 +37,10 @@ public abstract class Account{
         return newAccountNumber;
     }
 
+    public abstract void evaluateInterest();
+
+    public abstract void applyFees();
+
     public long getAccountNumber() {
         return AccountNumber;
     }
@@ -84,8 +88,5 @@ public abstract class Account{
     public void setAccountType(String accountType) {
         this.AccountType = accountType;
     }
-    public abstract void evaluateInterest();
-
-    public abstract void applyFees();
 
 }
