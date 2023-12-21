@@ -13,7 +13,7 @@ public class FileHandler {
     public static String ConvClientToString(ArrayList<Client> c) {
         String data = "";
         for (int i = 0; i < c.size(); i++) {
-            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + ",Accounts:\n" + ConvAccountsToString(c.get(i).getSavingAccount()) + "\n";
+            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "," + ConvAccountsToString(c.get(i).getSavingAccount()) + "\n";
         }
         return data;
     }
@@ -42,6 +42,9 @@ public class FileHandler {
         return data;
     }
 
+
+
+
     public static void writeData_C(String data) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(CLIENT_FILE_PATH))) {
             oos.writeObject(data);
@@ -68,23 +71,22 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
-    public static String readData_C() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(CLIENT_FILE_PATH))) {
-            Object read = ois.readObject();
-            if (read instanceof String) {
-                String data = (String) read;
-                System.out.println("User data has been read from file.");
-                return data;
-            } else {
-                System.out.println("Invalid data type in the file.");
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return null;
+
+//--------------------------------------------------Reading file-------------------------------------------------------------------//
+
+    //--------------------Convert String to Object----------------------------------------------------------------------//
+    public static void ConvertStringtoClient(String data,ArrayList<Client>c){
+
+        Client cl =new Client();
+
     }
 
 
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------//
     public static String readData_E() {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(Employee_File_Path))) {
             Object read = ois.readObject();
