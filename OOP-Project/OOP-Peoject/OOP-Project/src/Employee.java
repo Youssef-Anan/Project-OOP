@@ -10,6 +10,9 @@ public class Employee extends User {
     private String GraduatedCollege;
     private int yearOfGraduation;
     private  String TotalGrade;
+    public Employee(){
+
+    }
 
     public  Employee( int id,String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, String TotalGrade)
     {
