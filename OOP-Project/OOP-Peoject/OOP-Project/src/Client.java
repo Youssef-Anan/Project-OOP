@@ -71,13 +71,13 @@ savingAccount.add(savings);// Creates a new savings account
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void DisplayAccounts()    // Displays the client's account details.
     {
-        //String s=currentAccount.toString();//By change the current account into a string
+        String s=currentAccount.toString();//By change the current account into a string
 
         for (int i = 0; i < savingAccount.size(); i++) // Displays the client's saving account details.
         {
             System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
         }
-        if (currentAccount!=null)//Check if the current account is null
+        if (s!=null)//Check if the current account is null
         {
             // Displays the client's saving account details
             System.out.println("current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
