@@ -9,12 +9,12 @@ public abstract class Account{
     protected long AccountNumber;
     protected   LocalDate local_Date;
     protected double DEFAULT_INTEREST_RATE = 0.12;
-    private static final String ACCOUNT_FILE_PATH = "accounts.txt";
-
     private int Client_Id;
 
     protected double balance=0;
     protected String AccountType;
+
+    // This set is used to keep track of account numbers that have been generated to avoid generating the same account number more than once
     private static final Set<Long> generatedAccountNumbers = new HashSet<>();
     private static final Random random = new Random();
 
@@ -43,6 +43,10 @@ public abstract class Account{
     public abstract void evaluateInterest();
 
     public abstract void applyFees();
+
+
+
+    // Method to generate a unique account number that takes a definitely the first 4 numbers of account number and the rest is random
     static synchronized long generateUniqueAccountNumber(String x) {
         long newAccountNumber;
         do {
@@ -53,6 +57,8 @@ public abstract class Account{
         return newAccountNumber;
     }
 
+
+    // Method to read account information from a file and return an array of Account objects Returns null if an error occurs during the file reading process
     public static Account[] readAccountsFromFile() {
         try {
 
