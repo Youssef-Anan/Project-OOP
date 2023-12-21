@@ -3,7 +3,6 @@ import java.util.Set;
 import java.util.Random;
 import java.time.LocalDate;
 
-
 public abstract class Account{
     protected long AccountNumber;
     protected   LocalDate local_Date;
@@ -52,6 +51,7 @@ public abstract class Account{
     public void setLocal_Date(LocalDate local_Date) {
         this.local_Date = local_Date;
     }
+    public Account(){}
 
     public String getAccountType() {
         return AccountType;
@@ -88,5 +88,6 @@ public abstract class Account{
     public void setAccountType(String accountType) {
         this.AccountType = accountType;
     }
+
 
 }

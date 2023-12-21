@@ -17,6 +17,7 @@ public class Employee extends User {
     public  Employee( int id,String FirstName, String LastName,String Username, String Password, String Address, String Position,String GraduatedCollege, int yearOfGraduation, String TotalGrade)
     {
         super( id,FirstName, LastName, Username, Password);
+        super.userType="Employee";
         this.Address = Address;
         this.Position = Position;
         this.GraduatedCollege = GraduatedCollege;
@@ -27,6 +28,7 @@ public class Employee extends User {
     public Employee(String username,String password){
         setUsername(username);
         setPassword(password);
+        super.userType="Employee";
     }
 
     public Employee(Employee e) {
@@ -36,6 +38,7 @@ public class Employee extends User {
       this.GraduatedCollege=e.GraduatedCollege;
       this.yearOfGraduation=e.yearOfGraduation;
       this.TotalGrade=e.TotalGrade;
+        super.userType="Employee";
     }
     //----------------------------------Privileges of Employee----------------------------------------------------//
     //---------Function to edit his personal information (address,position)---------//

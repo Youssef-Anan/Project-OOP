@@ -22,6 +22,7 @@ public class FileHandler {
     public static String ConvClientToString(ArrayList<Client> c) {
         String data = "";
         for (int i = 0; i < c.size(); i++) {
+            System.out.println(c.get(i).savingAccount+"\nsize:  "+c.get(i).savingAccount.size());
             data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&" + ConvAccountsToString(c.get(i).getSavingAccount()) + "\n";
         }
         return data;
@@ -38,7 +39,7 @@ public class FileHandler {
     public static String ConvEmployeetoString(ArrayList<Employee> e) {
         String data = "";
         for (int i = 0; i < e.size(); i++) {
-            data += i + 1 + "- " + e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() + "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation() + "," + e.get(i).getTotalGrade() + "\n";
+            data +=e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getPassword()+ "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() + "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation() + "," + e.get(i).getTotalGrade() + "\n";
         }
         return data;
     }
@@ -46,7 +47,7 @@ public class FileHandler {
     public static String ConvTransactiontoString(ArrayList<Transaction> transactions) {
         String data = "";
         for (int i = 0; i < transactions.size(); i++) {
-            data += i + 1 + "- " + transactions.get(i).getFormattedDateTime() + "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getAmount() + "," + transactions.get(i).getSrcAccnum() + "," + transactions.get(i).getDstAccnum() + "\n";
+            data +=transactions.get(i).getFormattedDateTime() + "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getAmount() + "," + transactions.get(i).getSrcAccnum() + "," + transactions.get(i).getDstAccnum() + "\n";
         }
         return data;
     }
@@ -80,7 +81,7 @@ public class FileHandler {
             dummy.setPassword(ClientData[5]);
             dummy.setTelephoneNumber(ClientData[6]);
             //----------------------Accounts Data------------------------
-            ConvertStringtoAccount(objPart[1], dummy.savingAccount);
+           // ConvertStringtoAccount(objPart[1], dummy.savingAccount);
             c.add(dummy);
         }
     }
@@ -93,17 +94,17 @@ public class FileHandler {
             Employee dummy=new Employee();
             //----------------------Employee Data---------------------------
             String[] Employeedata = objects[i].split(",");
-            dummy.userType=Employeedata[0];
-            dummy.setID(Integer.parseInt(Employeedata[1]));
+            dummy.setID(Integer.parseInt(Employeedata[0]));
+            dummy.userType=Employeedata[1];
             dummy.setUsername(Employeedata[2]);
-            dummy.setFirstName(Employeedata[3]);
-            dummy.setLastName(Employeedata[4]);
-            dummy.setAddress(Employeedata[5]);
-            dummy.setPosition(Employeedata[6]);
-            dummy.setGraduatedCollege(Employeedata[7]);
-            dummy.setYearOfGraduation(Integer.parseInt(Employeedata[8]));
-            dummy.setTotalGrade(Employeedata[9]);
-
+            dummy.setPassword(Employeedata[3]);
+            dummy.setFirstName(Employeedata[4]);
+            dummy.setLastName(Employeedata[5]);
+            dummy.setAddress(Employeedata[6]);
+            dummy.setPosition(Employeedata[7]);
+            dummy.setGraduatedCollege(Employeedata[8]);
+            dummy.setYearOfGraduation(Integer.parseInt(Employeedata[9]));
+            dummy.setTotalGrade(Employeedata[10]);
             e.add(dummy);
         }
     }

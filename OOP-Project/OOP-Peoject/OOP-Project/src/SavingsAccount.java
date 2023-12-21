@@ -5,6 +5,7 @@ public class SavingsAccount extends Account {
 
 
 
+
     public SavingsAccount(int id)
     {
     // Call the constructor of the superclass (Account) with specific parameters
@@ -14,6 +15,11 @@ public class SavingsAccount extends Account {
     // Set the creation date of the account to the current date
     this.local_Date = LocalDate.now();
     }
+
+    public SavingsAccount() {
+
+    }
+
     @Override
     public void evaluateInterest() {
         LocalDate currentDate = LocalDate.now();

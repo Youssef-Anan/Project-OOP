@@ -1,14 +1,27 @@
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Client convClient=null;     Admin convAdmin=null;       Employee convEmployee=null;
-        Bank testbank = new Bank();
+        Scanner input =new Scanner(System.in);
+        User user=null;      Client convClient=null;     Admin convAdmin=null;       Employee convEmployee=null;
+        Bank bank = new Bank();
         //Program
-        while(true){
+        bank.getBankData();
+        program:while(true){
 
 //--------------------------------------Authentication--------------------------------------------------//
 //Authenticating User
-        User user=testbank.Authenticate();
+            System.out.println("1-Login\n2-Close Program");
+            int n= input.nextInt();
+            switch (n){
+                case 1:
+                    user=bank.Authenticate();
+                    break;
+                case 2:
+                    break program;
+            }
 //Giving User Client Authorities
         if(user.getUserType().equals("Client")){
             convClient= (Client) user;
@@ -24,17 +37,18 @@ public class Main {
 //--------------------------------------Showing User Options--------------------------------------------//
 //Client Options
             if(user.getUserType().equals("Client")){
-                testbank.ClientOptions(convClient);
+                bank.ClientOptions(convClient);
             }
 //Employee Options
             else if (user.getUserType().equals("Employee")) {
-                testbank.EmployeeOptions(convEmployee);
+                bank.EmployeeOptions(convEmployee);
             }
 //Admin Options
             else {
-                testbank.AdminOptions(convAdmin);
+                bank.AdminOptions(convAdmin);
             }
 
         }
+        bank.saveBankData();
     }
 }

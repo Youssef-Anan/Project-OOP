@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Client extends User {
      protected CurrentAccount currentAccount ;
-     protected ArrayList<SavingsAccount> savingAccount;
+     protected ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
 
     private String TelephoneNumber;
 
@@ -27,9 +27,9 @@ public class Client extends User {
         this.TelephoneNumber = other.TelephoneNumber;
         this.currentAccount = new CurrentAccount(getID());
         this.savingAccount = new ArrayList<>();  // Deep copy of the savingAccount ArrayList
-        for (SavingsAccount acc : other.savingAccount) {
+        if (other.savingAccount!=null){for (SavingsAccount acc : other.savingAccount) {
             this.savingAccount.add(new SavingsAccount(getID()));
-        }
+        }}
     }
 
 public void createCurrent() //Creates a new current account for the client if one does not already exist.
@@ -49,7 +49,9 @@ else
 public void createSavings()// Creates a new savings account and adds it to the client's list of savings accounts.
 {
 SavingsAccount savings=new SavingsAccount(getID());
+    System.out.println("Added Successfully");
 savingAccount.add(savings);// Creates a new savings account
+    DisplayAccounts();
 }
 
     public void DisplayClientDetails()   // Displays the client's personal and account details.
@@ -60,6 +62,7 @@ savingAccount.add(savings);// Creates a new savings account
         System.out.println("The client last user name: " + getUsername());
         System.out.println("The client phone number: " + TelephoneNumber);
         DisplayAccounts();
+        System.out.println("size:  " + savingAccount.size());
 
 
     }
@@ -132,7 +135,6 @@ savingAccount.add(savings);// Creates a new savings account
                 a.balance += Amount;
                 System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
     }
-
     public void Withdraw(double amount, Account sourceAcc) {
         if (sourceAcc.balance >= amount) {
             sourceAcc.setBalance(sourceAcc.getBalance() - amount);
@@ -140,28 +142,22 @@ savingAccount.add(savings);// Creates a new savings account
         }
         else {System.out.println("Insufficient Funds ");}
     }
-
-
     public String getTelephoneNumber() {
         return TelephoneNumber;
     }
-
     public void setTelephoneNumber(String telephoneNumber) {
         TelephoneNumber = telephoneNumber;
     }
-
     public ArrayList<SavingsAccount> getSavingAccount() {
+        System.out.println("size:  " + savingAccount.size());
         return savingAccount;
     }
-
     public void setSavingAccount(ArrayList<SavingsAccount> savingAccount) {
         this.savingAccount = savingAccount;
     }
-
     public CurrentAccount getCurrentAccount() {
         return currentAccount;
     }
-
     public void setCurrentAccount(CurrentAccount currentAccount) {
         this.currentAccount = currentAccount;
     }

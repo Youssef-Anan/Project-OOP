@@ -3,13 +3,23 @@ import java.util.Scanner;
 import java.io.*;
 public class Bank {
     Scanner input =new Scanner(System.in);
+    private static final String Transactions_File_Path = "transactions.txt";
+    private static final String Employee_File_Path = "employee.txt";
+    private static final String CLIENT_FILE_PATH = "client.txt";
     private ArrayList<Employee> Employees= new ArrayList<>();
     public ArrayList<Client> Clients= new ArrayList<>();
     private ArrayList<Transaction> Transactions = new ArrayList<>();
 
     public Bank(){}
     public void getBankData(){
-
+       // FileHandler.ConvertStringtoTransaction(FileHandler.readData(Transactions_File_Path),Transactions);
+        FileHandler.ConvertStringtoEmployee(FileHandler.readData(Employee_File_Path),Employees);
+        FileHandler.ConvertStringtoClient(FileHandler.readData(CLIENT_FILE_PATH),Clients);
+    }
+    public void saveBankData(){
+        FileHandler.writeData(FileHandler.ConvTransactiontoString(Transactions),Transactions_File_Path);
+        FileHandler.writeData(FileHandler.ConvEmployeetoString(Employees),Employee_File_Path);
+        FileHandler.writeData(FileHandler.ConvClientToString(Clients),CLIENT_FILE_PATH);
     }
     public User Authenticate() {
         String userType;
