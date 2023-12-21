@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 public class FileHandler {
 
@@ -44,10 +50,10 @@ public class FileHandler {
         return data;
     }
 
-
-    public static void writeData(String data, String Path) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(Path))) {
-            oos.writeObject(data);
+    public static void writeData(String data,String Path) {
+        try (BufferedWriter writer = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(Path), StandardCharsets.UTF_8))) {
+            writer.write(data);
             System.out.println("User data has been written to file.");
         } catch (IOException e) {
             e.printStackTrace();
