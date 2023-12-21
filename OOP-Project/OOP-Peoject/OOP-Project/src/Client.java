@@ -51,7 +51,7 @@ public void createSavings()// Creates a new savings account and adds it to the c
 SavingsAccount savings=new SavingsAccount(getID());
     System.out.println("Added Successfully");
 savingAccount.add(savings);// Creates a new savings account
-    DisplayAccounts();
+    //DisplayAccounts();
 }
 
     public void DisplayClientDetails()   // Displays the client's personal and account details.
@@ -71,7 +71,7 @@ savingAccount.add(savings);// Creates a new savings account
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void DisplayAccounts()    // Displays the client's account details.
     {
-       // String s=currentAccount.toString();//By change the current account into a string
+        //String s=currentAccount.toString();//By change the current account into a string
 
         for (int i = 0; i < savingAccount.size(); i++) // Displays the client's saving account details.
         {
