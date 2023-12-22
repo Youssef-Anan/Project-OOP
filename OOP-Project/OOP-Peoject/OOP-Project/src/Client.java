@@ -26,11 +26,11 @@ public class Client extends User {
         System.out.println("test accounts:");other.DisplayAccounts();
         this.TelephoneNumber = other.TelephoneNumber;
         this.currentAccount = new CurrentAccount(getID());
-        if (other.savingAccount!=null){
+
             for (int i = 0; i < other.savingAccount.size(); i++) {
                 savingAccount.add(other.savingAccount.get(i));
             }
-    }
+
     }
 
 public void createCurrent() //Creates a new current account for the client if one does not already exist.
@@ -75,7 +75,7 @@ SavingsAccount savings=new SavingsAccount(getID());
       //  String s=currentAccount.toString();
 
         for (int i = 0; i < savingAccount.size(); i++) {
-            System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+            System.out.println("Saving Account " +( i + 1) + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
         }
         //if (s!=null)
         //{
