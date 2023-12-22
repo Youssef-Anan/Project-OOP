@@ -37,11 +37,13 @@ public class Main {
 //--------------------------------------Showing User Options--------------------------------------------//
 //Client Options
             if(user.getUserType().equals("Client")){
-                bank.ClientOptions(convClient);
+                bank.ClientOptions(convClient,bank.getClients());
+                System.out.println("Displaying for BankClient:    /n");
+                bank.Clients.get(0).DisplayClientDetails();
             }
 //Employee Options
             else if (user.getUserType().equals("Employee")) {
-                bank.EmployeeOptions(convEmployee);
+                bank.EmployeeOptions(convEmployee,bank.getEmployees());
             }
 //Admin Options
             else {

@@ -82,7 +82,7 @@ public class Bank {
         }
             return user;
     }
-    public void ClientOptions(Client user){
+    public void ClientOptions(Client user,ArrayList<Client> a){
        loop: while(true){
         System.out.println("1-Display Account Details");
         System.out.println("2-Edit Personal Information");
@@ -147,9 +147,15 @@ public class Bank {
                 System.out.println("Wrong input!");
                 break;
         }
+       }
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i).getID()== user.getID()){
+                a.set(i,user);
+                break;
+            }
         }
     }
-    public void EmployeeOptions(Employee user){
+    public void EmployeeOptions(Employee user,ArrayList<Employee> a){
         loop :while(true) {
             System.out.println("1-Create Client");
             System.out.println("2-Edit Personal Information");
@@ -180,6 +186,12 @@ public class Bank {
                 default:
                     System.out.println("Wrong input!");
                     break;
+            }
+        }
+        for (int i = 0; i < a.size(); i++) {
+            if (a.get(i).getID()== user.getID()){
+                a.set(i,user);
+                break;
             }
         }
     }
@@ -219,5 +231,17 @@ public class Bank {
                     break;
             }
         }
+    }
+
+    public ArrayList<Client> getClients() {
+        return Clients;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return Employees;
+    }
+
+    public ArrayList<Transaction> getTransactions() {
+        return Transactions;
     }
 }

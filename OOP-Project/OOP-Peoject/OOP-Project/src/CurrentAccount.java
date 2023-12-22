@@ -1,7 +1,10 @@
+import java.time.LocalDate;
+
 public class CurrentAccount extends Account {
     // Call the constructor of the superclass (Account) with specific parameters
     public CurrentAccount(int id ){
         super(id,"7385","current account");
+        this.local_Date = LocalDate.now();
     }
 
     @Override

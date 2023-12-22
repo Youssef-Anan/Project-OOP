@@ -23,15 +23,18 @@ public class FileHandler {
         String data = "";
         for (int i = 0; i < c.size(); i++) {
             System.out.println(c.get(i).savingAccount+"\nsize:  "+c.get(i).savingAccount.size());
-            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&" + ConvAccountsToString(c.get(i).getSavingAccount()) + "\n";
+            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&" + ConvAccountsToString(c.get(i)) + "\n";
         }
         return data;
     }
 
-    public static String ConvAccountsToString(ArrayList<SavingsAccount> s) {
+    public static String ConvAccountsToString(Client user) {
         String data = "";
-        for (int i = 0; i < s.size(); i++) {
-            data += s.get(i).AccountNumber + "," + s.get(i).local_Date + "," + s.get(i).DEFAULT_INTEREST_RATE + "," + s.get(i).getBalance() + "$";
+        if (user.currentAccount!=null)
+        data+=user.currentAccount.AccountNumber +"," + user.currentAccount.getAccountType() + "," + user.currentAccount.local_Date + "," + user.currentAccount.DEFAULT_INTEREST_RATE + "," + user.currentAccount.getBalance() + "$";
+
+        for (int i = 0; i < user.savingAccount.size(); i++) {
+            data += user.savingAccount.get(i).AccountNumber + ","  + user.savingAccount.get(i).getAccountType() +","+ user.savingAccount.get(i).local_Date + "," + user.savingAccount.get(i).DEFAULT_INTEREST_RATE + "," + user.savingAccount.get(i).getBalance() + "$";
         }
         return data;
     }
@@ -81,7 +84,8 @@ public class FileHandler {
             dummy.setPassword(ClientData[5]);
             dummy.setTelephoneNumber(ClientData[6]);
             //----------------------Accounts Data------------------------
-           // ConvertStringtoAccount(objPart[1], dummy.savingAccount);
+            if (objPart.length>1)
+            ConvertStringtoAccount(objPart[1], dummy);
             c.add(dummy);
         }
     }
@@ -130,17 +134,23 @@ public class FileHandler {
 
     // data +=s.get(i).AccountNumber + "," + s.get(i).local_Date + "," + s.get(i).DEFAULT_INTEREST_RATE + "," + s.get(i).getBalance();
 
-    public static void ConvertStringtoAccount(String data, ArrayList<SavingsAccount> a) {
+    public static void ConvertStringtoAccount(String data, Client user) {
         //String[] dataArray = inputData.split("\n");
-        SavingsAccount dummy = new SavingsAccount();
+        Account dummy = new SavingsAccount();
+        Account accConv;
         String[] objects = data.split("\\$");
         for (int i = 0; i < objects.length; i++) {
             String[] objData = objects[i].split(",");
             dummy.setAccountNumber(Long.parseLong(objData[0]));
-            dummy.setLocal_Date(LocalDate.parse(objData[1]));
-            dummy.setDEFAULT_INTEREST_RATE(Double.parseDouble(objData[2]));
-            dummy.setBalance(Double.parseDouble(objData[3]));
-            a.add(dummy);
+            dummy.setAccountType(objData[1]);
+            dummy.setLocal_Date(LocalDate.parse(objData[2]));
+            dummy.setDEFAULT_INTEREST_RATE(Double.parseDouble(objData[3]));
+            dummy.setBalance(Double.parseDouble(objData[4]));
+            if (dummy.getAccountType().equals("saving account"))
+            user.savingAccount.add((SavingsAccount) dummy);
+            else {
+                accConv=dummy;
+                user.setCurrentAccount((CurrentAccount) accConv);}
         }
     }
 
