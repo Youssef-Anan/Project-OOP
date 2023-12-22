@@ -65,6 +65,8 @@ public class Employee extends User {
         String phoneNumber=input.next();
         //-------Generating Id for clients-------//
         Client client = new Client(10001+c.size(),firstName, lastName, username, password, phoneNumber);
+        client.createSavings();
+        client.createSavings();
         c.add(client);
     }
     //------Function to search for a client by ID--------//
