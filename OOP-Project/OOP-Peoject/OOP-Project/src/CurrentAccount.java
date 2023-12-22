@@ -6,6 +6,7 @@ public class CurrentAccount extends Account {
         super(id,"7385","current account");
         this.local_Date = LocalDate.now();
     }
+    public CurrentAccount(){}
 
     @Override
     public void evaluateInterest()
@@ -19,6 +20,7 @@ public class CurrentAccount extends Account {
             DEFAULT_INTEREST_RATE=0.12;
         }
     }
+
     public void applyFees()
     {
         // Calculate and add interest to the account balance based on the interest rate

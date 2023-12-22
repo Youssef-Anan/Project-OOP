@@ -10,13 +10,19 @@ public class Transaction {
 
     private int clientId;  // clientId is now assigned based on the Client class
     private int employeeId;//employeeId is now assigned based on the Employee class
-    private float amount;
+    private double amount;
     private long srcAccnum; // the Account that sends the money
     private  long dstAccnum; // the Account that receives the money
 
-    public Transaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc) {
-        this.clientId = client.getID(); //It takes the client id from Client class
-        this.employeeId= employee.getID();//It takes the employee id from Employee class
+    public Transaction( Client client, Employee employee, double amount, Account srcAcc, Account dstAcc) {
+        if (client==null){
+            this.clientId =0;
+        }
+        else this.clientId = client.getID(); //It takes the client id from Client class
+        if (employee==null){
+            this.employeeId=0;
+        }
+        else this.employeeId= employee.getID();//It takes the employee id from Employee class
         this.amount = amount;
         this.srcAccnum = srcAcc.getAccountNumber();
         this.dstAccnum = dstAcc.getAccountNumber();
@@ -26,7 +32,7 @@ public class Transaction {
 
     }
 
-    public static void createTransaction( Client client, Employee employee, float amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
+    public static void createTransaction( Client client, Employee employee, double amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
         Transaction trans = new Transaction( client, employee, amount, srcAcc, dstAcc);
         transactions.add(trans);
     }
@@ -56,11 +62,11 @@ public class Transaction {
         return employeeId;
     }
 
-    public float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

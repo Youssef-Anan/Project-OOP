@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
@@ -34,6 +35,22 @@ public abstract class Account{
         } while (generatedAccountNumbers.contains(newAccountNumber));
         generatedAccountNumbers.add(newAccountNumber);
         return newAccountNumber;
+    }
+    static Account getAccountbyID(ArrayList<Client> users,long AccountNumber){
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).currentAccount.getAccountNumber()==AccountNumber)return users.get(i).currentAccount;
+            else for (int j = 0; j < users.get(i).savingAccount.size(); j++) {
+                if (users.get(i).savingAccount.get(j).getAccountNumber()==AccountNumber)return users.get(i).savingAccount.get(j);
+            }
+        }
+        return null;
+    }
+    static Account getUserAccount(Client user,long AccountNumber){
+            if (user.currentAccount.getAccountNumber()==AccountNumber)return user.currentAccount;
+            else for (int j = 0; j < user.savingAccount.size(); j++) {
+                if (user.savingAccount.get(j).getAccountNumber()==AccountNumber)return user.savingAccount.get(j);
+            }
+        return null;
     }
 
     public abstract void evaluateInterest();

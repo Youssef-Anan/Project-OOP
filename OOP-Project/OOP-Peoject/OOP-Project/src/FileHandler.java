@@ -1,4 +1,5 @@
 import java.io.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,15 +15,10 @@ import java.nio.charset.StandardCharsets;
 
 public class FileHandler {
 
-    private static final String Transactions_File_Path = "transactions.txt";
-    private static final String Employee_File_Path = "employee.txt";
-    private static final String CLIENT_FILE_PATH = "client.txt";
-
     //-------------------------------Converting Object to String-----------------------------------------------------
     public static String ConvClientToString(ArrayList<Client> c) {
         String data = "";
         for (int i = 0; i < c.size(); i++) {
-            System.out.println(c.get(i).savingAccount+"\nsize:  "+c.get(i).savingAccount.size());
             data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&" + ConvAccountsToString(c.get(i)) + "\n";
         }
         return data;
@@ -55,11 +51,11 @@ public class FileHandler {
         return data;
     }
 
-    public static void writeData(String data,String Path) {
+    public static void writeData(String data,String Path,String name) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(Path), StandardCharsets.UTF_8))) {
             writer.write(data);
-            System.out.println("User data has been written to file.");
+            System.out.println(name+" data has been written to file.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -135,25 +131,29 @@ public class FileHandler {
     // data +=s.get(i).AccountNumber + "," + s.get(i).local_Date + "," + s.get(i).DEFAULT_INTEREST_RATE + "," + s.get(i).getBalance();
 
     public static void ConvertStringtoAccount(String data, Client user) {
-        //String[] dataArray = inputData.split("\n");
-        Account dummy = new SavingsAccount();
-        Account accConv;
+        CurrentAccount current = new CurrentAccount();
         String[] objects = data.split("\\$");
         for (int i = 0; i < objects.length; i++) {
+        SavingsAccount dummy = new SavingsAccount();
             String[] objData = objects[i].split(",");
             dummy.setAccountNumber(Long.parseLong(objData[0]));
             dummy.setAccountType(objData[1]);
             dummy.setLocal_Date(LocalDate.parse(objData[2]));
             dummy.setDEFAULT_INTEREST_RATE(Double.parseDouble(objData[3]));
             dummy.setBalance(Double.parseDouble(objData[4]));
-            if (dummy.getAccountType().equals("saving account"))
-            user.savingAccount.add((SavingsAccount) dummy);
+            if (dummy.getAccountType().equals("saving account")){
+                user.savingAccount.add(dummy);
+            }
             else {
-                accConv=dummy;
-                user.setCurrentAccount((CurrentAccount) accConv);}
+                current.setAccountNumber(dummy.getAccountNumber());
+                current.setAccountType(dummy.getAccountType());
+                current.setLocal_Date(dummy.getLocal_Date());
+                current.setDEFAULT_INTEREST_RATE(dummy.getDEFAULT_INTEREST_RATE());
+                current.setBalance(dummy.getBalance());
+                user.setCurrentAccount(current);
+            }
         }
     }
-
 
     //----------------------------------------------------------------------------------------------------------------------------------------//
     public static String readData(String Path) {

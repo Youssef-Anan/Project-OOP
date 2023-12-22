@@ -52,13 +52,18 @@ public class Admin extends User {
         }
     }
     //-------------Function for creating new employees-----------//
-    public void CreateEmployee(ArrayList<Employee>e) {
+    public void CreateEmployee(ArrayList<Employee>e,ArrayList<Client> c) {
         System.out.println("Enter Firstname:");
         String FirstName = input.next();
         System.out.println("Enter Lastname:");
         String LastName = input.next();
         System.out.println("Enter Username:");
         String Username = input.next();
+        while(User.usernameFound(Username,c,e)){
+            System.out.println("Username already exists!");
+            System.out.println("Enter Username:");
+            Username = input.next();
+        }
         System.out.println("Enter password:");
         String Password = input.next();
         System.out.println("Enter Address:");
@@ -97,7 +102,6 @@ public class Admin extends User {
                      t.get(i).displayTransaction();
                  }
              }
-
     }
     //--------Function for displaying transactions by client's Id--------//
     public void displayAllTransactionsbyClientID(ArrayList<Transaction> t)

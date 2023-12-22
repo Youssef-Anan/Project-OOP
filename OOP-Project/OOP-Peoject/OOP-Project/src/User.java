@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public abstract class User {
     String userType;
@@ -20,6 +21,16 @@ public abstract class User {
 
     }
 
+    public static boolean usernameFound(String username,ArrayList<Client> c,ArrayList<Employee> e) {
+        if (username.equals("admin")) return true;
+        for (int i = 0; i < c.size(); i++) {
+            if(username.equals(c.get(i).getUsername()))return true;
+        }
+        for (int i = 0; i < e.size(); i++) {
+            if(username.equals(e.get(i).getUsername()))return true;
+        }
+    return false;
+    }
 
     public int getID() {
         return ID;

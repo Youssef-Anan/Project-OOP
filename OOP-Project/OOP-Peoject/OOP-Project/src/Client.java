@@ -24,11 +24,10 @@ public class Client extends User {
     public Client(Client other) {
         super(other.getID(),other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
         this.TelephoneNumber = other.TelephoneNumber;
-        this.currentAccount = other.getCurrentAccount();//-------------ERROR MOHAMED HOSSAM
+        this.currentAccount = other.getCurrentAccount();
             for (int i = 0; i < other.savingAccount.size(); i++) {
                 savingAccount.add(other.savingAccount.get(i));
             }
-
     }
 
 public void createCurrent() //Creates a new current account for the client if one does not already exist.
@@ -62,25 +61,21 @@ SavingsAccount savings=new SavingsAccount(getID());
         System.out.println("The client last user name: " + getUsername());
         System.out.println("The client phone number: " + TelephoneNumber);
         DisplayAccounts();
-        System.out.println("size:  " + savingAccount.size());
-
-
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void DisplayAccounts()    // Displays the client's account details.
     {
-
+        int counter=1;
         if (currentAccount!=null)
         {
-            System.out.println("Current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
+            System.out.println(counter +"-"+"Current Account " +  " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
         }
         for (int i = 0; i < savingAccount.size(); i++) {
-            System.out.println("Saving Account " +( i + 1) + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+            System.out.println(counter + "-" + "Saving Account "  + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+            counter++;
         }
-
-
     }
 
 
@@ -127,8 +122,6 @@ SavingsAccount savings=new SavingsAccount(getID());
         }
 
     }
-
-
     public void TakeDeposit(double Amount, Account a) {
                 a.balance += Amount;
                 System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);

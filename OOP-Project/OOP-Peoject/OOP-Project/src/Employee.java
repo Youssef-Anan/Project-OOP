@@ -52,19 +52,24 @@ public class Employee extends User {
 
     }
     //---------Function to create new clients ---------//
-    public void CreateClients(ArrayList<Client>c) {
+    public void CreateClients(ArrayList<Client>c,ArrayList<Employee> e) {
         System.out.println("Enter  Firstname:");
         String firstName = input.next();
         System.out.println("Enter Lastname:");
         String lastName = input.next();
         System.out.println("Enter Username:");
-        String username = input.next();
+        String Username = input.next();
+        while(User.usernameFound(Username,c,e)){
+            System.out.println("Username already exists!");
+            System.out.println("Enter Username:");
+            Username = input.next();
+        }
         System.out.println("Enter password:");
         String password = input.next();
         System.out.println("Enter PhoneNumber:");
         String phoneNumber=input.next();
         //-------Generating Id for clients-------//
-        Client client = new Client(10001+c.size(),firstName, lastName, username, password, phoneNumber);
+        Client client = new Client(10001+c.size(),firstName, lastName, Username, password, phoneNumber);
         c.add(client);
     }
     //------Function to search for a client by ID--------//

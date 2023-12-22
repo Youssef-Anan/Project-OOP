@@ -14,7 +14,7 @@ public class Main {
 //--------------------------------------Authentication--------------------------------------------------//
 //Authenticating User
             System.out.println("1-Login\n2-Close Program");
-            int n= input.nextInt();
+            int n = Integer.parseInt(input.nextLine());
             switch (n){
                 case 1:
                     user=bank.Authenticate();
@@ -38,8 +38,6 @@ public class Main {
 //Client Options
             if(user.getUserType().equals("Client")){
                 bank.ClientOptions(convClient,bank.getClients());
-                System.out.println("Displaying for BankClient:    /n");
-                bank.Clients.get(0).DisplayClientDetails();
             }
 //Employee Options
             else if (user.getUserType().equals("Employee")) {

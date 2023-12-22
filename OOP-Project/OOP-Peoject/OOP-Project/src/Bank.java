@@ -17,67 +17,46 @@ public class Bank {
         FileHandler.ConvertStringtoClient(FileHandler.readData(CLIENT_FILE_PATH),Clients);
     }
     public void saveBankData(){
-        FileHandler.writeData(FileHandler.ConvTransactiontoString(Transactions),Transactions_File_Path);
-        FileHandler.writeData(FileHandler.ConvEmployeetoString(Employees),Employee_File_Path);
-        FileHandler.writeData(FileHandler.ConvClientToString(Clients),CLIENT_FILE_PATH);
+        FileHandler.writeData(FileHandler.ConvTransactiontoString(Transactions),Transactions_File_Path,"Transactions");
+        FileHandler.writeData(FileHandler.ConvEmployeetoString(Employees),Employee_File_Path,"Employees");
+        FileHandler.writeData(FileHandler.ConvClientToString(Clients),CLIENT_FILE_PATH,"Clients");
     }
     public User Authenticate() {
-        String userType;
-        boolean userFound = false;
         User user = null;
-        while (true) {
-            System.out.println("Choose who are you (Client-Employee-Admin)");
-            userType = input.nextLine();
-            if (userType.equals("Client") || userType.equals("Employee") || userType.equals("Admin")) {
-                break;
-            } else {
-                System.out.println("Wrong input! Please try again.");
-            }
-        }
         loop :while (true) {
         System.out.println("Enter Username:");
-        String username = input.nextLine();
+        String username = input.next();
         System.out.println("Enter Password:");
-        String password = input.nextLine();
-            if (userType.equals("Client")) {
-                for (int i = 0; i < Clients.size(); i++) {
-                    if (Clients.get(i).getUsername().equals(username) && Clients.get(i).getPassword().equals(password)) {
-                        userFound = true;
-                        user = new Client(Clients.get(i));
-                        user.userType = "Client";
-                        System.out.println("Login successful!");
-                        break loop;
+        String password = input.next();
 
-                    }
-                }
-                System.out.println("Wrong Credentials!");
-                continue loop;
-            } else if (userType.equals("Employee")) {
+            if (username.equals("admin") && password.equals("admin")) {
+                user = new Admin();
+                user.userType = "Admin";
+                System.out.println("Login successful!");
+                break loop;
+            }
                 for (int i = 0; i < Employees.size(); i++) {
                     if (Employees.get(i).getUsername().equals(username) && Employees.get(i).getPassword().equals(password)) {
-                        userFound = true;
                         user = new Employee(Employees.get(i));
                         user.userType = "Employee";
                         System.out.println("Login successful!");
                         break loop;
-
                     }
                 }
-                System.out.println("Wrong Credentials!");
+                for (int i = 0; i < Clients.size(); i++) {
+                    if (Clients.get(i).getUsername().equals(username) && Clients.get(i).getPassword().equals(password)) {
+                        user = new Client(Clients.get(i));
+                        user.userType = "Client";
+                        System.out.println("Login successful!");
+                        break loop;
+                    }
+                }
+                System.out.println("Wrong Credentials! Do you want to continue? (Yes-No)");
+                String choice=input.next();
+                if ("yes".equalsIgnoreCase(choice)){
                 continue loop;
-            } else if (userType.equals("Admin")) {
-                if (username.equals("admin") && password.equals("admin")) {
-                    userFound = true;
-                    user = new Admin();
-                    user.userType = "Admin";
-                    System.out.println("Login successful!");
-                    break loop;
                 }
-                else{
-                    System.out.println("Wrong Credentials!");
-                    continue loop;
-                }
-            }
+                else break;
 
         }
             return user;
@@ -108,24 +87,72 @@ public class Bank {
                 user.EditPersonalInformation();
                 break;
             case 3:
-                System.out.println("Choose which account you want to transfer money from");
+                long source,dest;
+                while(true){
+                System.out.println("Choose which account you want to transfer money from[Enter Account Number]:");
                 user.DisplayAccounts();
-
-                System.out.println("Choose which account you want to transfer money to");
-                user.DisplayAccounts();
+                 source= input.nextLong();
+                if (Account.getAccountbyID(Clients,source)==null){
+                    System.out.println("Account not found, Try again!");
+                }
+                else break;
+                }
+                while(true){
+                    System.out.println("Choose which account you want to transfer money to[Enter Account Number]:");
+                    user.DisplayAccounts();
+                     dest= input.nextLong();
+                    if (Account.getAccountbyID(Clients,dest)==null){
+                        System.out.println("Account not found, Try again!");
+                    }
+                    else break;
+                }
+                System.out.println("Enter the amount:");
+                double amount= input.nextDouble();
+                user.TransferMoney(amount,Account.getAccountbyID(Clients,source),Account.getAccountbyID(Clients,dest));
+                Transaction.createTransaction(user,null,amount,Account.getAccountbyID(Clients,source),Account.getAccountbyID(Clients,dest),Transactions);
                 break;
             case 4:
+                user.ShowTransactionHistory(Transactions);
                 break;
             case 5:
+                long Dacc;
+                while(true){
+                    System.out.println("Choose which account you want to Deposit to[Enter Account Number]:");
+                    user.DisplayAccounts();
+                    Dacc= input.nextLong();
+                    if (Account.getUserAccount(user,Dacc)==null){
+                        System.out.println("Account not found, Try again!");
+                    }
+                    else break;
+                }
+                System.out.println("Enter the amount:");
+                double Damount= input.nextDouble();
+                user.TakeDeposit(Damount,Account.getUserAccount(user,Dacc));
+                Transaction.createTransaction(user,null,Damount,Account.getAccountbyID(Clients,Dacc),null,Transactions);
+
                 break;
             case 6:
+                long Wacc;
+                while(true){
+                    System.out.println("Choose which account you want to Withdraw from[Enter Account Number]:");
+                    user.DisplayAccounts();
+                    Wacc= input.nextLong();
+                    if (Account.getUserAccount(user,Wacc)==null){
+                        System.out.println("Account not found, Try again!");
+                    }
+                    else break;
+                }
+                System.out.println("Enter the amount:");
+                double Wamount= input.nextDouble();
+                user.Withdraw(Wamount,Account.getUserAccount(user,Wacc));
+                Transaction.createTransaction(user,null,-Wamount,null,Account.getAccountbyID(Clients,Wacc),Transactions);
                 break;
             case 7:
                 String c=null;
                 while(true) {
                     System.out.println("What type of Account do you wish to create?[Current-Saving]");
                     c=input.next();
-                    if(c.equals("Current")||c.equals("Saving")){
+                    if(c.equalsIgnoreCase("Current")||c.equalsIgnoreCase("Saving")){
                         break;
                     }
                     else{
@@ -157,31 +184,35 @@ public class Bank {
     }
     public void EmployeeOptions(Employee user,ArrayList<Employee> a){
         loop :while(true) {
-            System.out.println("1-Create Client");
+            System.out.println("1-Display Account Details");
             System.out.println("2-Edit Personal Information");
-            System.out.println("3-Search for Client");
-            System.out.println("4-Edit Client Account");
-            System.out.println("5-Display Client Details");
-            System.out.println("6-Logout");
-            System.out.println("Choose From 1 to 6:");
+            System.out.println("3-Create Client");
+            System.out.println("4-Delete Client");
+            System.out.println("5-Search for Client");
+            System.out.println("6-Edit Client Account");
+            System.out.println("7-Logout");
+            System.out.println("Choose From 1 to 7:");
             int choice = input.nextInt();
             switch (choice) {
                 case 1:
-                    user.CreateClients(Clients);
+                    user.DisplayEmployeeDetails();
                     break;
                 case 2:
                     user.EditPersonalinformation();
                     break;
                 case 3:
-                    user.searchclientbyId(Clients);
+                    user.CreateClients(Clients,Employees);
                     break;
                 case 4:
-                    user.EditClientAccount(Clients);
+                    user.DeleteClient(Clients);
                     break;
                 case 5:
                     user.searchclientbyId(Clients);
                     break;
                 case 6:
+                    user.EditClientAccount(Clients);
+                    break;
+                case 7:
                     break loop;
                 default:
                     System.out.println("Wrong input!");
@@ -199,7 +230,7 @@ public class Bank {
         loop :while(true) {
             System.out.println("1-Create Employee");
             System.out.println("2-Delete Employee");
-            System.out.println("3-Display Transactions");///By kza haga
+            System.out.println("3-Display Transactions");
             System.out.println("4-Authorize Employee");
             System.out.println("5-Display All Clients");
             System.out.println("6-Display All Employees");
@@ -208,15 +239,36 @@ public class Bank {
             int choice = input.nextInt();
             switch (choice) {
                 case 1:
-                    user.CreateEmployee(Employees);
+                    user.CreateEmployee(Employees,Clients);
                     break;
                 case 2:
                     user.DeleteEmployee(Employees);
                     break;
                 case 3:
-
+                        String sType;
+                    while (true) {
+                        System.out.println("Search by (Client-Employee-Date)?");
+                        sType = input.next();
+                        if (sType.equalsIgnoreCase("Client") || sType.equalsIgnoreCase("Employee") || sType.equalsIgnoreCase("Date")) {
+                            break;
+                        } else {
+                            System.out.println("Wrong input! Please try again.");
+                        }
+                        }
+                        if(sType.equalsIgnoreCase("Client")){
+                                user.displayAllTransactionsbyClientID(Transactions);
+                        }
+                        else if (sType.equalsIgnoreCase("Employee")){
+                                user.displayAllTransactionsbyEmployeeID(Transactions);
+                        }
+                        else if (sType.equalsIgnoreCase("Date")){
+                                user.displayAllTransactionsbydate(Transactions);
+                        }
+                        else
+                                System.out.println("Wrong input!");
                     break;
                 case 4:
+                    user.AuthorizeNewEmp(Employees);
                     break;
                 case 5:
                     user.Display_All_Clients(Clients);
