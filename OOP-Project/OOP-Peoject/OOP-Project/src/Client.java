@@ -3,12 +3,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
-     protected CurrentAccount currentAccount ;
+     protected CurrentAccount currentAccount=null ;
      protected ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
 
+
     private String TelephoneNumber;
-
-
     Scanner input = new Scanner(System.in);
 
 
@@ -18,24 +17,25 @@ public class Client extends User {
 
     public Client(int id,String firstName, String lastName, String username, String password, String telephoneNumber) {
         super(id,firstName, lastName, username, password);
-    super.userType="Client";
+        super.userType="Client";
         TelephoneNumber = telephoneNumber;
 
     }
     public Client(Client other) {
         super(other.getID(),other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
         this.TelephoneNumber = other.TelephoneNumber;
-        this.currentAccount = new CurrentAccount(getID());
-        this.savingAccount = new ArrayList<>();  // Deep copy of the savingAccount ArrayList
-        if (other.savingAccount!=null){for (SavingsAccount acc : other.savingAccount) {
-            this.savingAccount.add(new SavingsAccount(getID()));
-        }}
+        this.currentAccount = other.getCurrentAccount();//-------------ERROR MOHAMED HOSSAM
+            for (int i = 0; i < other.savingAccount.size(); i++) {
+                savingAccount.add(other.savingAccount.get(i));
+            }
+
     }
 
 public void createCurrent() //Creates a new current account for the client if one does not already exist.
 {
-    if(currentAccount==null)//Check if the account is null
+    if(currentAccount==null)
     {
+        System.out.println("Creating current account");
         currentAccount = new CurrentAccount(getID());//Creates a new current account
 
     }
@@ -50,7 +50,7 @@ public void createSavings()// Creates a new savings account and adds it to the c
 {
 SavingsAccount savings=new SavingsAccount(getID());
     System.out.println("Added Successfully");
-savingAccount.add(savings);// Creates a new savings account
+    savingAccount.add(savings);// Creates a new savings account
     DisplayAccounts();
 }
 
@@ -61,7 +61,7 @@ savingAccount.add(savings);// Creates a new savings account
         System.out.println("The client last name: " + getLastName());
         System.out.println("The client last user name: " + getUsername());
         System.out.println("The client phone number: " + TelephoneNumber);
-        DisplayAccounts();// Displays the client's account details.
+        DisplayAccounts();
         System.out.println("size:  " + savingAccount.size());
 
 
@@ -71,17 +71,13 @@ savingAccount.add(savings);// Creates a new savings account
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void DisplayAccounts()    // Displays the client's account details.
     {
-        String s=currentAccount.toString();//By change the current account into a string
 
-        for (int i = 0; i < savingAccount.size(); i++) // Displays the client's saving account details.
+        if (currentAccount!=null)
         {
-            System.out.println("Saving Account " + i + 1 + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
+            System.out.println("Current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
         }
-        if (s!=null)//Check if the current account is null
-        {
-            // Displays the client's saving account details
-            System.out.println("current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
-
+        for (int i = 0; i < savingAccount.size(); i++) {
+            System.out.println("Saving Account " +( i + 1) + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
         }
 
 
@@ -151,8 +147,8 @@ savingAccount.add(savings);// Creates a new savings account
         TelephoneNumber = telephoneNumber;
     }
     public ArrayList<SavingsAccount> getSavingAccount() {
-        System.out.println("size:  " + savingAccount.size());
-        return savingAccount;
+        System.out.println("size: " + savingAccount.size());
+        return new ArrayList<>(savingAccount); // Return a copy to prevent external modification
     }
     public void setSavingAccount(ArrayList<SavingsAccount> savingAccount) {
         this.savingAccount = savingAccount;
