@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
-     protected CurrentAccount currentAccount ;
+     protected CurrentAccount currentAccount=null ;
      protected ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
 
 
@@ -17,16 +17,14 @@ public class Client extends User {
 
     public Client(int id,String firstName, String lastName, String username, String password, String telephoneNumber) {
         super(id,firstName, lastName, username, password);
-    super.userType="Client";
+        super.userType="Client";
         TelephoneNumber = telephoneNumber;
 
     }
     public Client(Client other) {
         super(other.getID(),other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
-        System.out.println("test accounts:");other.DisplayAccounts();
         this.TelephoneNumber = other.TelephoneNumber;
-        this.currentAccount = new CurrentAccount(getID());
-
+        this.currentAccount = other.getCurrentAccount();//-------------ERROR MOHAMED HOSSAM
             for (int i = 0; i < other.savingAccount.size(); i++) {
                 savingAccount.add(other.savingAccount.get(i));
             }
@@ -37,6 +35,7 @@ public void createCurrent() //Creates a new current account for the client if on
 {
     if(currentAccount==null)
     {
+        System.out.println("Creating current account");
         currentAccount = new CurrentAccount(getID());//Creates a new current account
 
     }
@@ -72,16 +71,14 @@ SavingsAccount savings=new SavingsAccount(getID());
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void DisplayAccounts()    // Displays the client's account details.
     {
-      //  String s=currentAccount.toString();
 
+        if (currentAccount!=null)
+        {
+            System.out.println("Current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
+        }
         for (int i = 0; i < savingAccount.size(); i++) {
             System.out.println("Saving Account " +( i + 1) + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
         }
-        //if (s!=null)
-        //{
-         //   System.out.println("current Account " + 1 + " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
-
-       // }
 
 
     }
