@@ -104,28 +104,54 @@ public class Employee extends User {
         }
     }
     //----Function to edit personal information of client by using client Id-----//
-    public void EditClientAccount(ArrayList<Client> c){
-        System.out.println("Enter the desired ID to edit the client  : ");
-        int id=input.nextInt();
-        for (int i = 0; i <c.size(); i++) {
-            if (id == c.get(i).getID()) {
-                c.get(i).EditPersonalInformation();
-
+    public void EditClientAccount(ArrayList<Client> c) {
+        int id;
+        boolean userfound=false;
+        while (true) {
+            try {
+                System.out.println("Enter the desired ID to edit the client  : ");
+                id = input.nextInt();
+                for (int i = 0; i < c.size(); i++) {
+                    if (id == c.get(i).getID()) {
+                        c.get(i).EditPersonalInformation();
+                        userfound=true;
+                    }
+                }
+                if(userfound==false){
+                    System.out.println("User not found");
+                }
+                break;
+            }catch(InputMismatchException exc){
+                System.out.println("Invalid Input please enter valid Id: ");
+                input.nextLine();
             }
         }
     }
     //----Function to delete client by using client Id-----//
-    public void DeleteClient(ArrayList<Client> c )
-    {
-        System.out.println("Enter the desired ID to delete the client: ");
-        int id=input.nextInt();
-        for(int i=0;i<c.size();i++){
-            if(id==c.get(i).getID()){
-               c.remove(c.get(i));
+    public void DeleteClient(ArrayList<Client> c ) {
+        int id;
+        boolean userfound = false;
+        while (true) {
+            try {
+                System.out.println("Enter the desired ID to delete the client: ");
+                id = input.nextInt();
+                for (int i = 0; i < c.size(); i++) {
+                    if (id == c.get(i).getID()) {
+                        c.remove(c.get(i));
+                        userfound=true;
+                    }
+
+                }
+                if(userfound==false){
+                    System.out.println("User not found");
+                }
+                break;
+            }catch (InputMismatchException exc){
+                System.out.println("Invalid Input please enter valid Id: ");
+                input.nextLine();
             }
 
         }
-
     }
     //----Function to display employee's details-----//
     public void DisplayEmployeeDetails(){

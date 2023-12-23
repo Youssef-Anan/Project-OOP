@@ -9,7 +9,7 @@ public abstract class User {
     private String Password;
 
     public User() {
-       super();
+
     }
 
     public User( int id,String FirstName, String LastName, String Username, String Password) {
