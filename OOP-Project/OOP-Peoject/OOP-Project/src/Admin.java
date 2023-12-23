@@ -1,4 +1,5 @@
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -23,6 +24,7 @@ public class Admin extends User {
     //---------Function to display all employees--------------//
     public void Display_All_Employees(ArrayList<Employee> e) {
         for (int i = 0; i < e.size(); i++) {
+            System.out.println("------------------------------------------------");
             e.get(i).DisplayEmployeeDetails();
         }
     }
@@ -30,6 +32,7 @@ public class Admin extends User {
     //---------Function to display all clients--------------//
     public void Display_All_Clients(ArrayList<Client> c) {
         for (int i = 0; i < c.size(); i++) {
+            System.out.println("------------------------------------------------");
             c.get(i).DisplayClientDetails();
         }
     }
@@ -51,6 +54,7 @@ public class Admin extends User {
 
     //-------------Function for creating new employees-----------//
     public void CreateEmployee(ArrayList<Employee> e, ArrayList<Client> c) {
+        Employee emp;
         System.out.println("Enter Firstname:");
         String FirstName = input.next();
         System.out.println("Enter Lastname:");
@@ -69,8 +73,12 @@ public class Admin extends User {
         System.out.println("Enter position:");
         String Position = input.next();
         System.out.println("Enter Graduated college:");
-
-        String GraduatedCollege = input.next();
+        String GraduatedCollege;
+        while(true){
+            GraduatedCollege = input.next();
+            if(GraduatedCollege.matches("[a-z]+")||GraduatedCollege.matches("[A-Z]+")){
+                break;
+            }else System.out.println("Please Enter Only Letters");}
         int yearOfGraduation = 0;
         while (true) {
             try {
@@ -82,9 +90,11 @@ public class Admin extends User {
                 input.nextLine();
             }
         }
-        System.out.println("Enter Total Grade(Excellent/Very good/Good/Bad):");
+        System.out.println("Enter Total Grade(Excellent/Good/Bad):");
         String TotalGrade = input.next();
-        Employee emp = new Employee(20001 + e.size(), FirstName, LastName, Username, Password, Address, Position, GraduatedCollege, yearOfGraduation, TotalGrade);
+        if(e.size()==0) emp = new Employee(20001, FirstName, LastName, Username, Password, Address, Position, GraduatedCollege, yearOfGraduation, TotalGrade);
+        else  emp = new Employee(1 + e.getLast().getID(), FirstName, LastName, Username, Password, Address, Position, GraduatedCollege, yearOfGraduation, TotalGrade);
+        System.out.println("Employee Created Successfully");
         e.add(emp);
     }
 
@@ -122,6 +132,7 @@ public class Admin extends User {
 
         for (int i = 0; i < t.size(); i++) {
             if (date.equals(t.get(i).getFormattedDateTime())) {
+                System.out.println("--------------------------------------------");
                 t.get(i).displayTransaction();
             }
         }
@@ -137,6 +148,7 @@ public class Admin extends User {
                 clientId = input.nextInt();
                 for (int i = 0; i < t.size(); i++) {
                     if (clientId == t.get(i).getClientId()) {
+                        System.out.println("--------------------------------------------");
                         t.get(i).displayTransaction();
                         userfound = true;
                     }
@@ -162,6 +174,7 @@ public class Admin extends User {
                 EmpId = input.nextInt();
                 for (int i = 0; i < t.size(); i++) {
                     if (EmpId == t.get(i).getClientId()) {
+                        System.out.println("--------------------------------------------");
                         t.get(i).displayTransaction();
                         userfound=true;
                     }

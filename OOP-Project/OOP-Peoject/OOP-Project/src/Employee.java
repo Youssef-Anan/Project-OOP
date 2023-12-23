@@ -46,14 +46,15 @@ public class Employee extends User {
     public void EditPersonalinformation(){
         System.out.println("Enter the new address");
         String Address = input.next();
-       this.Address=Address;
+        this.Address=Address;
         System.out.println("Enter the new Position");
         String Position = input.next();
         this.Position=Position;
-
+        System.out.println("Information Edited Successfully");
     }
     //---------Function to create new clients ---------//
     public void CreateClients(ArrayList<Client>c,ArrayList<Employee> e) {
+        Client client;
         System.out.println("Enter  Firstname:");
         String firstName = input.next();
         System.out.println("Enter Lastname:");
@@ -68,19 +69,25 @@ public class Employee extends User {
         System.out.println("Enter password:");
         String password = input.next();
         System.out.println("Enter PhoneNumber:");
-        String phoneNumber=input.next();
+        String phoneNumber;
+        while(true){
+            phoneNumber=input.next();
+        if(phoneNumber.matches("[0-9]+")){
+            break;
+        }else System.out.println("Please Enter Only Numbers");}
         //-------Generating Id for clients-------//
-        Client client = new Client(10001+c.size(),firstName, lastName, Username, password, phoneNumber);
+        if(c.size()==0){ client = new Client(10001,firstName, lastName, Username, password, phoneNumber);}
+        else { client = new Client(1+c.getLast().getID(),firstName, lastName, Username, password, phoneNumber);}
+        System.out.println("Client Added Successfully");
         c.add(client);
     }
     //------Function to search for a client by ID--------//
-    public void searchclientbyId( ArrayList<Client> c)
-    {
+    public void searchclientbyId( ArrayList<Client> c) {
         int id;
         boolean userfound =false;
         while (true) {
             try {
-                System.out.println("Enter the desired ID to search for a client : ");
+                System.out.println("Enter the desired ID to search for a client: ");
                 id=input.nextInt();
                 for (int i = 0; i < c.size(); i++)
                 {
@@ -138,7 +145,7 @@ public class Employee extends User {
                 for (int i = 0; i < c.size(); i++) {
                     if (id == c.get(i).getID()) {
                         c.remove(c.get(i));
-                        System.out.println("client "+id+" has been deleted.");
+                        System.out.println("Client "+id+" Has Been Deleted.");
                         userfound=true;
                     }
 
@@ -161,6 +168,8 @@ public class Employee extends User {
         System.out.println("The Employee last name: "+getLastName());
         System.out.println("The Employee  username: "+getUsername());
     }
+
+
 
     public String getAddress() {
         return Address;

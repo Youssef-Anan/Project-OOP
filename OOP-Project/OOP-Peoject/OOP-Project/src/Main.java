@@ -20,6 +20,7 @@ public class Main {
             // Authentication loop
             loop: while (true) {
                 int n = 0;
+                System.out.println("---------------------------------Bank System-----------------------------------");
                 System.out.println("1-Login\n2-Close Program");
 
                 // Checking that input is only an integer
@@ -28,6 +29,8 @@ public class Main {
                         n = input.nextInt();
                         break;
                     } catch (Exception e) {
+                        System.out.println("--------------------------------------------------------------------------------");
+                        System.out.println("1-Login\n2-Close Program");
                         System.out.println("You must enter only numbers!");
                         input.nextLine(); // Clear the buffer to avoid an infinite loop
                     }
@@ -36,6 +39,7 @@ public class Main {
                 switch (n) {
                     case 1:
                         user = bank.Authenticate(); // Authenticate the user
+                        if (user==null) break program;
                         break loop;
                     case 2:
                         break program; // Exit the program
@@ -53,7 +57,6 @@ public class Main {
             } else {
                 convAdmin = (Admin) user; // Cast user to Admin type
             }
-
             // Showing User Options based on UserType
             if (user.getUserType().equals("Client")) {
                 bank.ClientOptions(convClient); // Display client options

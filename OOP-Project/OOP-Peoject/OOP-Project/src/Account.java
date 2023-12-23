@@ -38,7 +38,7 @@ public abstract class Account{
     }
     static Account getAccountbyID(ArrayList<Client> users,long AccountNumber){
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).currentAccount.getAccountNumber()==AccountNumber)return users.get(i).currentAccount;
+            if (users.get(i).currentAccount!=null) if (users.get(i).currentAccount.getAccountNumber()==AccountNumber)return users.get(i).currentAccount;
             else for (int j = 0; j < users.get(i).savingAccount.size(); j++) {
                 if (users.get(i).savingAccount.get(j).getAccountNumber()==AccountNumber)return users.get(i).savingAccount.get(j);
             }
@@ -46,13 +46,14 @@ public abstract class Account{
         return null;
     }
     static Account getUserAccount(Client user,long AccountNumber){
+            if (user.currentAccount!=null){
             if (user.currentAccount.getAccountNumber()==AccountNumber)return user.currentAccount;
+            }
             else for (int j = 0; j < user.savingAccount.size(); j++) {
                 if (user.savingAccount.get(j).getAccountNumber()==AccountNumber)return user.savingAccount.get(j);
             }
         return null;
     }
-
     public abstract void evaluateInterest();
 
     public abstract void applyFees();

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Transaction {
 
     private final LocalDateTime date = LocalDateTime.now();
-   private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm");
     private String formattedDateTime = date.format(formatter); //it formats the LocalDatetime
 
     private int clientId;  // clientId is now assigned based on the Client class

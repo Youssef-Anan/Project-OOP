@@ -1,8 +1,14 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 public class Bank {
     Scanner input =new Scanner(System.in);
+    //Current Date
+    private final LocalDateTime date = LocalDateTime.now();
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy  HH:mm");
+    private String Time = date.format(formatter); //it formats the LocalDatetime
     // File paths for data persistence
     private static final String Transactions_File_Path = "transactions.txt";
     private static final String Employee_File_Path = "employee.txt";
@@ -36,16 +42,20 @@ public class Bank {
 
         // Infinite loop until valid authentication
         loop: while (true) {
+            System.out.println("-----------------------------------Login---------------------------------------");
+
             System.out.println("Enter Username:");
             String username = input.next();
             System.out.println("Enter Password:");
             String password = input.next();
+            System.out.println("-----------------------------------------------------------------------------------");
 
             // Check if the entered credentials match admin credentials
             if (username.equals("admin") && password.equals("admin")) {
                 user = new Admin();
                 user.userType = "Admin";
                 System.out.println("Login successful!");
+
                 break loop;
             }
 
@@ -70,6 +80,7 @@ public class Bank {
             }
 
             // Prompt user to continue or exit in case of wrong credentials
+            System.out.println("-----------------------------------------------------------------------------------");
             System.out.println("Wrong Credentials! Do you want to continue? (Yes-No)");
             String choice = input.next();
             if ("yes".equalsIgnoreCase(choice)) {
@@ -87,6 +98,7 @@ public class Bank {
             int choice;
 
             // Displaying menu options
+            System.out.println("Client:"+user.getFirstName()+" "+user.getLastName()+"-----------------------------Home---------------------------------------Date:"+Time);
             System.out.println("1-Display Account Details");
             System.out.println("2-Edit Personal Information");
             System.out.println("3-Transfer Money");
@@ -111,50 +123,62 @@ public class Bank {
             // Switch case to handle user choices
             switch (choice) {
                 case 1:
+                    System.out.println("------------------------------------Display Account Details---------------------------------");
                     user.DisplayClientDetails();
                     break;
                 case 2:
+                    System.out.println("------------------------------------Edit Personal Information-------------------------------");
                     user.EditPersonalInformation();
                     break;
                 case 3:
                     // Transfer money operation
                     long source, dest;
-                    while (true) {
-                        System.out.println("Choose which account you want to transfer money from[Enter Account Number]:");
+                    System.out.println("------------------------------------Transfer Money------------------------------------------");
                         user.DisplayAccounts();
+                        System.out.println("-----------------");
+                        System.out.println("Choose which account you want to transfer money from[Enter Account Number]:");
                         while (true) {
                             try {
                                 source = input.nextLong();
                                 break;
                             } catch (Exception e) {
+                                System.out.println("-----------------------------------------------------------------------------------");
+                                user.DisplayAccounts();
+                                System.out.println("-----------------");
                                 System.out.println("You must only enter numbers!");
                                 input.nextLine();
                             }
                         }
                         if (Account.getUserAccount(user, source) == null) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
                             System.out.println("Do you want to continue? (Yes-No)");
                             String choice1 = input.next();
                             if ("yes".equalsIgnoreCase(choice1)) {
                                 continue;
                             } else {
-                                break;
+                                break ;
                             }
-                        }else break;
-                    }
-                    while (true) {
-                        System.out.println("Choose which account you want to transfer money to[Enter Account Number]:");
+                        }
+
+                        System.out.println("-----------------------------------------------------------------------------------");
                         user.DisplayAccounts();
+                        System.out.println("-----------------");
+                        System.out.println("Choose which account you want to transfer money to[Enter Account Number]:");
                         while (true) {
                             try {
                                 dest = input.nextLong();
                                 break;
                             } catch (Exception e) {
+                                System.out.println("-----------------------------------------------------------------------------------");
+                                user.DisplayAccounts();
+                                System.out.println("-----------------");
                                 System.out.println("You must only enter numbers!");
                                 input.nextLine();
                             }
                         }
                         if (Account.getAccountbyID(Clients, dest) == null) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
                             System.out.println("Do you want to continue? (Yes-No)");
                             String choice1 = input.next();
@@ -163,8 +187,8 @@ public class Bank {
                             } else {
                                 break;
                             }
-                        }else break;
-                    }
+                        }
+                    System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("Enter the amount:");
                     double amount;
                     while (true) {
@@ -172,6 +196,7 @@ public class Bank {
                             amount = input.nextDouble();
                             break;
                         } catch (Exception e) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("You must only enter numbers!");
                             input.nextLine();
                         }
@@ -181,34 +206,39 @@ public class Bank {
                             Account.getAccountbyID(Clients, dest), Transactions);
                     break;
                 case 4:
+                    System.out.println("------------------------------------Show Transaction History--------------------------------");
                     user.ShowTransactionHistory(Transactions);
                     break;
                 case 5:
                     // Deposit operation
                     long Dacc;
-                    while (true) {
-                        System.out.println("Choose which account you want to Deposit to[Enter Account Number]:");
+                        System.out.println("------------------------------------Deposit---------------------------------------------");
                         user.DisplayAccounts();
+                        System.out.println("-----------------");
+                        System.out.println("Choose which account you want to Deposit to[Enter Account Number]:");
                         while (true) {
                             try {
                                 Dacc = input.nextLong();
                                 break;
                             } catch (Exception e) {
+                                System.out.println("-----------------------------------------------------------------------------------");
+                                user.DisplayAccounts();
+                                System.out.println("-----------------");
                                 System.out.println("You must only enter numbers!");
                                 input.nextLine();
                             }
                         }
                         if (Account.getUserAccount(user, Dacc) == null) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
                             System.out.println("Do you want to continue? (Yes-No)");
                             String choice1 = input.next();
                             if (!"yes".equalsIgnoreCase(choice1)) {
                                 break;
                             }
-                        } else {
-                            break;
                         }
-                    }
+
+                    System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("Enter the amount:");
                     double Damount;
                     while (true) {
@@ -216,6 +246,7 @@ public class Bank {
                             Damount = input.nextDouble();
                             break;
                         } catch (Exception e) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("You must only enter numbers!");
                             input.nextLine();
                         }
@@ -227,27 +258,33 @@ public class Bank {
                 case 6:
                     // Withdraw operation
                     long Wacc;
-                    while (true) {
-                        System.out.println("Choose which account you want to Withdraw from[Enter Account Number]:");
+                        System.out.println("------------------------------------Withdraw--------------------------------------------");
                         user.DisplayAccounts();
+                        System.out.println("-----------------");
+                        System.out.println("Choose which account you want to Withdraw from[Enter Account Number]:");
                         while (true) {
                             try {
                                 Wacc = input.nextLong();
                                 break;
                             } catch (Exception e) {
+                                System.out.println("-----------------------------------------------------------------------------------");
+                                user.DisplayAccounts();
+                                System.out.println("-----------------");
                                 System.out.println("You must only enter numbers!");
                                 input.nextLine();
                             }
                         }
                         if (Account.getUserAccount(user, Wacc) == null) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
                             System.out.println("Do you want to continue? (Yes-No)");
                             String choice1 = input.next();
                             if (!"yes".equalsIgnoreCase(choice1)) {
                                 break;
                             }
-                        }else break;
-                    }
+                        }
+
+                    System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println("Enter the amount:");
                     double Wamount;
                     while (true) {
@@ -255,6 +292,7 @@ public class Bank {
                             Wamount = input.nextDouble();
                             break;
                         } catch (Exception e) {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("You must only enter numbers!");
                             input.nextLine();
                         }
@@ -267,11 +305,13 @@ public class Bank {
                     // Create account operation
                     String c = null;
                     while (true) {
+                        System.out.println("------------------------------------Create Account--------------------------------------");
                         System.out.println("What type of Account do you wish to create?[Current-Saving]");
                         c = input.next();
                         if (c.equalsIgnoreCase("Current") || c.equalsIgnoreCase("Saving")) {
                             break;
                         } else {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Wrong input! Please try again.");
                             System.out.println("Do you want to continue? (Yes-No)");
                             String choice1 = input.next();
@@ -281,6 +321,7 @@ public class Bank {
                         }
                     }
                     c = c.toLowerCase();
+                    System.out.println("-----------------------------------------------------------------------------------");
                     switch (c) {
                         case "saving":
                             user.createSavings();
@@ -296,23 +337,24 @@ public class Bank {
                     System.out.println("Wrong input!");
                     break;
             }
+            for (int i = 0; i < Clients.size(); i++) {
+                if (Clients.get(i).getID() == user.getID()) {
+                    Clients.set(i, user);
+                    break;
+                }
+            }
         }
 
         // Update the user data after completing client options
-        for (int i = 0; i < Clients.size(); i++) {
-            if (Clients.get(i).getID() == user.getID()) {
-                Clients.set(i, user);
-                break;
-            }
-        }
+
     }
     //----------------------------------------------------------------------------------------------------
     //Displays and manages employee-specific options and operations in a loop until the user chooses to logout.
     public void EmployeeOptions(Employee user) {
         loop: while (true) {
             int choice;
-
             // Displaying menu options
+            System.out.println("Admin-----------------------------Home---------------------------------------Date:"+Time);
             System.out.println("1-Display Account Details");
             System.out.println("2-Edit Personal Information");
             System.out.println("3-Create Client");
@@ -336,25 +378,31 @@ public class Bank {
             // Switch case to handle user choices
             switch (choice) {
                 case 1:
+                    System.out.println("------------------------------------Display Account Details----------------------------");
                     user.DisplayEmployeeDetails();
                     break;
                 case 2:
+                    System.out.println("------------------------------------Edit Personal Information--------------------------");
                     user.EditPersonalinformation();
                     break;
                 case 3:
                     // Create client operation
+                    System.out.println("------------------------------------Create Client--------------------------------------");
                     user.CreateClients(Clients, Employees);
                     break;
                 case 4:
                     // Delete client operation
+                    System.out.println("------------------------------------Delete Client--------------------------------------");
                     user.DeleteClient(Clients);
                     break;
                 case 5:
                     // Search for client operation
+                    System.out.println("------------------------------------Search for Client----------------------------------");
                     user.searchclientbyId(Clients);
                     break;
                 case 6:
                     // Edit client account operation
+                    System.out.println("------------------------------------Edit Client Account--------------------------------");
                     user.EditClientAccount(Clients);
                     break;
                 case 7:
@@ -364,15 +412,14 @@ public class Bank {
                     System.out.println("Wrong input!");
                     break;
             }
-        }
-
-        // Update the user data after completing employee options
-        for (int i = 0; i < Employees.size(); i++) {
-            if (Employees.get(i).getID() == user.getID()) {
-                Employees.set(i, user);
-                break;
+            for (int i = 0; i < Employees.size(); i++) {
+                if (Employees.get(i).getID() == user.getID()) {
+                    Employees.set(i, user);
+                    break;
+                }
             }
         }
+        // Update the user data after completing employee options
     }
     //----------------------------------------------------------------------------------------------------
     //Displays and manages admin-specific options and operations in a loop until the admin chooses to logout.
@@ -381,7 +428,7 @@ public class Bank {
             int choice;
 
             // Displaying menu options
-            System.out.println("1-Create Employee");
+            System.out.println("User:"+user.getFirstName()+" "+user.getLastName()+"-----------------------------Bank System---------------------------------------");
             System.out.println("2-Delete Employee");
             System.out.println("3-Display Transactions");
             System.out.println("4-Authorize Employee");
@@ -405,21 +452,25 @@ public class Bank {
             switch (choice) {
                 case 1:
                     // Create employee operation
+                    System.out.println("-------------------------------------Delete Employee-------------------------------------");
                     user.CreateEmployee(Employees, Clients);
                     break;
                 case 2:
                     // Delete employee operation
+                    System.out.println("-------------------------------------Display Transactions--------------------------------");
                     user.DeleteEmployee(Employees);
                     break;
                 case 3:
                     // Display transactions based on user input (client, employee, or date)
                     String sType;
                     while (true) {
+                        System.out.println("-----------------------------------------------------------------------------------");
                         System.out.println("Search by (Client-Employee-Date)?");
                         sType = input.next();
                         if (sType.equalsIgnoreCase("Client") || sType.equalsIgnoreCase("Employee") || sType.equalsIgnoreCase("Date")) {
                             break;
                         } else {
+                            System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Wrong input! Please try again.");
                             System.out.println("Do you want to continue? (Yes-No)");
                             String choice1 = input.next();
@@ -430,25 +481,31 @@ public class Bank {
                     }
                     if (sType.equalsIgnoreCase("Client")) {
                         // Display transactions by client ID
+                        System.out.println("-----------------------------------------------------------------------------------");
                         user.displayAllTransactionsbyClientID(Transactions);
                     } else if (sType.equalsIgnoreCase("Employee")) {
                         // Display transactions by employee ID
+                        System.out.println("-----------------------------------------------------------------------------------");
                         user.displayAllTransactionsbyEmployeeID(Transactions);
                     } else if (sType.equalsIgnoreCase("Date")) {
                         // Display transactions by date
+                        System.out.println("-----------------------------------------------------------------------------------");
                         user.displayAllTransactionsbydate(Transactions);
                     }
                     break;
                 case 4:
                     // Authorize new employee operation
+                    System.out.println("-------------------------------------Authorize Employee----------------------------------");
                     user.AuthorizeNewEmp(Employees);
                     break;
                 case 5:
                     // Display all clients operation
+                    System.out.println("-------------------------------------Display All Clients---------------------------------");
                     user.Display_All_Clients(Clients);
                     break;
                 case 6:
                     // Display all employees operation
+                    System.out.println("-------------------------------------Display All Employees-------------------------------");
                     user.Display_All_Employees(Employees);
                     break;
                 case 7:

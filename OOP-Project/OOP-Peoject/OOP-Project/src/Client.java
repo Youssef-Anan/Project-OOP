@@ -3,9 +3,9 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Client extends User {
+    public static int clientsNumber=0;
      protected CurrentAccount currentAccount=null ;
      protected ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
-
     private String TelephoneNumber;
     Scanner input = new Scanner(System.in);
 
@@ -18,7 +18,7 @@ public class Client extends User {
         super(id,firstName, lastName, username, password);
         super.userType="Client";
         TelephoneNumber = telephoneNumber;
-
+        clientsNumber++;
     }
     public Client(Client other) {
         super(other.getID(),other.getFirstName(), other.getLastName(), other.getUsername(), other.getPassword());
@@ -33,32 +33,32 @@ public void createCurrent() //Creates a new current account for the client if on
 {
     if(currentAccount==null)//We check  the current account is equal null to create current account
     {
-        System.out.println("Creating current account");
+        System.out.println("Current Account Created Successfully");
         currentAccount = new CurrentAccount(getID());//Creates a new current account
 
     }
 
 else
     {
-        System.out.println("the account  is already taken");
+        System.out.println("The is an Account Already Created");
     }
 }
 
 public void createSavings()// Creates a new savings account and adds it to the client's list of savings accounts.
 {
 SavingsAccount savings=new SavingsAccount(getID());
-    System.out.println("Added Successfully");
+    System.out.println("Saving Account Created Successfully");
     savingAccount.add(savings);// Creates a new savings account
 
 }
 
     public void DisplayClientDetails()   // Displays the client's personal and account details.
     {
-        System.out.println("The client id: " + getID());
-        System.out.println("The client first name: " + getFirstName());
-        System.out.println("The client last name: " + getLastName());
-        System.out.println("The client last user name: " + getUsername());
-        System.out.println("The client phone number: " + TelephoneNumber);
+        System.out.println("The Client ID: " + getID());
+        System.out.println("The Client Firstname: " + getFirstName());
+        System.out.println("The Client Lastname: " + getLastName());
+        System.out.println("The Client Username: " + getUsername());
+        System.out.println("The Client Phonenumber: " + TelephoneNumber);
         DisplayAccounts();// call the function  DisplayAccounts
     }
 
@@ -68,16 +68,17 @@ SavingsAccount savings=new SavingsAccount(getID());
         int counter=1;
         if (currentAccount!=null)//We check  the current account is not equal null to display current account
         {
+            System.out.println("-----------------");
             System.out.println(counter +"-"+"Current Account " +  " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
-        counter++;
+            counter++;
         }
         for (int i = 0; i < savingAccount.size(); i++)//Display the saving account
         {
+            System.out.println("-----------------");
             System.out.println(counter + "-" + "Saving Account "  + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
             counter++;
         }
     }
-
 
     public void EditPersonalInformation() // Edit person information
     {
@@ -115,28 +116,25 @@ SavingsAccount savings=new SavingsAccount(getID());
         {
             destinationAcc.setBalance(destinationAcc.balance + amount);//we add the amount to the destination account
             sourceAcc.setBalance(sourceAcc.balance - amount);// withdraw the amount from source account
-            System.out.println("Transfer successful.");
+            System.out.println("Transferred successfully.");
         } else
         {
-            System.out.println("Insufficient funds for transfer.");
+            System.out.println("Insufficient Funds.");
         }
     }
-
-
     public void ShowTransactionHistory(ArrayList<Transaction> tran) {
         for (int i=0;i<tran.size();i++)
         {
-            if (tran!=null)//check the transaction history was not ثmpty
+            if (tran!=null)//check the transaction history was not empty
             {
                 if (tran.get(i).getClientId() == getID())
                 {
+                    System.out.println("-----------------");
                     tran.get(i).displayTransaction();
-                    break;
                 }
             }
             else
-                System.out.println("the transaction history is empty");{
-
+                System.out.println("The Transaction History is Empty");{
             }
 
         }
@@ -152,7 +150,7 @@ SavingsAccount savings=new SavingsAccount(getID());
             sourceAcc.setBalance(sourceAcc.getBalance() - amount);//withdraw the amount from source account
             System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.balance);
         }
-        else {System.out.println("Insufficient Funds ");}
+        else {System.out.println("Insufficient Funds.");}
     }
     public String getTelephoneNumber() {
         return TelephoneNumber;
