@@ -428,7 +428,7 @@ public class Bank {
             int choice;
 
             // Displaying menu options
-            System.out.println("User:"+user.getFirstName()+" "+user.getLastName()+"-----------------------------Bank System---------------------------------------");
+            System.out.println("Admin-----------------------------Home---------------------------------------Date:"+Time);
             System.out.println("2-Delete Employee");
             System.out.println("3-Display Transactions");
             System.out.println("4-Authorize Employee");
