@@ -1,6 +1,7 @@
 
 import java.lang.IllegalArgumentException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Employee extends User {
@@ -75,14 +76,31 @@ public class Employee extends User {
     //------Function to search for a client by ID--------//
     public void searchclientbyId( ArrayList<Client> c)
     {
-        System.out.println("Enter the desired ID to search for a client : ");
-        int id=input.nextInt();
-        for (int i = 0; i < c.size(); i++) {
+        int id;
+        boolean userfound =false;
+        while (true) {
+            try {
+                System.out.println("Enter the desired ID to search for a client : ");
+                id=input.nextInt();
+                for (int i = 0; i < c.size(); i++)
+                {
 
-        if(id == c.get(i).getID())
-        {
-            c.get(i).DisplayClientDetails();
-        }
+                    if (id == c.get(i).getID()) {
+                        c.get(i).DisplayClientDetails();
+                        userfound=true;
+                    }
+
+                }
+                if(userfound==false)
+                {
+                    System.out.println("User not found");
+                }
+                break;
+            }catch(InputMismatchException exc)
+            {
+                System.out.println("Invalid Input please enter valid Id: ");
+                input.nextLine();
+            }
         }
     }
     //----Function to edit personal information of client by using client Id-----//

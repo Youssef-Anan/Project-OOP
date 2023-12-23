@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Admin extends User {
@@ -71,10 +72,22 @@ public class Admin extends User {
         System.out.println("Enter position:");
         String Position = input.next();
         System.out.println("Enter Graduated college:");
+
         String GraduatedCollege= input.next();
+        int yearOfGraduation=0;
+        while(true ){
+            try{
         System.out.println("Enter Year of Graduation:");
-        int yearOfGraduation = input.nextInt();
-        System.out.println("Enter Total Grade:");
+         yearOfGraduation = input.nextInt();
+            break;
+            }
+            catch (InputMismatchException exc)
+            {
+                System.out.println("Error: Please enter a valid integer.");
+                input.nextLine();
+            }
+        }
+        System.out.println("Enter Total Grade(Excellent/Very good/Good/Bad):");
         String TotalGrade = input.next();
         Employee emp= new Employee(20001+e.size(),FirstName,LastName,Username,Password,Address,Position,GraduatedCollege,yearOfGraduation,TotalGrade);
         e.add(emp);
