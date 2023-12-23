@@ -6,7 +6,6 @@ public class Client extends User {
      protected CurrentAccount currentAccount=null ;
      protected ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
 
-
     private String TelephoneNumber;
     Scanner input = new Scanner(System.in);
 
@@ -41,7 +40,7 @@ public void createCurrent() //Creates a new current account for the client if on
 
 else
     {
-        System.out.println("the account number is already taken");
+        System.out.println("the account  is already taken");
     }
 }
 
@@ -50,7 +49,7 @@ public void createSavings()// Creates a new savings account and adds it to the c
 SavingsAccount savings=new SavingsAccount(getID());
     System.out.println("Added Successfully");
     savingAccount.add(savings);// Creates a new savings account
-    DisplayAccounts();
+
 }
 
     public void DisplayClientDetails()   // Displays the client's personal and account details.
@@ -63,14 +62,14 @@ SavingsAccount savings=new SavingsAccount(getID());
         DisplayAccounts();
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public void DisplayAccounts()    // Displays the client's account details.
     {
         int counter=1;
         if (currentAccount!=null)
         {
             System.out.println(counter +"-"+"Current Account " +  " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
+        counter++;
         }
         for (int i = 0; i < savingAccount.size(); i++) {
             System.out.println(counter + "-" + "Saving Account "  + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
@@ -80,26 +79,41 @@ SavingsAccount savings=new SavingsAccount(getID());
 
 
     public void EditPersonalInformation() {
-        System.out.println("Enter the new First Name:");
-        String firstname= input.nextLine();
-        System.out.println("Enter the new Last Name:");
-        String lastname= input.nextLine();
-        System.out.println("Enter the new Telephone Number:");
-        String telephone= input.next();
-        setFirstName(firstname);
-        setLastName(lastname);
-        setTelephoneNumber(telephone);
-        System.out.println("Personal information updated for " + getID());
-
+        try {
+            System.out.println("Enter the new First Name:");
+            String firstname = input.nextLine();
+            System.out.println("Enter the new Last Name:");
+            String lastname = input.nextLine();
+            System.out.println("Enter the new Telephone Number:");
+            String telephone = input.next();
+            // Check if the telephone number is numeric
+            if (!telephone.matches("\\d+")) {
+                throw new IllegalArgumentException("Telephone number must contain only numbers.");
+            }
+            setFirstName(firstname);
+            setLastName(lastname);
+            setTelephoneNumber(telephone);
+            System.out.println("Personal information updated for " + getID());
+        }
+        catch (IllegalArgumentException e)
+        {
+            System.out.println(e.getMessage());
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 
 
     public void TransferMoney(double amount, Account sourceAcc, Account destinationAcc) {
-        if (sourceAcc.balance >= amount) {
+        if (sourceAcc.balance >= amount)
+        {
             destinationAcc.setBalance(destinationAcc.balance + amount);
             sourceAcc.setBalance(sourceAcc.balance - amount);
             System.out.println("Transfer successful.");
-        } else {
+        } else
+        {
             System.out.println("Insufficient funds for transfer.");
         }
     }
@@ -110,7 +124,8 @@ SavingsAccount savings=new SavingsAccount(getID());
         {
             if (tran!=null)
             {
-                if (tran.get(i).getClientId() == getID()) {
+                if (tran.get(i).getClientId() == getID())
+                {
                     tran.get(i).displayTransaction();
                 }
             }
