@@ -30,12 +30,7 @@ public class Bank {
         FileHandler.writeData(FileHandler.ConvClientToString(Clients),CLIENT_FILE_PATH,"Clients");
     }
     //----------------------------------------------------------------------------------------------------
-    /**
-     * Authenticates the user based on the entered username and password.
-     * If the user is an admin, employee, or client, a corresponding object is created.
-     * The user is prompted to re-enter credentials in case of incorrect input.
-     * @return The authenticated user object (Admin, Employee, or Client).
-     */
+    //Authenticates the user based on the entered username and password.
     public User Authenticate() {
         User user = null;
 
@@ -86,11 +81,7 @@ public class Bank {
         return user;
     }
     //----------------------------------------------------------------------------------------------------
-    /*
-     * Displays and manages client-specific options and operations in a loop until the user chooses to logout.
-     * The user can view account details, edit personal information, transfer money, view transaction history,
-     * deposit, withdraw, create an account, or logout.
-     */
+    //Displays and manages client-specific options and operations in a loop until the user chooses to logout.
     public void ClientOptions(Client user) {
         loop: while (true) {
             int choice;
@@ -316,11 +307,7 @@ public class Bank {
         }
     }
     //----------------------------------------------------------------------------------------------------
-    /**
-     * Displays and manages employee-specific options and operations in a loop until the user chooses to logout.
-     * The employee can view account details, edit personal information, create clients, delete clients,
-     * search for clients, edit client accounts, or logout.
-     */
+    //Displays and manages employee-specific options and operations in a loop until the user chooses to logout.
     public void EmployeeOptions(Employee user) {
         loop: while (true) {
             int choice;
@@ -388,11 +375,7 @@ public class Bank {
         }
     }
     //----------------------------------------------------------------------------------------------------
-    /**
-     * Displays and manages admin-specific options and operations in a loop until the admin chooses to logout.
-     * The admin can create employees, delete employees, display transactions, authorize new employees,
-     * display all clients, display all employees, or logout.
-     */
+    //Displays and manages admin-specific options and operations in a loop until the admin chooses to logout.
     public void AdminOptions(Admin user) {
         loop: while (true) {
             int choice;

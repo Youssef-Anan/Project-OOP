@@ -60,8 +60,8 @@ public class FileHandler {
         }
         return data;
     }
-    //------------------------------------------------------------------
-
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Put the Data in the Files
     public static void writeData(String data,String Path,String name) {
         try (BufferedWriter writer = new BufferedWriter(
                 new OutputStreamWriter(new FileOutputStream(Path), StandardCharsets.UTF_8))) {
@@ -72,8 +72,8 @@ public class FileHandler {
         }
     }
 //--------------------------------------------------Reading file-------------------------------------------------------------------//
-
-
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert a String to Clients ArrayList
     public static void ConvertStringtoClient(String data, ArrayList<Client> c) {
         try {
             String[] objects = data.split("\n");//Splitting Objects--------------
@@ -98,8 +98,8 @@ public class FileHandler {
             System.out.println("Empty Client Data");
         }
     }
-    //-----------------------------------------------------------------------------------
-
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert a String to Employee ArrayList
     public static void ConvertStringtoEmployee(String data, ArrayList<Employee> e) {
         try {
             String[] objects = data.split("\n");//Splitting Objects---------------
@@ -124,6 +124,8 @@ public class FileHandler {
             System.out.println("Empty Employee Data");
         }
     }
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert a String to Transactions ArrayList
     public static void ConvertStringtoTransaction(String data,ArrayList<Transaction>transactions){
         try{
             String[] objects = data.split("\n");//Splitting Objects---------------
@@ -144,6 +146,8 @@ public class FileHandler {
             System.out.println("Empty Transactions Data");
         }
     }
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert a String to Accounts ArrayList
     public static void ConvertStringtoAccount(String data, Client user) {
         CurrentAccount current = new CurrentAccount();
         if (data!="" ||data!=null) {
@@ -169,7 +173,8 @@ public class FileHandler {
             }
         }
     }
-    //----------------------------------------------------------------------------------------------------------------------------------------//
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Get the Data From the Files in the Shape of String
     public static String readData(String Path) {
         String data = "";
         try {
