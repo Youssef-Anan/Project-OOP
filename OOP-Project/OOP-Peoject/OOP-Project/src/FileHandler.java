@@ -1,14 +1,10 @@
-import java.io.*;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -16,39 +12,55 @@ import java.nio.charset.StandardCharsets;
 public class FileHandler {
 
     //-------------------------------Converting Object to String-----------------------------------------------------
+
+    //Method to Convert Clients ArrayList to a String
     public static String ConvClientToString(ArrayList<Client> c) {
         String data = "";
         for (int i = 0; i < c.size(); i++) {
-            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + "," + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&" + ConvAccountsToString(c.get(i)) + "\n";
+            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + ","
+                    + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&"
+                    + ConvAccountsToString(c.get(i)) + "\n";
         }
         return data;
     }
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert Accounts ArrayList to a String
     public static String ConvAccountsToString(Client user) {
         String data = "";
         if (user.currentAccount!=null)
-        data+=user.currentAccount.AccountNumber +"," + user.currentAccount.getAccountType() + "," + user.currentAccount.local_Date + "," + user.currentAccount.DEFAULT_INTEREST_RATE + "," + user.currentAccount.getBalance() + "$";
+        data+=user.currentAccount.AccountNumber +"," + user.currentAccount.getAccountType() + "," + user.currentAccount.local_Date + ","
+                + user.currentAccount.DEFAULT_INTEREST_RATE + "," + user.currentAccount.getBalance() + "$";
 
         for (int i = 0; i < user.savingAccount.size(); i++) {
-            data += user.savingAccount.get(i).AccountNumber + ","  + user.savingAccount.get(i).getAccountType() +","+ user.savingAccount.get(i).local_Date + "," + user.savingAccount.get(i).DEFAULT_INTEREST_RATE + "," + user.savingAccount.get(i).getBalance() + "$";
+            data += user.savingAccount.get(i).AccountNumber + ","  + user.savingAccount.get(i).getAccountType() +","+ user.savingAccount.get(i).local_Date +
+                    "," + user.savingAccount.get(i).DEFAULT_INTEREST_RATE + "," + user.savingAccount.get(i).getBalance() + "$";
         }
         return data;
     }
-
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert Employees ArrayList to a String
     public static String ConvEmployeetoString(ArrayList<Employee> e) {
         String data = "";
         for (int i = 0; i < e.size(); i++) {
-            data +=e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getPassword()+ "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() + "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation() + "," + e.get(i).getTotalGrade() + "\n";
+            data +=e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getPassword()+
+                    "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() +
+                    "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation()
+                    + "," + e.get(i).getTotalGrade() + "\n";
         }
         return data;
     }
-
+    //------------------------------------------------------------------------------------------------------------
+    //Method to Convert Transactions ArrayList to a String
     public static String ConvTransactiontoString(ArrayList<Transaction> transactions) {
         String data = "";
         for (int i = 0; i < transactions.size(); i++) {
-            data +=transactions.get(i).getFormattedDateTime() + "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getAmount() + "," + transactions.get(i).getSrcAccnum() + "," + transactions.get(i).getDstAccnum() + "\n";
+            data +=transactions.get(i).getFormattedDateTime() + "," + transactions.get(i).getClientId() +
+                    "," + transactions.get(i).getEmployeeId() + "," + transactions.get(i).getAmount() +
+                    "," + transactions.get(i).getSrcAccnum() + "," + transactions.get(i).getDstAccnum() + "\n";
         }
         return data;
     }
+    //------------------------------------------------------------------
 
     public static void writeData(String data,String Path,String name) {
         try (BufferedWriter writer = new BufferedWriter(
@@ -59,10 +71,9 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
-
 //--------------------------------------------------Reading file-------------------------------------------------------------------//
 
-    //--------------------Convert String to Object----------------------------------------------------------------------//
+
     public static void ConvertStringtoClient(String data, ArrayList<Client> c) {
         try {
             String[] objects = data.split("\n");//Splitting Objects--------------
@@ -87,7 +98,7 @@ public class FileHandler {
             System.out.println("Empty Client Data");
         }
     }
-// data += i + 1 + "- " + e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() + "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation() + "," + e.get(i).getTotalGrade() + "\n";
+    //-----------------------------------------------------------------------------------
 
     public static void ConvertStringtoEmployee(String data, ArrayList<Employee> e) {
         try {
@@ -133,11 +144,6 @@ public class FileHandler {
             System.out.println("Empty Transactions Data");
         }
     }
-
-
-
-    // data +=s.get(i).AccountNumber + "," + s.get(i).local_Date + "," + s.get(i).DEFAULT_INTEREST_RATE + "," + s.get(i).getBalance();
-
     public static void ConvertStringtoAccount(String data, Client user) {
         CurrentAccount current = new CurrentAccount();
         if (data!="" ||data!=null) {
@@ -163,7 +169,6 @@ public class FileHandler {
             }
         }
     }
-
     //----------------------------------------------------------------------------------------------------------------------------------------//
     public static String readData(String Path) {
         String data = "";
@@ -181,8 +186,6 @@ public class FileHandler {
         }
         return data;
     }
-
-
 }
 
 
