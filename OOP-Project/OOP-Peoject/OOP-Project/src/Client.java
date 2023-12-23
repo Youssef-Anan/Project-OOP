@@ -31,7 +31,7 @@ public class Client extends User {
 
 public void createCurrent() //Creates a new current account for the client if one does not already exist.
 {
-    if(currentAccount==null)
+    if(currentAccount==null)//We check  the current account is equal null to create current account
     {
         System.out.println("Creating current account");
         currentAccount = new CurrentAccount(getID());//Creates a new current account
@@ -59,26 +59,28 @@ SavingsAccount savings=new SavingsAccount(getID());
         System.out.println("The client last name: " + getLastName());
         System.out.println("The client last user name: " + getUsername());
         System.out.println("The client phone number: " + TelephoneNumber);
-        DisplayAccounts();
+        DisplayAccounts();// call the function  DisplayAccounts
     }
 
 
     public void DisplayAccounts()    // Displays the client's account details.
     {
         int counter=1;
-        if (currentAccount!=null)
+        if (currentAccount!=null)//We check  the current account is not equal null to display current account
         {
             System.out.println(counter +"-"+"Current Account " +  " the number of account " +currentAccount.getAccountNumber() + " the account balance: $" + currentAccount.getBalance());
         counter++;
         }
-        for (int i = 0; i < savingAccount.size(); i++) {
+        for (int i = 0; i < savingAccount.size(); i++)//Display the saving account
+        {
             System.out.println(counter + "-" + "Saving Account "  + " the number of account " + savingAccount.get(i).getAccountNumber() + " the account balance: $" + savingAccount.get(i).getBalance());
             counter++;
         }
     }
 
 
-    public void EditPersonalInformation() {
+    public void EditPersonalInformation() // Edit person information
+    {
         try {
             System.out.println("Enter the new First Name:");
             String firstname = input.nextLine();
@@ -87,7 +89,8 @@ SavingsAccount savings=new SavingsAccount(getID());
             System.out.println("Enter the new Telephone Number:");
             String telephone = input.next();
             // Check if the telephone number is numeric
-            if (!telephone.matches("\\d+")) {
+            if (!telephone.matches("\\d+"))//Verify the phone number does not consist of letters
+            {
                 throw new IllegalArgumentException("Telephone number must contain only numbers.");
             }
             setFirstName(firstname);
@@ -105,12 +108,13 @@ SavingsAccount savings=new SavingsAccount(getID());
         }
     }
 
-
-    public void TransferMoney(double amount, Account sourceAcc, Account destinationAcc) {
-        if (sourceAcc.balance >= amount)
+     //transfer money from source account to destination account
+    public void TransferMoney(double amount, Account sourceAcc, Account destinationAcc)
+    {
+        if (sourceAcc.balance >= amount)//check if the amount is existing  ins source account
         {
-            destinationAcc.setBalance(destinationAcc.balance + amount);
-            sourceAcc.setBalance(sourceAcc.balance - amount);
+            destinationAcc.setBalance(destinationAcc.balance + amount);//we add the amount to the destination account
+            sourceAcc.setBalance(sourceAcc.balance - amount);// withdraw the amount from source account
             System.out.println("Transfer successful.");
         } else
         {
@@ -122,11 +126,12 @@ SavingsAccount savings=new SavingsAccount(getID());
     public void ShowTransactionHistory(ArrayList<Transaction> tran) {
         for (int i=0;i<tran.size();i++)
         {
-            if (tran!=null)
+            if (tran!=null)//check the transaction history was not ثmpty
             {
                 if (tran.get(i).getClientId() == getID())
                 {
                     tran.get(i).displayTransaction();
+                    break;
                 }
             }
             else
@@ -138,12 +143,13 @@ SavingsAccount savings=new SavingsAccount(getID());
 
     }
     public void TakeDeposit(double Amount, Account a) {
-                a.balance += Amount;
+                a.balance += Amount;//we add the amount to the  account
                 System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
     }
     public void Withdraw(double amount, Account sourceAcc) {
-        if (sourceAcc.balance >= amount) {
-            sourceAcc.setBalance(sourceAcc.getBalance() - amount);
+        if (sourceAcc.balance >= amount)//check if the amount is existing  ins source account
+        {
+            sourceAcc.setBalance(sourceAcc.getBalance() - amount);//withdraw the amount from source account
             System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.balance);
         }
         else {System.out.println("Insufficient Funds ");}
