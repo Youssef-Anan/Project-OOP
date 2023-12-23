@@ -78,7 +78,7 @@ public class Admin extends User {
                 yearOfGraduation = input.nextInt();
                 break;
             } catch (InputMismatchException exc) {
-                System.out.println("Error: Please enter a valid integer.");
+                System.out.println("Error: Please enter a valid integer year .");
                 input.nextLine();
             }
         }
@@ -100,6 +100,7 @@ public class Admin extends User {
                 for (int i = 0; i < e.size(); i++) {
                     if (id == e.get(i).getID()) {
                         e.remove(e.get(i));
+                        System.out.println("Employee "+id+" has been deleted ");
                         userfound = true;
                     }
                 }

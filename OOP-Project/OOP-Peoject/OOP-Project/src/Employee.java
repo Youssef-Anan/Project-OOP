@@ -138,6 +138,7 @@ public class Employee extends User {
                 for (int i = 0; i < c.size(); i++) {
                     if (id == c.get(i).getID()) {
                         c.remove(c.get(i));
+                        System.out.println("client "+id+" has been deleted.");
                         userfound=true;
                     }
 
