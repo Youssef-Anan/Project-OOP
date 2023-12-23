@@ -80,7 +80,6 @@ public class Bank {
             }
 
             // Prompt user to continue or exit in case of wrong credentials
-            System.out.println("-----------------------------------------------------------------------------------");
             System.out.println("Wrong Credentials! Do you want to continue? (Yes-No)");
             String choice = input.next();
             if ("yes".equalsIgnoreCase(choice)) {
@@ -429,6 +428,7 @@ public class Bank {
 
             // Displaying menu options
             System.out.println("Admin-----------------------------Home---------------------------------------Date:"+Time);
+            System.out.println("1-Create Employee");
             System.out.println("2-Delete Employee");
             System.out.println("3-Display Transactions");
             System.out.println("4-Authorize Employee");
@@ -452,19 +452,19 @@ public class Bank {
             switch (choice) {
                 case 1:
                     // Create employee operation
-                    System.out.println("-------------------------------------Delete Employee-------------------------------------");
+                    System.out.println("-------------------------------------Create Employee-------------------------------------");
                     user.CreateEmployee(Employees, Clients);
                     break;
                 case 2:
                     // Delete employee operation
-                    System.out.println("-------------------------------------Display Transactions--------------------------------");
+                    System.out.println("-------------------------------------Delete Employee-------------------------------------");
                     user.DeleteEmployee(Employees);
                     break;
                 case 3:
                     // Display transactions based on user input (client, employee, or date)
                     String sType;
                     while (true) {
-                        System.out.println("-----------------------------------------------------------------------------------");
+                        System.out.println("------------------------------Display Transactions-----------------------------------");
                         System.out.println("Search by (Client-Employee-Date)?");
                         sType = input.next();
                         if (sType.equalsIgnoreCase("Client") || sType.equalsIgnoreCase("Employee") || sType.equalsIgnoreCase("Date")) {
