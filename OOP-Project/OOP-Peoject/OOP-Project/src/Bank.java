@@ -184,7 +184,7 @@ public class Bank {
                         input.nextLine();
                     }}
                 user.TakeDeposit(Damount,Account.getUserAccount(user,Dacc));
-                Transaction.createTransaction(user,null,Damount,Account.getAccountbyID(Clients,Dacc),null,Transactions);
+                Transaction.createTransaction(user,null,Damount,Account.getUserAccount(user,Dacc),null,Transactions);
 
                 break;
             case 6:
