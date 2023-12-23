@@ -17,7 +17,7 @@ public abstract class Account{
     private static final Set<Long> generatedAccountNumbers = new HashSet<>();
     private static final Random random = new Random();
 
-    public Account(String accountType, double balance) {
+    public Account(String accountType, float balance) {
         this.AccountType = accountType;
         this.balance = balance;
     }

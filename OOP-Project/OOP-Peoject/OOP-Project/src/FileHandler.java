@@ -23,7 +23,6 @@ public class FileHandler {
         }
         return data;
     }
-
     public static String ConvAccountsToString(Client user) {
         String data = "";
         if (user.currentAccount!=null)
@@ -65,65 +64,74 @@ public class FileHandler {
 
     //--------------------Convert String to Object----------------------------------------------------------------------//
     public static void ConvertStringtoClient(String data, ArrayList<Client> c) {
-        //String[] dataArray = inputData.split("\n");
-        String[] objects = data.split("\n");//Splitting Objects--------------
-        for (int i = 0; i < objects.length; i++) {
-           Client dummy=new Client();
-            String[] objPart = objects[i].split("&");//Splitting DataTypes------------
-            //----------------------Client Data---------------------------
-            String[] ClientData = objPart[0].split(",");//Splitting Client Data-------
-            dummy.userType = ClientData[0];
-            dummy.setID(Integer.parseInt(ClientData[1]));
-            dummy.setFirstName(ClientData[2]);
-            dummy.setLastName(ClientData[3]);
-            dummy.setUsername(ClientData[4]);
-            dummy.setPassword(ClientData[5]);
-            dummy.setTelephoneNumber(ClientData[6]);
-            //----------------------Accounts Data------------------------
-            if (objPart.length>1)
-            ConvertStringtoAccount(objPart[1], dummy);
-            c.add(dummy);
+        try {
+            String[] objects = data.split("\n");//Splitting Objects--------------
+            for (int i = 0; i < objects.length; i++) {
+                Client dummy = new Client();
+                String[] objPart = objects[i].split("&");//Splitting DataTypes------------
+                //----------------------Client Data---------------------------ObjPart[0]
+                String[] ClientData = objPart[0].split(",");//Splitting Client Data-------
+                dummy.userType = ClientData[0];
+                dummy.setID(Integer.parseInt(ClientData[1]));
+                dummy.setFirstName(ClientData[2]);
+                dummy.setLastName(ClientData[3]);
+                dummy.setUsername(ClientData[4]);
+                dummy.setPassword(ClientData[5]);
+                dummy.setTelephoneNumber(ClientData[6]);
+                //----------------------Accounts Data------------------------ObjPart[1]
+                if (objPart.length > 1)
+                    ConvertStringtoAccount(objPart[1], dummy);
+                c.add(dummy);
+            }
+        }catch (Exception t){
+            System.out.println("Empty Client Data");
         }
     }
 // data += i + 1 + "- " + e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() + "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation() + "," + e.get(i).getTotalGrade() + "\n";
 
     public static void ConvertStringtoEmployee(String data, ArrayList<Employee> e) {
-        //String[] dataArray = inputData.split("\n");
-        String[] objects = data.split("\n");//Splitting Objects---------------
-        for (int i = 0; i < objects.length; i++) {
-            Employee dummy=new Employee();
-            //----------------------Employee Data---------------------------
-            String[] Employeedata = objects[i].split(",");
-            dummy.setID(Integer.parseInt(Employeedata[0]));
-            dummy.userType=Employeedata[1];
-            dummy.setUsername(Employeedata[2]);
-            dummy.setPassword(Employeedata[3]);
-            dummy.setFirstName(Employeedata[4]);
-            dummy.setLastName(Employeedata[5]);
-            dummy.setAddress(Employeedata[6]);
-            dummy.setPosition(Employeedata[7]);
-            dummy.setGraduatedCollege(Employeedata[8]);
-            dummy.setYearOfGraduation(Integer.parseInt(Employeedata[9]));
-            dummy.setTotalGrade(Employeedata[10]);
-            e.add(dummy);
+        try {
+            String[] objects = data.split("\n");//Splitting Objects---------------
+            for (int i = 0; i < objects.length; i++) {
+                Employee dummy = new Employee();
+                //----------------------Employee Data---------------------------
+                String[] Employeedata = objects[i].split(",");
+                dummy.setID(Integer.parseInt(Employeedata[0]));
+                dummy.userType = Employeedata[1];
+                dummy.setUsername(Employeedata[2]);
+                dummy.setPassword(Employeedata[3]);
+                dummy.setFirstName(Employeedata[4]);
+                dummy.setLastName(Employeedata[5]);
+                dummy.setAddress(Employeedata[6]);
+                dummy.setPosition(Employeedata[7]);
+                dummy.setGraduatedCollege(Employeedata[8]);
+                dummy.setYearOfGraduation(Integer.parseInt(Employeedata[9]));
+                dummy.setTotalGrade(Employeedata[10]);
+                e.add(dummy);
+            }
+        } catch (Exception t){
+            System.out.println("Empty Employee Data");
         }
     }
     public static void ConvertStringtoTransaction(String data,ArrayList<Transaction>transactions){
-        String[] objects = data.split("\n");//Splitting Objects---------------
-        for (int i = 0; i < objects.length; i++) {
-            Transaction dummy = new Transaction();
+        try{
+            String[] objects = data.split("\n");//Splitting Objects---------------
+            for (int i = 0; i < objects.length; i++) {
+                Transaction dummy = new Transaction();
 
-            //----------------------Transactions data---------------------------//
-            String[] Transdata = objects[i].split(",");
-            dummy.setFormatterDateTime(Transdata[0]);
-            dummy.setClientId(Integer.parseInt(Transdata[1]));
-            dummy.setEmployeeId(Integer.parseInt(Transdata[2]));
-            dummy.setAmount(Float.parseFloat(Transdata[3]));
-            dummy.setSrcAccnum(Long.parseLong(Transdata[4]));
-            dummy.setDstAccnum(Long.parseLong(Transdata[5]));
-        transactions.add(dummy);
+                //----------------------Transactions data---------------------------//
+                String[] Transdata = objects[i].split(",");
+                dummy.setFormatterDateTime(Transdata[0]);
+                dummy.setClientId(Integer.parseInt(Transdata[1]));
+                dummy.setEmployeeId(Integer.parseInt(Transdata[2]));
+                dummy.setAmount(Double.parseDouble(Transdata[3]));
+                dummy.setSrcAccnum(Long.parseLong(Transdata[4]));
+                dummy.setDstAccnum(Long.parseLong(Transdata[5]));
+                transactions.add(dummy);
+            }
+        } catch (Exception t){
+            System.out.println("Empty Transactions Data");
         }
-
     }
 
 
@@ -132,25 +140,26 @@ public class FileHandler {
 
     public static void ConvertStringtoAccount(String data, Client user) {
         CurrentAccount current = new CurrentAccount();
-        String[] objects = data.split("\\$");
-        for (int i = 0; i < objects.length; i++) {
-        SavingsAccount dummy = new SavingsAccount();
-            String[] objData = objects[i].split(",");
-            dummy.setAccountNumber(Long.parseLong(objData[0]));
-            dummy.setAccountType(objData[1]);
-            dummy.setLocal_Date(LocalDate.parse(objData[2]));
-            dummy.setDEFAULT_INTEREST_RATE(Double.parseDouble(objData[3]));
-            dummy.setBalance(Double.parseDouble(objData[4]));
-            if (dummy.getAccountType().equals("saving account")){
-                user.savingAccount.add(dummy);
-            }
-            else {
-                current.setAccountNumber(dummy.getAccountNumber());
-                current.setAccountType(dummy.getAccountType());
-                current.setLocal_Date(dummy.getLocal_Date());
-                current.setDEFAULT_INTEREST_RATE(dummy.getDEFAULT_INTEREST_RATE());
-                current.setBalance(dummy.getBalance());
-                user.setCurrentAccount(current);
+        if (data!="" ||data!=null) {
+            String[] objects = data.split("\\$");
+            for (int i = 0; i < objects.length; i++) {
+                SavingsAccount dummy = new SavingsAccount();
+                String[] objData = objects[i].split(",");
+                dummy.setAccountNumber(Long.parseLong(objData[0]));
+                dummy.setAccountType(objData[1]);
+                dummy.setLocal_Date(LocalDate.parse(objData[2]));
+                dummy.setDEFAULT_INTEREST_RATE(Double.parseDouble(objData[3]));
+                dummy.setBalance(Double.parseDouble(objData[4]));
+                if (dummy.getAccountType().equals("saving account")) {
+                    user.savingAccount.add(dummy);
+                } else {
+                    current.setAccountNumber(dummy.getAccountNumber());
+                    current.setAccountType(dummy.getAccountType());
+                    current.setLocal_Date(dummy.getLocal_Date());
+                    current.setDEFAULT_INTEREST_RATE(dummy.getDEFAULT_INTEREST_RATE());
+                    current.setBalance(dummy.getBalance());
+                    user.setCurrentAccount(current);
+                }
             }
         }
     }

@@ -12,7 +12,7 @@ public class Bank {
 
     public Bank(){}
     public void getBankData(){
-       // FileHandler.ConvertStringtoTransaction(FileHandler.readData(Transactions_File_Path),Transactions);
+        FileHandler.ConvertStringtoTransaction(FileHandler.readData(Transactions_File_Path),Transactions);
         FileHandler.ConvertStringtoEmployee(FileHandler.readData(Employee_File_Path),Employees);
         FileHandler.ConvertStringtoClient(FileHandler.readData(CLIENT_FILE_PATH),Clients);
     }
@@ -61,8 +61,9 @@ public class Bank {
         }
             return user;
     }
-    public void ClientOptions(Client user,ArrayList<Client> a){
+    public void ClientOptions(Client user){
        loop: while(true){
+           int choice;
         System.out.println("1-Display Account Details");
         System.out.println("2-Edit Personal Information");
         System.out.println("3-Transfer Money");
@@ -72,18 +73,20 @@ public class Bank {
         System.out.println("7-Create Account");
         System.out.println("8-Logout");
         System.out.println("Choose From 1 to 8:");
-        int choice = input.nextInt();
+        while(true) {
+            try {
+                choice = input.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("You must only enter numbers!");
+                input.nextLine();
+            }
+        }
         switch (choice){
             case 1:
                 user.DisplayClientDetails();
                 break;
             case 2:
-                System.out.println("Enter the new First Name:");
-                String firstname= input.next();
-                System.out.println("Enter the new Last Name:");
-                String lastname= input.next();
-                System.out.println("Enter the new Telephone Number:");
-                String telephone= input.next();
                 user.EditPersonalInformation();
                 break;
             case 3:
@@ -91,25 +94,58 @@ public class Bank {
                 while(true){
                 System.out.println("Choose which account you want to transfer money from[Enter Account Number]:");
                 user.DisplayAccounts();
+                while (true){
+                try{
                  source= input.nextLong();
-                if (Account.getAccountbyID(Clients,source)==null){
+                 break;
+                } catch (Exception e) {
+                    System.out.println("You must only enter numbers!");
+                    input.nextLine();
+                }}
+                if (Account.getUserAccount(user,source)==null){
                     System.out.println("Account not found, Try again!");
+                    System.out.println("Do you want to continue? (Yes-No)");
+                    String choice1=input.next();
+                    if ("yes".equalsIgnoreCase(choice1)){
+                        continue ;
+                    }
+                    else break;
                 }
-                else break;
                 }
                 while(true){
                     System.out.println("Choose which account you want to transfer money to[Enter Account Number]:");
                     user.DisplayAccounts();
-                     dest= input.nextLong();
+                    while (true){
+                        try{
+                            dest= input.nextLong();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("You must only enter numbers!");
+                            input.nextLine();
+                        }}
                     if (Account.getAccountbyID(Clients,dest)==null){
                         System.out.println("Account not found, Try again!");
+                    System.out.println("Do you want to continue? (Yes-No)");
+                    String choice1=input.next();
+                    if ("yes".equalsIgnoreCase(choice1)){
+                        continue ;
                     }
                     else break;
+                    }
                 }
                 System.out.println("Enter the amount:");
-                double amount= input.nextDouble();
-                user.TransferMoney(amount,Account.getAccountbyID(Clients,source),Account.getAccountbyID(Clients,dest));
-                Transaction.createTransaction(user,null,amount,Account.getAccountbyID(Clients,source),Account.getAccountbyID(Clients,dest),Transactions);
+                double amount;
+                while(true){
+                    try{
+                        amount= input.nextDouble();
+                        break;
+                    } catch (Exception e){
+                        System.out.println("You must only enter numbers!");
+                        input.nextLine();
+                    }
+                }
+                user.TransferMoney(amount,Account.getUserAccount(user,source),Account.getAccountbyID(Clients,dest));
+                Transaction.createTransaction(user,null,amount,Account.getUserAccount(user,source),Account.getAccountbyID(Clients,dest),Transactions);
                 break;
             case 4:
                 user.ShowTransactionHistory(Transactions);
@@ -119,14 +155,34 @@ public class Bank {
                 while(true){
                     System.out.println("Choose which account you want to Deposit to[Enter Account Number]:");
                     user.DisplayAccounts();
-                    Dacc= input.nextLong();
-                    if (Account.getUserAccount(user,Dacc)==null){
+                    while (true){
+                        try{
+                            Dacc= input.nextLong();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("You must only enter numbers!");
+                            input.nextLine();
+                        }}
+                    if (Account.getUserAccount(user,Dacc)==null) {
                         System.out.println("Account not found, Try again!");
+                        System.out.println("Do you want to continue? (Yes-No)");
+                        String choice1 = input.next();
+                        if (!"yes".equalsIgnoreCase(choice1)) {
+                            break;
+                        }
                     }
                     else break;
                 }
                 System.out.println("Enter the amount:");
-                double Damount= input.nextDouble();
+                double Damount;
+                while (true){
+                    try{
+                        Damount= input.nextDouble();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("You must only enter numbers!");
+                        input.nextLine();
+                    }}
                 user.TakeDeposit(Damount,Account.getUserAccount(user,Dacc));
                 Transaction.createTransaction(user,null,Damount,Account.getAccountbyID(Clients,Dacc),null,Transactions);
 
@@ -136,16 +192,35 @@ public class Bank {
                 while(true){
                     System.out.println("Choose which account you want to Withdraw from[Enter Account Number]:");
                     user.DisplayAccounts();
-                    Wacc= input.nextLong();
+                    while (true){
+                        try{
+                            Wacc= input.nextLong();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("You must only enter numbers!");
+                            input.nextLine();
+                        }}
                     if (Account.getUserAccount(user,Wacc)==null){
                         System.out.println("Account not found, Try again!");
+                    System.out.println("Do you want to continue? (Yes-No)");
+                    String choice1=input.next();
+                    if (!"yes".equalsIgnoreCase(choice1)) {
+                        break;
                     }
-                    else break;
+                    }
                 }
                 System.out.println("Enter the amount:");
-                double Wamount= input.nextDouble();
+                double Wamount;
+                while (true){
+                    try{
+                        Wamount= input.nextDouble();
+                        break;
+                    } catch (Exception e) {
+                        System.out.println("You must only enter numbers!");
+                        input.nextLine();
+                    }}
                 user.Withdraw(Wamount,Account.getUserAccount(user,Wacc));
-                Transaction.createTransaction(user,null,-Wamount,null,Account.getAccountbyID(Clients,Wacc),Transactions);
+                Transaction.createTransaction(user,null,-Wamount,Account.getUserAccount(user,Wacc),null,Transactions);
                 break;
             case 7:
                 String c=null;
@@ -157,13 +232,19 @@ public class Bank {
                     }
                     else{
                         System.out.println("Wrong input! Please try again.");
+                        System.out.println("Do you want to continue? (Yes-No)");
+                        String choice1=input.next();
+                        if (!"yes".equalsIgnoreCase(choice1)) {
+                            break;
+                        }
                     }
                 }
+                c=c.toLowerCase();
                 switch (c){
-                    case "Saving":
+                    case "saving":
                         user.createSavings();
                         break;
-                    case "Current":
+                    case "current":
                         user.createCurrent();
                         break;
                 }
@@ -175,15 +256,16 @@ public class Bank {
                 break;
         }
        }
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).getID()== user.getID()){
-                a.set(i,user);
+        for (int i = 0; i < Clients.size(); i++) {
+            if (Clients.get(i).getID() == user.getID()){
+                Clients.set(i,user);
                 break;
             }
         }
     }
-    public void EmployeeOptions(Employee user,ArrayList<Employee> a){
+    public void EmployeeOptions(Employee user){
         loop :while(true) {
+            int choice;
             System.out.println("1-Display Account Details");
             System.out.println("2-Edit Personal Information");
             System.out.println("3-Create Client");
@@ -192,7 +274,15 @@ public class Bank {
             System.out.println("6-Edit Client Account");
             System.out.println("7-Logout");
             System.out.println("Choose From 1 to 7:");
-            int choice = input.nextInt();
+            while(true) {
+                try {
+                    choice = input.nextInt();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("You must only enter numbers!");
+                    input.nextLine();
+                }
+            }
             switch (choice) {
                 case 1:
                     user.DisplayEmployeeDetails();
@@ -219,15 +309,16 @@ public class Bank {
                     break;
             }
         }
-        for (int i = 0; i < a.size(); i++) {
-            if (a.get(i).getID()== user.getID()){
-                a.set(i,user);
+        for (int i = 0; i < Employees.size(); i++) {
+            if (Employees.get(i).getID()== user.getID()){
+                Employees.set(i,user);
                 break;
             }
         }
     }
     public void AdminOptions(Admin user){
         loop :while(true) {
+            int choice;
             System.out.println("1-Create Employee");
             System.out.println("2-Delete Employee");
             System.out.println("3-Display Transactions");
@@ -236,7 +327,15 @@ public class Bank {
             System.out.println("6-Display All Employees");
             System.out.println("7-Logout");
             System.out.println("Choose From 1 to 7:");
-            int choice = input.nextInt();
+            while(true) {
+                try {
+                    choice = input.nextInt();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("You must only enter numbers!");
+                    input.nextLine();
+                }
+            }
             switch (choice) {
                 case 1:
                     user.CreateEmployee(Employees,Clients);
@@ -253,6 +352,11 @@ public class Bank {
                             break;
                         } else {
                             System.out.println("Wrong input! Please try again.");
+                            System.out.println("Do you want to continue? (Yes-No)");
+                            String choice1=input.next();
+                            if (!"yes".equalsIgnoreCase(choice1)) {
+                                break;
+                            }
                         }
                         }
                         if(sType.equalsIgnoreCase("Client")){
@@ -264,8 +368,6 @@ public class Bank {
                         else if (sType.equalsIgnoreCase("Date")){
                                 user.displayAllTransactionsbydate(Transactions);
                         }
-                        else
-                                System.out.println("Wrong input!");
                     break;
                 case 4:
                     user.AuthorizeNewEmp(Employees);
@@ -288,11 +390,9 @@ public class Bank {
     public ArrayList<Client> getClients() {
         return Clients;
     }
-
     public ArrayList<Employee> getEmployees() {
         return Employees;
     }
-
     public ArrayList<Transaction> getTransactions() {
         return Transactions;
     }

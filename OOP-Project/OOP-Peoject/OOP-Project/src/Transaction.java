@@ -15,17 +15,15 @@ public class Transaction {
     private  long dstAccnum; // the Account that receives the money
 
     public Transaction( Client client, Employee employee, double amount, Account srcAcc, Account dstAcc) {
-        if (client==null){
-            this.clientId =0;
-        }
+        if (client==null) this.clientId =0;
         else this.clientId = client.getID(); //It takes the client id from Client class
-        if (employee==null){
-            this.employeeId=0;
-        }
+        if (employee==null) this.employeeId=0;
         else this.employeeId= employee.getID();//It takes the employee id from Employee class
         this.amount = amount;
-        this.srcAccnum = srcAcc.getAccountNumber();
-        this.dstAccnum = dstAcc.getAccountNumber();
+        if (srcAcc==null) this.srcAccnum =0;
+        else this.srcAccnum = srcAcc.getAccountNumber();
+        if (dstAcc==null) this.dstAccnum =0;
+        else this.dstAccnum = dstAcc.getAccountNumber();
     }
 
     public Transaction() {

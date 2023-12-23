@@ -13,15 +13,29 @@ public class Main {
 
 //--------------------------------------Authentication--------------------------------------------------//
 //Authenticating User
+            loop:while (true){
+            int n = 0;
             System.out.println("1-Login\n2-Close Program");
-            int n = Integer.parseInt(input.nextLine());
+            while(true) {
+                try {
+                    n = input.nextInt();
+                    break;
+                } catch (Exception e) {
+                    System.out.println("You must enter only numbers!");
+                    input.nextLine();
+                }
+            }
             switch (n){
                 case 1:
                     user=bank.Authenticate();
-                    break;
+                    break loop;
                 case 2:
                     break program;
+                default:
+                    System.out.println("Wrong Number!");
+                    break;
             }
+        }
 //Giving User Client Authorities
         if(user.getUserType().equals("Client")){
             convClient= (Client) user;
@@ -37,11 +51,11 @@ public class Main {
 //--------------------------------------Showing User Options--------------------------------------------//
 //Client Options
             if(user.getUserType().equals("Client")){
-                bank.ClientOptions(convClient,bank.getClients());
+                bank.ClientOptions(convClient);
             }
 //Employee Options
             else if (user.getUserType().equals("Employee")) {
-                bank.EmployeeOptions(convEmployee,bank.getEmployees());
+                bank.EmployeeOptions(convEmployee);
             }
 //Admin Options
             else {
