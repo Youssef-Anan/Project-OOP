@@ -354,7 +354,7 @@ public class Bank {
         loop: while (true) {
             int choice;
             // Displaying menu options
-            System.out.println("Admin-----------------------------Home---------------------------------------Date:"+Time);
+            System.out.println("Client:"+user.getFirstName()+" "+user.getLastName()+"-----------------------------Home---------------------------------------Date:"+Time);
             System.out.println("1-Display Account Details");
             System.out.println("2-Edit Personal Information");
             System.out.println("3-Create Client");
