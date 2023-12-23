@@ -1,8 +1,13 @@
+package System;
+
+import Users.Accounts.*;
+import Users.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.*;
+
 public class Bank {
     Scanner input =new Scanner(System.in);
     //Current Date
@@ -53,7 +58,8 @@ public class Bank {
             // Check if the entered credentials match admin credentials
             if (username.equals("admin") && password.equals("admin")) {
                 user = new Admin();
-                user.userType = "Admin";
+                user.setUserType("Admin");
+                user.setUserType("Admin");
                 System.out.println("Login successful!");
 
                 break loop;
@@ -63,7 +69,7 @@ public class Bank {
             for (int i = 0; i < Employees.size(); i++) {
                 if (Employees.get(i).getUsername().equals(username) && Employees.get(i).getPassword().equals(password)) {
                     user = new Employee(Employees.get(i));
-                    user.userType = "Employee";
+                    user.setUserType("Employee");
                     System.out.println("Login successful!");
                     System.out.println("-----------------------------------------------------------------------------------");
                     break loop;
@@ -74,14 +80,14 @@ public class Bank {
             for (int i = 0; i < Clients.size(); i++) {
                 if (Clients.get(i).getUsername().equals(username) && Clients.get(i).getPassword().equals(password)) {
                     user = new Client(Clients.get(i));
-                    user.userType = "Client";
+                    user.setUserType("Client");
                     System.out.println("Login successful!");
                     break loop;
                 }
             }
 
             // Prompt user to continue or exit in case of wrong credentials
-            System.out.println("Wrong Credentials! Do you want to continue? (Yes-No)");
+            System.out.println("Wrong Credentials! Do you want to continue? Write Yes to Continue:");
             String choice = input.next();
             if ("yes".equalsIgnoreCase(choice)) {
                 continue loop;
@@ -153,7 +159,7 @@ public class Bank {
                         if (Account.getUserAccount(user, source) == null) {
                             System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
-                            System.out.println("Do you want to continue? (Yes-No)");
+                            System.out.println("Do you want to continue? Write Yes to Continue:");
                             String choice1 = input.next();
                             if ("yes".equalsIgnoreCase(choice1)) {
                                 continue;
@@ -181,7 +187,7 @@ public class Bank {
                         if (Account.getAccountbyID(Clients, dest) == null) {
                             System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
-                            System.out.println("Do you want to continue? (Yes-No)");
+                            System.out.println("Do you want to continue? Write Yes to Continue:");
                             String choice1 = input.next();
                             if ("yes".equalsIgnoreCase(choice1)) {
                                 continue;
@@ -232,7 +238,7 @@ public class Bank {
                         if (Account.getUserAccount(user, Dacc) == null) {
                             System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
-                            System.out.println("Do you want to continue? (Yes-No)");
+                            System.out.println("Do you want to continue? Write Yes to Continue:");
                             String choice1 = input.next();
                             if (!"yes".equalsIgnoreCase(choice1)) {
                                 break;
@@ -278,7 +284,7 @@ public class Bank {
                         if (Account.getUserAccount(user, Wacc) == null) {
                             System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Account not found, Try again!");
-                            System.out.println("Do you want to continue? (Yes-No)");
+                            System.out.println("Do you want to continue? Write Yes to Continue:");
                             String choice1 = input.next();
                             if (!"yes".equalsIgnoreCase(choice1)) {
                                 break;
@@ -314,7 +320,7 @@ public class Bank {
                         } else {
                             System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Wrong input! Please try again.");
-                            System.out.println("Do you want to continue? (Yes-No)");
+                            System.out.println("Do you want to continue? Write Yes to Continue:");
                             String choice1 = input.next();
                             if (!"yes".equalsIgnoreCase(choice1)) {
                                 break;
@@ -476,7 +482,7 @@ public class Bank {
                         } else {
                             System.out.println("-----------------------------------------------------------------------------------");
                             System.out.println("Wrong input! Please try again.");
-                            System.out.println("Do you want to continue? (Yes-No)");
+                            System.out.println("Do you want to continue? Write Yes to Continue:");
                             String choice1 = input.next();
                             if (!"yes".equalsIgnoreCase(choice1)) {
                                 break;

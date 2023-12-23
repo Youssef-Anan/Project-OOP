@@ -1,3 +1,9 @@
+package System;
+
+import Users.Accounts.Account;
+import Users.Client;
+import Users.Employee;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,7 +36,7 @@ public class Transaction {
 
     }
 
-    public static void createTransaction( Client client, Employee employee, double amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
+    public static void createTransaction(Client client, Employee employee, double amount, Account srcAcc, Account dstAcc, ArrayList<Transaction> transactions) {
         Transaction trans = new Transaction( client, employee, amount, srcAcc, dstAcc);
         transactions.add(trans);
     }

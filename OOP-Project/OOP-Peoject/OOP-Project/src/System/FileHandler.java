@@ -1,3 +1,10 @@
+package System;
+
+import Users.Accounts.CurrentAccount;
+import Users.Accounts.SavingsAccount;
+import Users.Client;
+import Users.Employee;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.io.File;  // Import the File class
@@ -17,7 +24,7 @@ public class FileHandler {
     public static String ConvClientToString(ArrayList<Client> c) {
         String data = "";
         for (int i = 0; i < c.size(); i++) {
-            data += c.get(i).userType + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + ","
+            data += c.get(i).getUserType() + "," + c.get(i).getID() + "," + c.get(i).getFirstName() + "," + c.get(i).getLastName() + ","
                     + c.get(i).getUsername() + "," + c.get(i).getPassword() + "," + c.get(i).getTelephoneNumber() + "&"
                     + ConvAccountsToString(c.get(i)) + "\n";
         }
@@ -27,13 +34,13 @@ public class FileHandler {
     //Method to Convert Accounts ArrayList to a String
     public static String ConvAccountsToString(Client user) {
         String data = "";
-        if (user.currentAccount!=null)
-        data+=user.currentAccount.AccountNumber +"," + user.currentAccount.getAccountType() + "," + user.currentAccount.local_Date + ","
-                + user.currentAccount.DEFAULT_INTEREST_RATE + "," + user.currentAccount.getBalance() + "$";
+        if (user.getCurrentAccount() !=null)
+        data+= user.getCurrentAccount().getAccountNumber() +"," + user.getCurrentAccount().getAccountType() + "," + user.getCurrentAccount().getLocal_Date() + ","
+                + user.getCurrentAccount().getDEFAULT_INTEREST_RATE() + "," + user.getCurrentAccount().getBalance() + "$";
 
-        for (int i = 0; i < user.savingAccount.size(); i++) {
-            data += user.savingAccount.get(i).AccountNumber + ","  + user.savingAccount.get(i).getAccountType() +","+ user.savingAccount.get(i).local_Date +
-                    "," + user.savingAccount.get(i).DEFAULT_INTEREST_RATE + "," + user.savingAccount.get(i).getBalance() + "$";
+        for (int i = 0; i < user.getSavingAccount().size(); i++) {
+            data += user.getSavingAccount().get(i).getAccountNumber() + ","  + user.getSavingAccount().get(i).getAccountType() +","+ user.getSavingAccount().get(i).getLocal_Date() +
+                    "," + user.getSavingAccount().get(i).getDEFAULT_INTEREST_RATE() + "," + user.getSavingAccount().get(i).getBalance() + "$";
         }
         return data;
     }
@@ -42,7 +49,7 @@ public class FileHandler {
     public static String ConvEmployeetoString(ArrayList<Employee> e) {
         String data = "";
         for (int i = 0; i < e.size(); i++) {
-            data +=e.get(i).getID() + "," + e.get(i).userType + "," + e.get(i).getUsername() + "," + e.get(i).getPassword()+
+            data +=e.get(i).getID() + "," + e.get(i).getUserType() + "," + e.get(i).getUsername() + "," + e.get(i).getPassword()+
                     "," + e.get(i).getFirstName() + "," + e.get(i).getLastName() + "," + e.get(i).getAddress() +
                     "," + e.get(i).getPosition() + "," + e.get(i).getGraduatedCollege() + "," + e.get(i).getYearOfGraduation()
                     + "," + e.get(i).getTotalGrade() + "\n";
@@ -82,7 +89,7 @@ public class FileHandler {
                 String[] objPart = objects[i].split("&");//Splitting DataTypes------------
                 //----------------------Client Data---------------------------ObjPart[0]
                 String[] ClientData = objPart[0].split(",");//Splitting Client Data-------
-                dummy.userType = ClientData[0];
+                dummy.setUserType(ClientData[0]);
                 dummy.setID(Integer.parseInt(ClientData[1]));
                 dummy.setFirstName(ClientData[2]);
                 dummy.setLastName(ClientData[3]);
@@ -108,7 +115,7 @@ public class FileHandler {
                 //----------------------Employee Data---------------------------
                 String[] Employeedata = objects[i].split(",");
                 dummy.setID(Integer.parseInt(Employeedata[0]));
-                dummy.userType = Employeedata[1];
+                dummy.setUserType(Employeedata[1]);
                 dummy.setUsername(Employeedata[2]);
                 dummy.setPassword(Employeedata[3]);
                 dummy.setFirstName(Employeedata[4]);

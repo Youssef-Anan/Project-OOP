@@ -1,3 +1,7 @@
+package Users;
+
+import Users.Accounts.*;
+import System.Transaction;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -5,7 +9,7 @@ import java.util.ArrayList;
 public class Client extends User {
     public static int clientsNumber=0;
      protected CurrentAccount currentAccount=null ;
-     protected ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
+     public ArrayList<SavingsAccount> savingAccount=new ArrayList<>();
     private String TelephoneNumber;
     Scanner input = new Scanner(System.in);
 
@@ -112,10 +116,10 @@ SavingsAccount savings=new SavingsAccount(getID());
      //transfer money from source account to destination account
     public void TransferMoney(double amount, Account sourceAcc, Account destinationAcc)
     {
-        if (sourceAcc.balance >= amount)//check if the amount is existing  ins source account
+        if (sourceAcc.getBalance() >= amount)//check if the amount is existing  ins source account
         {
-            destinationAcc.setBalance(destinationAcc.balance + amount);//we add the amount to the destination account
-            sourceAcc.setBalance(sourceAcc.balance - amount);// withdraw the amount from source account
+            destinationAcc.setBalance(destinationAcc.getBalance() + amount);//we add the amount to the destination account
+            sourceAcc.setBalance(sourceAcc.getBalance() - amount);// withdraw the amount from source account
             System.out.println("Transferred successfully.");
         } else
         {
@@ -141,14 +145,14 @@ SavingsAccount savings=new SavingsAccount(getID());
 
     }
     public void TakeDeposit(double Amount, Account a) {
-                a.balance += Amount;//we add the amount to the  account
-                System.out.println("Deposited +$" + Amount + ". New balance: $" + a.balance);
+                a.setBalance(a.getBalance()+Amount);//we add the amount to the  account
+                System.out.println("Deposited +$" + Amount + ". New balance: $" + a.getBalance());
     }
     public void Withdraw(double amount, Account sourceAcc) {
-        if (sourceAcc.balance >= amount)//check if the amount is existing  ins source account
+        if (sourceAcc.getBalance() >= amount)//check if the amount is existing  ins source account
         {
             sourceAcc.setBalance(sourceAcc.getBalance() - amount);//withdraw the amount from source account
-            System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.balance);
+            System.out.println("Withdraw -$" + amount + ". New balance: $" + sourceAcc.getBalance());
         }
         else {System.out.println("Insufficient Funds.");}
     }
@@ -159,7 +163,6 @@ SavingsAccount savings=new SavingsAccount(getID());
         TelephoneNumber = telephoneNumber;
     }
     public ArrayList<SavingsAccount> getSavingAccount() {
-        System.out.println("size: " + savingAccount.size());
         return new ArrayList<>(savingAccount); // Return a copy to prevent external modification
     }
     public void setSavingAccount(ArrayList<SavingsAccount> savingAccount) {

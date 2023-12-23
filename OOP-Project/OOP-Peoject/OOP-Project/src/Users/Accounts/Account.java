@@ -1,3 +1,7 @@
+package Users.Accounts;
+
+import Users.Client;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,21 +40,21 @@ public abstract class Account{
         generatedAccountNumbers.add(newAccountNumber);
         return newAccountNumber;
     }
-    static Account getAccountbyID(ArrayList<Client> users,long AccountNumber){
+    public static Account getAccountbyID(ArrayList<Client> users, long AccountNumber){
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).currentAccount!=null) if (users.get(i).currentAccount.getAccountNumber()==AccountNumber)return users.get(i).currentAccount;
-            else for (int j = 0; j < users.get(i).savingAccount.size(); j++) {
-                if (users.get(i).savingAccount.get(j).getAccountNumber()==AccountNumber)return users.get(i).savingAccount.get(j);
+            if (users.get(i).getCurrentAccount() !=null) if (users.get(i).getCurrentAccount().getAccountNumber()==AccountNumber)return users.get(i).getCurrentAccount();
+            else for (int j = 0; j < users.get(i).getSavingAccount().size(); j++) {
+                if (users.get(i).getSavingAccount().get(j).getAccountNumber()==AccountNumber)return users.get(i).getSavingAccount().get(j);
             }
         }
         return null;
     }
-    static Account getUserAccount(Client user,long AccountNumber){
-            if (user.currentAccount!=null){
-            if (user.currentAccount.getAccountNumber()==AccountNumber)return user.currentAccount;
+    public static Account getUserAccount(Client user, long AccountNumber){
+            if (user.getCurrentAccount() !=null){
+            if (user.getCurrentAccount().getAccountNumber()==AccountNumber)return user.getCurrentAccount();
             }
-            else for (int j = 0; j < user.savingAccount.size(); j++) {
-                if (user.savingAccount.get(j).getAccountNumber()==AccountNumber)return user.savingAccount.get(j);
+            else for (int j = 0; j < user.getSavingAccount().size(); j++) {
+                if (user.getSavingAccount().get(j).getAccountNumber()==AccountNumber)return user.getSavingAccount().get(j);
             }
         return null;
     }

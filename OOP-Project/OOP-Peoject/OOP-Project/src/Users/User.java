@@ -1,3 +1,5 @@
+package Users;
+
 import java.util.ArrayList;
 
 public abstract class User {
@@ -21,7 +23,7 @@ public abstract class User {
 
     }
 
-    public static boolean usernameFound(String username,ArrayList<Client> c,ArrayList<Employee> e) {
+    public static boolean usernameFound(String username, ArrayList<Client> c, ArrayList<Employee> e) {
         if (username.equals("admin")) return true;
         for (int i = 0; i < c.size(); i++) {
             if(username.equals(c.get(i).getUsername()))return true;
@@ -31,6 +33,7 @@ public abstract class User {
         }
     return false;
     }
+
 
     public int getID() {
         return ID;
@@ -74,5 +77,9 @@ public abstract class User {
     public String getUserType() {
         return userType;
     }
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
 }
 
