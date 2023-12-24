@@ -59,7 +59,7 @@ public class Bank {
             if (username.equals("admin") && password.equals("admin")) {
                 user = new Admin();
                 user.setUserType("Admin");
-                user.setUserType("Admin");
+
                 System.out.println("Login successful!");
 
                 break loop;

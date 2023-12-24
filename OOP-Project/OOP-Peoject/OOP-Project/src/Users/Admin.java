@@ -79,7 +79,7 @@ public class Admin extends User {
         String GraduatedCollege;
         while(true){
             GraduatedCollege = input.next();
-            if(GraduatedCollege.matches("[a-z]+")||GraduatedCollege.matches("[A-Z]+")){
+            if(GraduatedCollege.matches("[a-zA-Z]+")){
                 break;
             }else System.out.println("Please Enter Only Letters");}
         int yearOfGraduation = 0;
