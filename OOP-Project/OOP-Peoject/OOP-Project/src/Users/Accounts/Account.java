@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public abstract class Account{
     protected long AccountNumber;
     protected   LocalDate local_Date;
-    protected double DEFAULT_INTEREST_RATE = 0.12;
+    protected double DEFAULT_FEES_RATE = 0.12;
     private int Client_Id;
 
     protected double balance=0;
@@ -21,15 +21,14 @@ public abstract class Account{
     private static final Set<Long> generatedAccountNumbers = new HashSet<>();
     private static final Random random = new Random();
 
-    public Account(String accountType, float balance) {
-        this.AccountType = accountType;
-        this.balance = balance;
-    }
     public Account(int Client_id,String s ,String AccountType) {
         this.Client_Id=Client_id;
         this.AccountNumber = generateUniqueAccountNumber(s);
         this.AccountType=AccountType;
     }
+
+    public Account(){}
+
     // Method to generate a unique account number that takes a definitely the first 4 numbers of account number and the rest is random
     static long generateUniqueAccountNumber(String x) {
         long newAccountNumber;
@@ -73,7 +72,6 @@ public abstract class Account{
     public void setLocal_Date(LocalDate local_Date) {
         this.local_Date = local_Date;
     }
-    public Account(){}
 
     public String getAccountType() {
         return AccountType;
@@ -91,12 +89,12 @@ public abstract class Account{
         AccountNumber = accountNumber;
     }
 
-    public double getDEFAULT_INTEREST_RATE() {
-        return DEFAULT_INTEREST_RATE;
+    public double getDEFAULT_FEES_RATE() {
+        return DEFAULT_FEES_RATE;
     }
 
-    public void setDEFAULT_INTEREST_RATE(double DEFAULT_INTEREST_RATE) {
-        this.DEFAULT_INTEREST_RATE = DEFAULT_INTEREST_RATE;
+    public void setDEFAULT_FEES_RATE(double DEFAULT_FEES_RATE) {
+        this.DEFAULT_FEES_RATE = DEFAULT_FEES_RATE;
     }
 
     public int getClient_Id() {

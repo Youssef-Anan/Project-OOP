@@ -36,11 +36,11 @@ public class FileHandler {
         String data = "";
         if (user.getCurrentAccount() !=null)
         data+= user.getCurrentAccount().getAccountNumber() +"," + user.getCurrentAccount().getAccountType() + "," + user.getCurrentAccount().getLocal_Date() + ","
-                + user.getCurrentAccount().getDEFAULT_INTEREST_RATE() + "," + user.getCurrentAccount().getBalance() + "$";
+                + user.getCurrentAccount().getDEFAULT_FEES_RATE() + "," + user.getCurrentAccount().getBalance() + "$";
 
         for (int i = 0; i < user.getSavingAccount().size(); i++) {
             data += user.getSavingAccount().get(i).getAccountNumber() + ","  + user.getSavingAccount().get(i).getAccountType() +","+ user.getSavingAccount().get(i).getLocal_Date() +
-                    "," + user.getSavingAccount().get(i).getDEFAULT_INTEREST_RATE() + "," + user.getSavingAccount().get(i).getBalance() + "$";
+                    "," + user.getSavingAccount().get(i).getDEFAULT_FEES_RATE() + "," + user.getSavingAccount().get(i).getBalance() + "$";
         }
         return data;
     }
@@ -165,7 +165,7 @@ public class FileHandler {
                 dummy.setAccountNumber(Long.parseLong(objData[0]));
                 dummy.setAccountType(objData[1]);
                 dummy.setLocal_Date(LocalDate.parse(objData[2]));
-                dummy.setDEFAULT_INTEREST_RATE(Double.parseDouble(objData[3]));
+                dummy.setDEFAULT_FEES_RATE(Double.parseDouble(objData[3]));
                 dummy.setBalance(Double.parseDouble(objData[4]));
                 if (dummy.getAccountType().equals("saving account")) {
                     user.savingAccount.add(dummy);
@@ -173,7 +173,7 @@ public class FileHandler {
                     current.setAccountNumber(dummy.getAccountNumber());
                     current.setAccountType(dummy.getAccountType());
                     current.setLocal_Date(dummy.getLocal_Date());
-                    current.setDEFAULT_INTEREST_RATE(dummy.getDEFAULT_INTEREST_RATE());
+                    current.setDEFAULT_FEES_RATE(dummy.getDEFAULT_FEES_RATE());
                     current.setBalance(dummy.getBalance());
                     user.setCurrentAccount(current);
                 }
