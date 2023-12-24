@@ -31,7 +31,7 @@ public abstract class Account{
         this.AccountType=AccountType;
     }
     // Method to generate a unique account number that takes a definitely the first 4 numbers of account number and the rest is random
-    static synchronized long generateUniqueAccountNumber(String x) {
+    static long generateUniqueAccountNumber(String x) {
         long newAccountNumber;
         do {
             long randomNumber = Math.abs(random.nextLong() % 900000000000L) + 100000000000L;

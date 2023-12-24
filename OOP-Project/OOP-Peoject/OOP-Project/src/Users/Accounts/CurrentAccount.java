@@ -24,7 +24,7 @@ public class CurrentAccount extends Account {
             DEFAULT_INTEREST_RATE=0.12;
         }
     }
-
+    @Override
     public void applyFees()
     {
         // Calculate and add interest to the account balance based on the interest rate
